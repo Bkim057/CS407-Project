@@ -5,8 +5,8 @@ from flask_login import login_required, current_user, UserMixin
 from numpy import delete
 import pusher
 import sqlalchemy
-from .models import User, Post, Topic, Message
-from .posts import post_to_html, pfp_to_html
+from .models import User, Post, Topic, Commented, Message
+from .posts import delete_comment, delete_post, post_to_html, pfp_to_html
 from . import db
 from werkzeug.security import generate_password_hash
 
@@ -39,7 +39,12 @@ def profile_delete():
         posts_for_user = Post.query.filter_by(user_id=usr_obj.id)
         for p in posts_for_user:
             print("type", type(p))
-            db.session.delete(p)
+            #db.session.delete(p)
+            delete_post(p.id)
+        
+        comments_for_user = Commented.query.filter_by(author=usr_obj.id)
+        for c in comments_for_user:
+            delete_comment(c.id)
         
         db.session.delete(usr_obj)
         db.session.commit()

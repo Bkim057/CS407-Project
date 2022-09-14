@@ -55,7 +55,7 @@ class User(UserMixin, db.Model):
     pfp = db.Column(LargeBinary)
     # End of warning
     followed_topics = db.relationship('Topic', secondary=user_topic, backref='followed_by', lazy='dynamic')
-    comments = db.relationship('Comment',  backref='user', passive_deletes=True)
+    comments = db.relationship('Commented',  backref='user', passive_deletes=True)
     saved_posts = db.relationship('Post', secondary=saved_post, backref='saved_by', lazy='dynamic')
 
     def is_following_topic(self, topic):
@@ -175,7 +175,7 @@ class Post(UserMixin, db.Model):
     filename = db.Column(db.String(50))
     data = db.Column(db.LargeBinary)
     tagged_topics = db.relationship('Topic', secondary=post_topic, backref='posts_tagged_with')
-    comments = db.relationship('Comment', backref='post', passive_deletes=True)
+    comments = db.relationship('Commented', backref='post', passive_deletes=True)
 
 class Topic(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -188,7 +188,7 @@ class Message(UserMixin, db.Model):
     username = db.Column(db.String(20))
     message = db.Column(db.String(500))
 
-class Comment(UserMixin, db.Model):
+class Commented(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     contents = db.Column(db.String(200))
     # author = db.relationship('User', secondary=post_comment, backref='user')

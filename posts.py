@@ -10,7 +10,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, flash
 from flask import session as cur_session
 from flask_login import login_required, current_user
 from requests import session
-from .models import User, Post, Topic, Comment, post_topic, liked_post, saved_post
+from .models import User, Post, Topic, Commented, post_topic, liked_post, saved_post
 from . import db
 from werkzeug.security import generate_password_hash
 
@@ -78,7 +78,6 @@ def delete_post(id):
   db.session.commit()
   q3 = saved_post.delete().where(saved_post.c.saved_id == obj.id)
   db.session.execute(q3)
-  db.session.commit()
   db.session.commit()
   # update Posts db
   db.session.delete(obj)
@@ -583,7 +582,7 @@ def create_comment(post_id):
   else:
     post = Post.query.filter_by(id=post_id)
     if post:
-      comment = Comment(contents=contents, author=current_user.id, post_id=post_id)
+      comment = Commented(contents=contents, author=current_user.id, post_id=post_id)
       db.session.add(comment)
       db.session.commit()
     
@@ -592,7 +591,7 @@ def create_comment(post_id):
 @posts.route("/delete-comment/<comment_id>")
 @login_required
 def delete_comment(comment_id):
-  comment = Comment.query.filter_by(id=comment_id).first()
+  comment = Commented.query.filter_by(id=comment_id).first()
 
   if not comment:
     flash('Comment does not exist')
