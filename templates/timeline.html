@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="column is-4 is-offset-4">
+  <h1 class="title">Timeline: Post #{{ post_num }}</h1>
+  <div class="box">
+      <!-- TODO: Must implement function to get post html -->
+        {{ post_html|safe }}
+  </div>
+
+  <h1 class="title">Actions</h1>
+  <div class="box">
+
+    {% if post_num < list_len - 1 %}
+    <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/disp_timeline/{{ id }}/{{ post_num + 1 }}/{{ type }}';" type="button"value="Next Post" name="action" button
+      style="margin:5px;">Next Post</button>
+    {% endif %}
+
+    {% if post_num > 0 %}
+    <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/disp_timeline/{{ id }}/{{ post_num - 1 }}/{{ type }}';" type="button"value="Previous Post" name="action" button
+      style="margin:5px;">Previous Post</button>
+    {% endif %}
+  </div>
+  
+</div>
+
+{% endblock %}

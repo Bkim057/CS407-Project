@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="columns">
+
+  {% if current_user.is_authenticated %}
+
+  <label> Make a New Topic
+    <form action="/new_topic">
+      <input type="text" placeholder="Create a New Topic.." id="topicname"name="tname"maxlength="20">
+      <button type="submit">Create</button>
+    </form>
+  </label>
+
+  {% endif %}
+
+  <div class="column is-4 is-offset-4">
+    <h1 class="title">Existing Topics</h1>  
+    {{ topics_string|safe }}
+  </div>
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

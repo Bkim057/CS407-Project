@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="columns">
+<div class="column is-6 is-offset-2">
+  <h1 class="title">User Info</h1>
+  <div class="box">
+      <!-- TODO: Add PFP display functionality -->
+      {{ pfp_to_html(id)|safe }}
+
+      <h3>Name: {{ name }}</h3>
+      <h3>Bio: {{ bio }}</h3>
+      <form method="GET" action="/edit_profile">
+          <button class="button is-block is-info is-large is-fullwidth" value="Edit Profile" name="action"button style="margin:5px;">Edit Profile</button>
+      </form>
+
+      <form method="GET" action="/all_following">
+        <button class="button is-block is-info is-large is-fullwidth" value="Manage Following" name="action"button style="margin:5px;">Manage Following</button>
+      </form>
+
+      <form method="POST" action="/profile">
+          <button class="button is-block is-info is-large is-fullwidth" value="Delete Account" name="action"button style="margin:5px;">Delete Account</button>
+      </form>
+      {%if current_user.chat_restriction %}
+      <form action="/unrestrict_user/">
+        <button class="button is-block is-info is-large is-fullwidth" value="Unchatrestrict" name="action" button
+          style="margin:5px;">Chat with anyone</button>
+      </form>
+      {% else %}
+      <form action="/restrict_user/">
+        <button class="button is-block is-info is-large is-fullwidth" value="Chatrestrict" name="action" button
+          style="margin:5px;">Chat only mutuals</button>
+      </form>
+      {% endif %}
+  </div>
+
+  <h1 class="title">Posts</h1>
+  <div class="box">
+    <form method="POST" action="/create_post">
+      <button class="button is-block is-info is-large is-fullwidth" value="Create Post" name="action" button
+        style="margin:5px;">Create Post</button>
+    </form>
+
+    <form action="/manage_posts/{{ id }}/0">
+      <button class="button is-block is-info is-large is-fullwidth" value="Manage Posts" name="action" button
+        style="margin:5px;">Manage Created Posts</button>
+    </form>
+
+    <form action="/saved_posts/{{ id }}/0">
+      <button class="button is-block is-info is-large is-fullwidth" value="Saved Posts" name="action" button
+        style="margin:5px;">Saved Posts</button>
+    </form>
+
+  </div>
+
+  <h1 class="title">Timeline</h1>
+  <div class="box">
+
+    <form action="/disp_timeline/{{ id }}/0/Topic">
+      <button class="button is-block is-info is-large is-fullwidth" value="Followed Topics" name="action" button
+        style="margin:5px;">Followed Topics Timeline</button>
+    </form>
+
+
+
+    <form action="/disp_timeline/{{ id }}/0/Users">
+      <button class="button is-block is-info is-large is-fullwidth" value="Followed Users" name="action" button
+        style="margin:5px;">Followed Users Timeline</button>
+    </form>
+
+  </div>
+    
+<!-- 
+  <h1 class="title">Temporary Stuff</h1>
+  <div class="box">
+    <form method="POST" action="/view_temp">
+      <button class="button is-block is-info is-large is-fullwidth" value="Temp Posts" name="action" button
+        style="margin:5px;">Temp Posts</button>
+    </form>
+    <form action="/view_profile/3">
+      <button class="button is-block is-info is-large is-fullwidth" value="View Other" name="action" button
+        style="margin:5px;">TEMP VIEW</button>
+    </form>
+  </div>
+-->
+
+<!-- </div>
+
+<div class="column is-half">
+  <h1 class="title">Posts</h1>
+  {{ post_to_html(2)|safe }}
+</div>
+
+</div> -->
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

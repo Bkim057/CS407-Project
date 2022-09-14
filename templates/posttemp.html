@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<div class="center"style="width: 800px;">
+
+    <div class="box">
+        <div class="Box-header">
+            <h3 class="Box-title">
+              Video Post
+            </h3>
+        </div>
+        <div class="Box-body">
+            <iframe width="360" height="315"
+                src="https://www.youtube.com/embed/928DB6m5e9s">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="Box-header">
+            <h3 class="Box-title">
+              Text Post
+            </h3>
+        </div>
+        <div class="Box-body">
+            <div id="text-post" class="transition-all" style="word-break: break-all;">
+                FGJUEWHRGOIEWHRIGHEWOIRGHOEWIRHGOIEWRHGOIEWHRGOIWHEOIGUHEWOIRGBERVBEORBGUHVEGIUVWIGOUHQGIQVWBGOIBQEIRHGQE
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="Box-header">
+            <h3 class="Box-title">
+              Image Post
+            </h3>
+        </div>
+        <div class="Box-body">
+            <img src="{{url_for('static',filename = 'download.png')}}" alt="boilering" style="width:360px;height:315px;">
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="Box-header">
+            <h3 class="Box-title">
+              Link Post
+            </h3>
+        </div>
+        <div class="Box-body">
+            <div id="text-post" class="transition-all" style="word-break: break-all;">
+                <a href="https://www.google.com/">To Google</a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}

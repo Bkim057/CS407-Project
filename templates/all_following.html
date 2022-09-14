@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="columns">
+
+  <div class="column">
+    <h1 class="title">Followed Topics</h1>  
+    {{ topics_string|safe }}
+  </div>
+
+  <div class="column">
+    <h1 class="title">Followed Users</h1>  
+    {{ users_string|safe }}
+  </div>
+
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

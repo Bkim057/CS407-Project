@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if not user.is_blocking(current_user) %}
+<div class="column is-4 is-offset-4">
+  <h1 class="title">User Info</h1>
+  <div class="box">
+      <!-- TODO: Add PFP display functionality -->
+      {{ pfp_to_html(id)|safe }}
+
+      <h3>Name: {{ name }}</h3>
+
+      {%if not current_user.is_blocking(user) %}
+
+      <h3>Bio: {{ bio }}</h3>
+
+      <h3>Followers: {{ user.followers.count() }}  Following: {{ user.followed.count() }}</h3>
+
+  </div>
+  {% endif %}
+  {%if not current_user.is_blocking(user) %}
+  <h1 class="title">Userline</h1>
+  <div class="box">
+    <form action="/disp_userline/{{ id }}/0/Posts">
+      <button class="button is-block is-info is-large is-fullwidth" value="Post Activity" name="action" button
+        style="margin:5px;">View user's post activity</button>
+    </form>
+
+    <form action="/disp_userline/{{ id }}/0/Interactions">
+      <button class="button is-block is-info is-large is-fullwidth" value="Interactions" name="action" button
+        style="margin:5px;">View user's post interactions</button>
+    </form>
+  </div>
+  {% endif %}
+  <!-- TODO: FOLLOWING FUNCTIONALITY    -->
+  <!-- Buttons do nothing at the moment -->
+  <!-- Maybe show different button based on if user is being followed or not atm? -->
+  <!-- Will need some way to query db to see if user is being followed though -->
+  <!-- Probably with inline python and support from database to see followed users -->
+  {% if current_user.is_authenticated %}
+  <h1 class="title">Actions</h1>
+  <div class="box">
+    {% if current_user.id != -1 %}
+    <!-- id of user to follow/unfollow is supplied with {{ id }}    -->
+    <!-- since it is given to it by the view_profile() function     -->
+    {% if not current_user.is_blocking(user) %}
+      {% if not current_user.is_following(user) %}
+        <form action="/follow_user/{{ id }}">
+          <button class="button is-block is-info is-large is-fullwidth" value="Follow User" name="action" button
+            style="margin:5px;">Follow User</button>
+        </form>
+      {% else %}
+        <form action="/unfollow_user/{{ id }}">
+          <button class="button is-block is-info is-large is-fullwidth" value="Unfollow User" name="action" button
+            style="margin:5px;">Unfollow User</button>
+        </form>
+      {% endif %}
+    {% endif %}
+    <!-- Change action for it to be a new page where the users may chat    -->
+    {% if not current_user.is_blocking(user) %}
+      {% if user.chat_restriction %}
+          {% if user.is_following(current_user) %}
+            <form action="/chat_with/{{ id }}">
+              <button class="button is-block is-info is-large is-fullwidth" value="Chat With User" name="action" button
+                style="margin:5px;">Chat With User</button>
+              </form>
+          {% endif %}
+      {% else %}
+        <form action="/chat_with/{{ id }}">
+          <button class="button is-block is-info is-large is-fullwidth" value="chatting" name="action" button
+            style="margin:5px;">Chat With User</button>
+        </form>
+      {% endif %}
+    {% endif %}
+    
+    {%if not current_user.is_blocking(user) %}
+    <form action="/block_user/{{ id }}">
+      <button class="button is-block is-info is-large is-fullwidth" value="Block User" name="action" button
+        style="margin:5px;">Block User</button>
+    </form>
+    {% else %}
+    <form action="/unblock_user/{{ id }}">
+      <button class="button is-block is-info is-large is-fullwidth" value="Unblock User" name="action" button
+        style="margin:5px;">Unblock User</button>
+    </form>
+    {% endif %}
+    {% endif %}
+  </div>
+  {% endif %}
+  
+  
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
+{% endif %}
+{% endblock %}

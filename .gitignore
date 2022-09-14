@@ -1,0 +1,15 @@
+__pycache__/__init__.cpython-39.pyc
+__pycache__/app.cpython-39.pyc
+__pycache__/auth.cpython-39.pyc
+__pycache__/main.cpython-39.pyc
+__pycache__/models.cpython-39.pyc
+__pycache__/email.cpython-39.pyc
+__pycache__/posts.cpython-39.pyc
+__pycache__/profile.cpython-39.pyc
+__pycache__/token.cpython-39.pyc
+db.sqlite
+__pycache__/email.cpython-39.pyc
+__pycache__/posts.cpython-39.pyc
+__pycache__/profile.cpython-39.pyc
+__pycache__/tests.cpython-39.pyc
+__pycache__/token.cpython-39.pyc

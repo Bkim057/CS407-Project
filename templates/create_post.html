@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="column is-half is-offset-one-quarter">
+    <h1 class="title">Create Post</h1>
+    <div class="box">
+        <!-- TODO: Add PFP update functionality -->
+
+        <!-- TODO: Add input forms -->
+        <form method="POST" action="/post_created" enctype="multipart/form-data">
+    
+            <div class="field">
+                <div class="control">
+                    <textarea class="textarea" name="contents" placeholder="Contents"></textarea>
+                </div>
+            </div>
+            
+            <input class="input" name="topic" type="text" placeholder="Topic">
+            <div class="field">
+                <div class="control">
+                    
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="columns">
+                    <div class="column">
+                        <div id="file-js-example" class="file has-name">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="attachment">
+                                <span class="file-cta">
+                                    <span class="file-label">
+                                        Choose a file…
+                                    </span>
+                                </span>
+                                <span class="file-name">
+                                    No file uploaded
+                                </span>
+                            </label>
+                        </div>
+                        
+                        <script>
+                            const fileInput = document.querySelector('#file-js-example input[type=file]');
+                            fileInput.onchange = () => {
+                                if (fileInput.files.length > 0) {
+                                    const fileName = document.querySelector('#file-js-example .file-name');
+                                    fileName.textContent = fileInput.files[0].name;
+                                }
+                            }
+                        </script>
+                    </div>
+                    <div class="column">
+                        <label class="checkbox">
+                            <input type="checkbox" name="anonymous">
+                            Post Anonymously
+                        </label>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth" value="Post Created" name="action" button
+            style="margin: 5px;">Confirm</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

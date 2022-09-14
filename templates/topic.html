@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="column is-4 is-offset-4">
+
+  <h1 class="title">This Page is About {{ name }}!</h1>
+
+  <!--Added below-->
+  {% if post_num != NULL %}
+  <div class="column">
+
+    <h1 class="title">Tagged Post #{{ post_num }}</h1>
+    <div class="box">
+          {{ post_html|safe }}
+    </div>
+
+    {% if list_len > 1 %}
+    <h1 class="title">Navigate Posts</h1>
+    <div class="box">
+  
+      {% if post_num < list_len - 1 %}
+        <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/view_topic/{{ id }}/{{ post_num + 1 }}';" type="button"value="Next Post" name="action" button
+          style="margin:5px;">Next Post</button>
+      {% endif %}
+  
+      {% if post_num > 0 %}
+        <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/view_topic/{{ id }}/{{ post_num - 1 }}';" type="button" value="Previous Post" name="action" button
+          style="margin:5px;">Previous Post</button>
+      {% endif %}
+    </div>
+    {% endif %}
+
+  </div>
+  {% endif %}
+  <!--Added above-->
+
+
+  {% if current_user.is_authenticated %}
+  <div class="box">
+    <!-- id of user to follow/unfollow is supplied with {{ id }}    -->
+    <!-- since it is given to it by the view_profile() function     -->
+    {%if not current_user.is_following_topic(id) %}
+      <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/follow_topic/{{ id }}';" type="button" value="Follow Topic" name="action" button
+        style="margin:5px;">Follow This Topic!</button>
+    {% else %}
+    <h1>No longer interested in {{ name }}?</h1>
+    <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/unfollow_topic/{{ id }}';" type="button" value="Follow Topic" name="action" button
+      style="margin:5px;">Unfollow This Topic!</button>
+    {% endif %}
+  </div>
+  {% endif %}
+  
+</div>
+
+{% endblock %}
