@@ -36,14 +36,14 @@ def create_app():
     app.config['SECURITY_PASSWORD_SALT'] = 'my_precious_two'
 
     # mail settings
-    app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-    app.config['MAIL_PORT'] = 465
-    app.config['MAIL_USE_TLS'] = False
-    app.config['MAIL_USE_SSL'] = True
+    app.config['MAIL_SERVER'] = 'smtp.elasticemail.com'
+    app.config['MAIL_PORT'] = 2525
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USE_SSL'] = False
 
     # gmail authentication
-    app.config['MAIL_USERNAME'] = os.environ['APP_MAIL_USERNAME']
-    app.config['MAIL_PASSWORD'] = os.environ['APP_MAIL_PASSWORD']
+    app.config['MAIL_USERNAME'] = 'purduecircle265@gmail.com'
+    app.config['MAIL_PASSWORD'] = 'BC8320BE68E48015E30E6C9BAD8C83177341'
 
     # mail accounts
     app.config['MAIL_DEFAULT_SENDER'] = 'purduecircle265@gmail.com'
