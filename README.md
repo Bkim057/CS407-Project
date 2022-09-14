@@ -1,10 +1,8 @@
-# CS307 Project: Purdue Circle
+# CS407 Project: BigBoilers
 ### Team Members
-Bryan Kim, Gautam Raghu, Jorge Ribeiro, Snekha Senthilkumar, Vindhya Banda
+Bryan Kim, Gautam Raghu, Jorge Ribeiro, Vindhya Banda
 ### Project Description
-The problem of not having a social networking application that pulls elements from other more popular social platforms affects people who want a succinct platform to connect. The impact of which is increased confusion and time spent understanding how each separate social media platform works. A successful solution would allow a person to be able to have an account in which they can edit or delete, as well as give the person the ability to interact with posts, post something of their own, and follow people or topics in which they find themselves interested in. We plan to implement this solution through our web app, Purdue Circle!
+Being new to working out, or attempting to try something new at the gym can be a daunting task. Usually we don’t really know how many exercises are out there that hit the different muscle groups that we want to grow. While nutrition apps are nothing new, our web application aims to help users be aware of the different muscle groups in the body and what exercises they can perform to workout each one. This is accomplished through users being able to select and get immediate results on all exercises which enhance those muscles. Furthermore users can save exercises to a personalized workout list.
 ### Important Links
-Find a breakdown of user stories in the [Product Backlog ](https://docs.google.com/document/d/1EaFGhafJff10VELDWm531yrX4vTATiyffsPnwdKP1bs/edit).  
-Find design specifications in the [Design Document](https://docs.google.com/document/d/1lYZ9qQd66wIMCNOC0bPERvUjC4TKY0PhmOpuiWVGUBU/edit).  
-UI Goals and specifications are outlined on our [Figma Doc](https://www.figma.com/file/B2E5Ph3elMdBouhWwEo3dg/WebApp-Mock?node-id=0%3A1).  
-Sprint 1 details are listed in the [Sprint #1 Planning Doc](https://docs.google.com/document/d/1kJqO51eTvSvpgxgyYyyzGd3NwsEluKbiBU92ocFw9xs/edit).  
+Find a breakdown of user stories in the [Product Backlog ](https://docs.google.com/document/d/1hjh5B_aCYY89kmNJ7PGnSHFefa-vchyeDDAgagfpQ0U/edit).  
+Find design specifications in the [Design Document](https://docs.google.com/document/d/11zBtyGx4EUnJSevTTkPbfRsM6GJC2DMYYBG1Vx7bA6w/edit).  
