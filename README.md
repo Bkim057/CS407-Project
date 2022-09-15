@@ -6,3 +6,5 @@ Being new to working out, or attempting to try something new at the gym can be a
 ### Important Links
 Find a breakdown of user stories in the [Product Backlog ](https://docs.google.com/document/d/1hjh5B_aCYY89kmNJ7PGnSHFefa-vchyeDDAgagfpQ0U/edit).  
 Find design specifications in the [Design Document](https://docs.google.com/document/d/11zBtyGx4EUnJSevTTkPbfRsM6GJC2DMYYBG1Vx7bA6w/edit).  
+Find the sprint planning doc in the [Sprint #1 Planning Doc](https://docs.google.com/document/d/1ev_VrGcu_Uj2N5DBleOxV74sbzjdCSXqSOGIdQxbkys/edit?usp=sharing
+)
