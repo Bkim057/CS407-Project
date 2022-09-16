@@ -1,0 +1,193 @@
+{
+  "id": "734df6c2-3039-4ec6-8c2c-b48325f265b3",
+  "version": "2.0",
+  "name": "test",
+  "url": "http://127.0.0.1:5000/",
+  "tests": [{
+    "id": "3a95edfa-e840-4114-b7e6-c8100f10a6d9",
+    "name": "Login with incorrect credentials",
+    "commands": [{
+      "id": "1de1d8bf-829e-428f-9a5a-c30650b9d30d",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c7b55ab2-7e1a-4260-b226-23a097e33a0c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "742c7a55-aff8-46e8-8136-f27431af62c2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Home",
+      "targets": [
+        ["linkText=Home", "linkText"],
+        ["css=.navbar-item:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'Home')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Home')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "81275d7e-15a6-4312-85e6-a77686374b9e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ba7a30a7-0666-489d-b7d8-bee5e6a4b83c",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.field:nth-child(1) .input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "bryan@gmail.com"
+    }, {
+      "id": "7638d20c-a9f9-42bc-9d33-858bfccfd78e",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.field:nth-child(2) .input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "1234"
+    }, {
+      "id": "ca6dbfc2-ee07-4293-8a1b-0e0df5f6e8ea",
+      "comment": "",
+      "command": "click",
+      "target": "css=.button:nth-child(4)",
+      "targets": [
+        ["css=.button:nth-child(4)", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d62af94f-134f-40b9-8aa5-a464010fbc6c",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.notification",
+      "targets": [
+        ["css=.notification", "css:finder"],
+        ["xpath=//div/div[2]", "xpath:position"]
+      ],
+      "value": "Login credentials were incorrect or User does not exist."
+    }]
+  }, {
+    "id": "62b36247-95fb-4906-8b1e-ce6c26cc3073",
+    "name": "Login with correct credentials",
+    "commands": [{
+      "id": "0606685d-01a6-4617-8850-6d73ab3bcfa5",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "26c950bf-90a6-40bd-ae80-d6ca5c77bf07",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "49a513f6-1dd8-4c54-94d7-2eddd4255ee2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bccf8d4c-805e-4a89-9f80-424be832509a",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.field:nth-child(1) .input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "bryan@gmail.com"
+    }, {
+      "id": "4c75f753-b4e3-44e6-921f-9d8e1febb7cb",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.field:nth-child(2) .input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "123"
+    }, {
+      "id": "741de8b6-5b57-4c55-87eb-980515d34743",
+      "comment": "",
+      "command": "click",
+      "target": "css=.button:nth-child(4)",
+      "targets": [
+        ["css=.button:nth-child(4)", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bb253b8b-82e4-4b05-a401-207182226c22",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=h3:nth-child(2)",
+      "targets": [
+        ["css=h3:nth-child(2)", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Name: bryan')]", "xpath:innerText"]
+      ],
+      "value": "Name: bryan"
+    }, {
+      "id": "d9dc4add-4f41-43fd-a8e2-8dc1895fe8d8",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "1cf16f12-f9e7-4337-8479-8565b92c0326",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["3a95edfa-e840-4114-b7e6-c8100f10a6d9"]
+  }],
+  "urls": ["https://www.google.com/", "http://127.0.0.1:5000/"],
+  "plugins": []
+}
