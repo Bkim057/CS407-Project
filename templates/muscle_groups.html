@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+    <div class="box">
+        <h3>Upper Body</h3>
+        <form action="/muscle_page/">
+            <button><a href="{{ url_for('muscle_groups.upper_body_page') }}">View Exercises</a></button>
+        </form>
+    </div>
+    <div class="box">
+        <h3>Core</h3>
+        <form action="/muscle_page/">
+            <button><a href="{{ url_for('muscle_groups.core_page') }}">View Exercises</a></button>
+        </form>
+    </div>
+    <div class="box">
+        <h3>Lower Body</h3>
+        <form action="/muscle_page/">
+            <button><a href="{{ url_for('muscle_groups.lower_body_page') }}">View Exercises</a></button>
+        </form>
+    </div>
+</html>
+{% endblock %}

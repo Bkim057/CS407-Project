@@ -81,4 +81,7 @@ def create_app():
     from .topics import topics as topics_blueprint
     app.register_blueprint(topics_blueprint)
 
+    from .muscle_groups import muscle_groups as mg_blueprint
+    app.register_blueprint(mg_blueprint)
+
     return app

@@ -66,6 +66,12 @@
                             </a>
 
                             {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('muscle_groups.muscles_page') }}" class="navbar-item">
+                                Explore Workouts
+                            </a>
+                            {% endif %}
+
+                            {% if current_user.is_authenticated %}
                             <div class="search-container">
                                 <form action="/search_user">
                                   <input type="text" placeholder="Search a User.." id="uname"name="search"maxlength="1000">
