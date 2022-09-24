@@ -710,6 +710,253 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "7da703b7-53d4-4305-b0ae-5ad16962244b",
+    "name": "Follow/Unfollow a User",
+    "commands": [{
+      "id": "be92673b-490f-401e-922b-c8c46311aa7e",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "84d8d8de-d7fc-44e1-80b7-429bde423f61",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f001def0-10cc-4a30-a0ef-e37716d6561f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9ae3d39c-cc41-4a2f-9341-201563483ddf",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.field:nth-child(1) .input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "bryan@gmail.com"
+    }, {
+      "id": "6b980f45-f4fb-4c82-b409-4dbf864e51a6",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.field:nth-child(2) .input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "123"
+    }, {
+      "id": "46d831f8-23b4-4c4b-992d-9e1fd1161cd0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.button",
+      "targets": [
+        ["css=.button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ec896863-b4a8-4591-9779-d690dfe6e263",
+      "comment": "",
+      "command": "click",
+      "target": "css=.search-container > form",
+      "targets": [
+        ["css=.search-container > form", "css:finder"],
+        ["xpath=//form[@action='/search_user']", "xpath:attributes"],
+        ["xpath=//form", "xpath:position"],
+        ["xpath=//form[contains(.,' Submit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e38ea08a-17df-40c7-919a-65ef2f7b8cf4",
+      "comment": "",
+      "command": "click",
+      "target": "id=uname",
+      "targets": [
+        ["id=uname", "id"],
+        ["name=search", "name"],
+        ["css=#uname", "css:finder"],
+        ["xpath=//input[@id='uname']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4a769851-28b7-46be-a820-389b90547d75",
+      "comment": "",
+      "command": "type",
+      "target": "id=uname",
+      "targets": [
+        ["id=uname", "id"],
+        ["name=search", "name"],
+        ["css=#uname", "css:finder"],
+        ["xpath=//input[@id='uname']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "a"
+    }, {
+      "id": "823d7c3c-bdb6-47d0-8572-a8c6ef88d4c6",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(2)",
+      "targets": [
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Submit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bf3d1a1c-be1e-4826-a5a4-3b69450ab8f0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.box:nth-child(2) button",
+      "targets": [
+        ["css=.box:nth-child(2) button", "css:finder"],
+        ["xpath=//div[2]/div/div/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'View this User')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3b8439ec-04ca-4064-a7ee-baf8b3181a68",
+      "comment": "",
+      "command": "click",
+      "target": "css=.box:nth-child(6) > form:nth-child(1) > .button",
+      "targets": [
+        ["css=.box:nth-child(6) > form:nth-child(1) > .button", "css:finder"],
+        ["xpath=(//button[@name='action'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Follow User')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3d64bfa5-8a31-4313-afab-9b82a65cbc29",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.notification",
+      "targets": [
+        ["css=.notification", "css:finder"],
+        ["xpath=//div[2]/div/div[2]", "xpath:position"]
+      ],
+      "value": "You are following a!"
+    }, {
+      "id": "65c50d67-8f0a-468d-8ae0-2e3a1a4eee83",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Profile",
+      "targets": [
+        ["linkText=Profile", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Profile')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/profile')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Profile')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b673e0e5-04b3-4063-9b34-3c30840215b8",
+      "comment": "",
+      "command": "click",
+      "target": "css=form:nth-child(5) > .button",
+      "targets": [
+        ["css=form:nth-child(5) > .button", "css:finder"],
+        ["xpath=(//button[@name='action'])[2]", "xpath:attributes"],
+        ["xpath=//form[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Manage Following')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1ad30ae-8245-4028-89a9-36ce6808b447",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.column:nth-child(2) h3",
+      "targets": [
+        ["css=.column:nth-child(2) h3", "css:finder"],
+        ["xpath=//div[2]/div/h3", "xpath:position"]
+      ],
+      "value": "a"
+    }, {
+      "id": "52afdf61-403c-4546-a241-7b997da6baf2",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(1)",
+      "targets": [
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//div[2]/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Unfollow!')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6adae6ff-73fc-4b21-ab4d-321cd6d030a8",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Profile",
+      "targets": [
+        ["linkText=Profile", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Profile')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/profile')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Profile')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b212108f-caf5-4099-813b-8c26e8fc0a87",
+      "comment": "",
+      "command": "click",
+      "target": "css=form:nth-child(5) > .button",
+      "targets": [
+        ["css=form:nth-child(5) > .button", "css:finder"],
+        ["xpath=(//button[@name='action'])[2]", "xpath:attributes"],
+        ["xpath=//form[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Manage Following')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9071be6f-937f-42c5-828f-a060746ef017",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.column:nth-child(2) h3",
+      "targets": [
+        ["css=.column:nth-child(2) h3", "css:finder"],
+        ["xpath=//div[2]/div/h3", "xpath:position"]
+      ],
+      "value": "You don't folllow any users!"
+    }, {
+      "id": "d8de83dd-f23a-40a1-a8a0-c17276cf0bc5",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.navbar-item:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "bfb4178c-bdf3-4603-be28-e631fdcdf477",

@@ -299,6 +299,59 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "9214c3bd-b9f7-43c3-a40b-b44912be236b",
+    "name": "Login with empty fields",
+    "commands": [{
+      "id": "a4afabb5-27cd-42b0-98df-ec63241c530a",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9492c6b0-bf9a-4f5c-9571-2ce6d46fc82d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1eadd5a1-63ad-4eab-82b9-cfb0e632513e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c86ee43f-46ec-4f5a-97a5-2cf2590c18cc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.button",
+      "targets": [
+        ["css=.button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bc0f2b7e-e2a2-41dc-b1af-c59dffc9a227",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.notification",
+      "targets": [
+        ["css=.notification", "css:finder"],
+        ["xpath=//div/div[2]", "xpath:position"]
+      ],
+      "value": "PLEASE FILL OUT ALL DAH FIELDS"
+    }]
   }],
   "suites": [{
     "id": "1cf16f12-f9e7-4337-8479-8565b92c0326",
