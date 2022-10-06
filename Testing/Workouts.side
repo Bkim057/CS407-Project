@@ -1,0 +1,211 @@
+{
+  "id": "1efc30ed-6323-4a68-880f-e591e4bf5517",
+  "version": "2.0",
+  "name": "Workouts",
+  "url": "http://127.0.0.1:5000/",
+  "tests": [{
+    "id": "f7f38766-3af8-42d9-bab8-c58ed665d3e4",
+    "name": "Check for Muscle Pages",
+    "commands": [{
+      "id": "d1e227fd-50ce-4d01-97b5-ffebc6b65891",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "21971a2f-7d5c-4c70-b348-ea5e88579520",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "87110b19-6391-4c82-bdf2-75a56c835698",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a4f46900-23dc-4bff-92d8-742bc2250bcc",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.field:nth-child(1) .input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "bryan@gmail.com"
+    }, {
+      "id": "f8dfc243-0e61-410f-b531-46fb4aab90d3",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.field:nth-child(2) .input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "123"
+    }, {
+      "id": "c25d2899-9a25-4643-8223-7f5952d61e53",
+      "comment": "",
+      "command": "click",
+      "target": "css=.button",
+      "targets": [
+        ["css=.button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "efd2a701-c74f-4e3b-8925-4bba5bc22e67",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Explore Workouts",
+      "targets": [
+        ["linkText=Explore Workouts", "linkText"],
+        ["css=.navbar-item:nth-child(5)", "css:finder"],
+        ["xpath=//a[contains(text(),'Explore Workouts')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/muscles_page')]", "xpath:href"],
+        ["xpath=//a[5]", "xpath:position"],
+        ["xpath=//a[contains(.,'Explore Workouts')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6fab2bbe-c75f-41ca-93ac-cb3bb9e17704",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=View Muscles",
+      "targets": [
+        ["linkText=View Muscles", "linkText"],
+        ["css=div:nth-child(2) > form a", "css:finder"],
+        ["xpath=//a[contains(text(),'View Muscles')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/muscle_page/upper_body')]", "xpath:href"],
+        ["xpath=//button/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Muscles')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "74983233-8e8d-440d-92f0-b6514a9778bb",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.box:nth-child(2) > h3",
+      "targets": [
+        ["css=.box:nth-child(2) > h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Shoulders')]", "xpath:innerText"]
+      ],
+      "value": "Shoulders"
+    }, {
+      "id": "752525bc-8e5e-420e-b5fd-017ba694a740",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Explore Workouts",
+      "targets": [
+        ["linkText=Explore Workouts", "linkText"],
+        ["css=.navbar-item:nth-child(5)", "css:finder"],
+        ["xpath=//a[contains(text(),'Explore Workouts')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/muscles_page')]", "xpath:href"],
+        ["xpath=//a[5]", "xpath:position"],
+        ["xpath=//a[contains(.,'Explore Workouts')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "25145ffa-aa4d-42b8-8c5f-649de4103912",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(3) a",
+      "targets": [
+        ["css=div:nth-child(3) a", "css:finder"],
+        ["xpath=(//a[contains(text(),'View Muscles')])[2]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/muscle_page/core')]", "xpath:href"],
+        ["xpath=//div[2]/form/button/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "570c2178-2640-4660-ba90-6aa945aa574e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.box:nth-child(2) > h3",
+      "targets": [
+        ["css=.box:nth-child(2) > h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Lower Back')]", "xpath:innerText"]
+      ],
+      "value": "Lower Back"
+    }, {
+      "id": "f95cfb74-af55-4cee-9ff0-64e7a8a55028",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Explore Workouts",
+      "targets": [
+        ["linkText=Explore Workouts", "linkText"],
+        ["css=.navbar-item:nth-child(5)", "css:finder"],
+        ["xpath=//a[contains(text(),'Explore Workouts')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/muscles_page')]", "xpath:href"],
+        ["xpath=//a[5]", "xpath:position"],
+        ["xpath=//a[contains(.,'Explore Workouts')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "db64f8aa-9c5d-4ca9-b6bf-aaa1a76918f7",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(4) a",
+      "targets": [
+        ["css=div:nth-child(4) a", "css:finder"],
+        ["xpath=(//a[contains(text(),'View Muscles')])[3]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/muscle_page/lower_body')]", "xpath:href"],
+        ["xpath=//div[3]/form/button/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "978f3325-23a0-4b8c-b84c-d4d60e1ebd3d",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.box:nth-child(2) > h3",
+      "targets": [
+        ["css=.box:nth-child(2) > h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Glutes')]", "xpath:innerText"]
+      ],
+      "value": "Glutes"
+    }, {
+      "id": "9c3da771-3beb-4b80-a554-06efe63bfda6",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.navbar-item:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "72eaba82-7123-47d6-9458-5561f5aa97c1",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://127.0.0.1:5000/"],
+  "plugins": []
+}
