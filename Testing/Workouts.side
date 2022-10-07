@@ -87,14 +87,11 @@
       "id": "6fab2bbe-c75f-41ca-93ac-cb3bb9e17704",
       "comment": "",
       "command": "click",
-      "target": "linkText=View Muscles",
+      "target": "css=div:nth-child(2) > form > button",
       "targets": [
-        ["linkText=View Muscles", "linkText"],
-        ["css=div:nth-child(2) > form a", "css:finder"],
-        ["xpath=//a[contains(text(),'View Muscles')]", "xpath:link"],
-        ["xpath=//a[contains(@href, '/muscle_page/upper_body')]", "xpath:href"],
-        ["xpath=//button/a", "xpath:position"],
-        ["xpath=//a[contains(.,'View Muscles')]", "xpath:innerText"]
+        ["css=div:nth-child(2) > form > button", "css:finder"],
+        ["xpath=//div[2]/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'View Muscles')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
@@ -126,12 +123,10 @@
       "id": "25145ffa-aa4d-42b8-8c5f-649de4103912",
       "comment": "",
       "command": "click",
-      "target": "css=div:nth-child(3) a",
+      "target": "css=div:nth-child(3) button",
       "targets": [
-        ["css=div:nth-child(3) a", "css:finder"],
-        ["xpath=(//a[contains(text(),'View Muscles')])[2]", "xpath:link"],
-        ["xpath=//a[contains(@href, '/muscle_page/core')]", "xpath:href"],
-        ["xpath=//div[2]/form/button/a", "xpath:position"]
+        ["css=div:nth-child(3) button", "css:finder"],
+        ["xpath=//div[2]/form/button", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -163,12 +158,10 @@
       "id": "db64f8aa-9c5d-4ca9-b6bf-aaa1a76918f7",
       "comment": "",
       "command": "click",
-      "target": "css=div:nth-child(4) a",
+      "target": "css=.column:nth-child(3) button",
       "targets": [
-        ["css=div:nth-child(4) a", "css:finder"],
-        ["xpath=(//a[contains(text(),'View Muscles')])[3]", "xpath:link"],
-        ["xpath=//a[contains(@href, '/muscle_page/lower_body')]", "xpath:href"],
-        ["xpath=//div[3]/form/button/a", "xpath:position"]
+        ["css=.column:nth-child(3) button", "css:finder"],
+        ["xpath=//div[3]/div/div[2]/form/button", "xpath:position"]
       ],
       "value": ""
     }, {
