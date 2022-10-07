@@ -42,6 +42,10 @@ saved_post = db.Table('saved_post',
     db.Column('saved_id', db.Integer, db.ForeignKey('post.id'))
 )
 
+workout_muscle_groups = db.Table('workout_muscle_groups',
+    db.Column('workout_id', db.Integer, db.ForeignKey('workout.id')),
+    db.Column('muscle', db.String, db.ForeignKey('muscle.name')))
+
 class User(UserMixin, db.Model):
 
     # Some of these fields are required
@@ -195,3 +199,14 @@ class Commented(UserMixin, db.Model):
     # post_id = db.relationship('Post', secondary=post_comment, backref='post')
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id', ondelete="CASCADE"), nullable=False)
+
+class Muscle(UserMixin, db.Model):
+    name = db.Column(db.String(15), primary_key=True)
+
+class Workout(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    exercise_name = db.Column(db.String(15))
+    description = db.Column(db.String(500))
+    URL = db.Column(db.String(2048))
+    
+    muscle_groups = db.relationship('Muscle', secondary=workout_muscle_groups)
