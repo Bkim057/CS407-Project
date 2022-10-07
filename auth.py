@@ -40,13 +40,22 @@ def login_post():
         return redirect(url_for('auth.login'))
 
     if not confirmed:
+        # TODO: user must be set after verifying it is a valid user from database
         flash('Make sure to confirm your email')
         return redirect(url_for('auth.login'))
-    # TODO: user must be set after verifying it is a valid user from database
     login_user(user, remember=remember)
 
     # Good2go login and send user to profile
     return redirect(url_for('prof.profile'))
+
+@auth.route('/guest_login')
+def login_guest():
+    global confirmed
+    # Ensure that all the fields are filled in
+    user = User.query.filter_by(id=-1).first()
+    login_user(user, remember=False)
+    # Good2go login and send user to profile
+    return redirect(url_for('main.index'))
 
 # Signup page
 @auth.route('/signup')
