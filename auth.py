@@ -120,10 +120,14 @@ def confirm_email(token):
     if confirmed is True:
         flash('Account already confirmed. Please login.', 'success')
     else:
-        confirmed = True
+
         print("LINK CLICKED!", confirmed)
         # user.confirmed_on = datetime.datetime.now()
         db.session.add(user)
         db.session.commit()
+        email = request.form.get('email')
+        user = User.query.filter_by(email=email)
+        if user:
+            confirmed = True
         flash('You have confirmed your account. Thanks!', 'success')
     return redirect(url_for('main.index'))
