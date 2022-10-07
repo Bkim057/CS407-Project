@@ -423,7 +423,7 @@ def get_interactions_user(user_id):
 
 # TODO function to get all posts' id's of all topics a user is following
 # Return Null if no topics followed
-def get_posts_topics_followed(user_id):  
+def get_posts_topics_followed(user_id):   
     user = User.query.filter_by(id=user_id).first()
     # topics is a list of Topic objects
     topics = user.followed_topics.all()
@@ -438,6 +438,8 @@ def get_posts_topics_followed(user_id):
       for post in post_list:
         if (post.user_id in blocked_user_ids):
           continue
+        if post.anonymous:   
+          continue    
         post_ids.append(post.id)
       # endfor
     # endfor
