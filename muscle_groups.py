@@ -24,6 +24,9 @@ def core_page():
 def lower_body_page():
     return render_template('lower_body.html')
 
+@muscle_groups.route('/muscle_page/workout_splits')
+def workout_splits():
+    return render_template('workout_splits.html')
 
 @muscle_groups.route('/view_workout/<id>')
 def view_workout(id):
