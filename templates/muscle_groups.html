@@ -3,60 +3,114 @@
 
 {% block content %}
 <html>
-    <img src="{{url_for('static', filename='tags.png')}}" align="middle" style="width:20%;height:60%; border-radius: 5px;" />
-    <div>
-        <form action="/muscle_page/upper_body">
-            <button style="position: absolute;
-            top: 25%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            background-color: red;
-            color: white;
-            font-size: 16px;
-            padding: 12px 24px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;">View Muscles</button>
-        </form>
+    <section class="hero is-primary">
+        <div class="hero-body">
+        </div>
+    </section>
+    <div style="display: table; width: 100%;"class="columns">
+        <div style="display: table-cell;"class="column is-one-third">
+            <div style="padding-bottom: 46px;"class="box">
+                <div class="content is-medium is-left">
+                    <h2 style="color: #ff4040 ;">Upper Body</h2>
+                    <p class="has-text-left pl-5"><strong>Section Includes:</strong></p>
+                    <div class="content is-left is-normal has-text-left">
+                        <ul class="pl-6">
+                            <li>Shoulders</li>
+                            <li>Back</li>
+                            <li>Triceps</li>
+                            <li>Biceps</li>
+                            <li>Chest</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div>
+                    <form action="/muscle_page/upper_body">
+                        <button style="position: absolute;
+                        transform: translate(-50%, -50%);
+                        -ms-transform: translate(-50%, -50%);
+                        background-color: #ff4040 ;
+                        color: white;
+                        font-size: 16px;
+                        padding: 12px 24px;
+                        border: none;
+                        cursor: pointer;
+                        margin-top: 3px;
+                        border-radius: 5px;">View Muscles</button>
+                    </form>
+                </div>
+            </div>        
+        </div>
+        <div style="display: table-cell;"class="column is-one-third">
+            <div style="padding-bottom: 103px;"class="box">
+                <div class="content is-medium is-left">
+                    <h2 style="color:green ;">Core</h2>
+                    <p class="has-text-left pl-5"><strong>Section Includes:</strong></p>
+                    <div class="content is-left is-normal has-text-left">
+                        <ul class="pl-6">
+                            <li>Lower Back</li>
+                            <li>Abs</li>
+                            <li>Obliques</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div>
+                    <form action="/muscle_page/core">
+                        <button style="position: absolute;
+                        transform: translate(-50%, -50%);
+                        -ms-transform: translate(-50%, -50%);
+                        background-color: green;
+                        color: white;
+                        font-size: 16px;
+                        padding: 12px 24px;
+                        border: none;
+                        cursor: pointer;
+                        margin-top: 60px;
+                        border-radius: 5px;">View Muscles</button>
+                    </form>
+                </div>
+            </div>        
+        </div>
+        <div style="display: table-cell;"class="column is-one-third">
+            <div style="padding-bottom: 75px;"class="box">
+                <div class="content is-medium is-left">
+                    <h2 style="color: #4169e1 ;">Lower Body</h2>
+                    <p class="has-text-left pl-5"><strong>Section Includes:</strong></p>
+                    <div class="content is-left is-normal has-text-left">
+                        <ul class="pl-6">
+                            <li>Glutes</li>
+                            <li>Quadriceps</li>
+                            <li>Calves</li>
+                            <li>Hamstrings</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div >
+                    <form action="/muscle_page/lower_body">
+                        <button style="position: absolute;
+                        transform: translate(-50%, -50%);
+                        -ms-transform: translate(-50%, -50%);
+                        background-color: #4169e1;
+                        color: white;
+                        font-size: 16px;
+                        padding: 12px 24px;
+                        border: none;
+                        cursor: pointer;
+                        margin-top: 35px;
+                        border-radius: 5px;">View Muscles</button>
+                    </form>
+                </div>
+            </div>        
+        </div>
     </div>
-    <div>
-        <form action="/muscle_page/core">
-            <button style="position: absolute;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            background-color: green;
-            color: white;
-            font-size: 16px;
-            padding: 12px 24px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;">View Muscles</button>
-        </form>
-    </div>
-    <div >
-        <form action="/muscle_page/lower_body">
-            <button style="position: absolute;
-            top: 93%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            background-color: blue;
-            color: white;
-            font-size: 16px;
-            padding: 12px 24px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;">View Muscles</button>
-        </form>
-    </div>
+
+   
     <div>
         <form action="/muscle_page/workout_splits">
             <button style="position: absolute;
-                top: 93%;
-                left: 70%;
+
                 transform: translate(-50%, -50%);
                 -ms-transform: translate(-50%, -50%);
                 background-color: black;
@@ -65,6 +119,7 @@
                 padding: 12px 24px;
                 border: none;
                 cursor: pointer;
+                margin-top: 20px;
                 border-radius: 5px;">View Workout Splits</button>
         </form>
     </div>
