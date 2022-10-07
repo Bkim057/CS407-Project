@@ -230,7 +230,7 @@ def follow_topic(id):
 def unfollow_topic(id):
     #topic = Topic.query.filter_by(id=id).first()
     if not current_user.is_following_topic(id):
-        flash("You don't follow this topic!")
+        flash("You don't follow this muscle group!")
         return redirect(url_for('prof.view_topic', id=id))
     current_user.unfollow_topic(id)
     db.session.commit()
@@ -335,7 +335,7 @@ def all_following_page():
     topics_html_string = ""
     if len(topics) == 0:
         topics_html_string += "<div class=\"box\">\
-                                    <h3>You don't folllow any topics!</h3>\
+                                    <h3>You don't folllow any muscle groups!</h3>\
                                 </div>"
     else:
         for topic in topics:

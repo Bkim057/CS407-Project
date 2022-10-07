@@ -26,7 +26,7 @@ def topic_to_html(name, id):
     html_string =  "<div class=\"box\">\
                         <h3>" + str(name) + "</h3>\
                         <form action=\"/view_topic/" + str(id) + "/" + str("0") + "\">\
-                            <button>View this Topic</button>\
+                            <button>View Workouts</button>\
                         </form>\
                     </div>"
     return html_string

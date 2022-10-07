@@ -42,11 +42,11 @@
     <!-- since it is given to it by the view_profile() function     -->
     {%if not current_user.is_following_topic(id) %}
       <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/follow_topic/{{ id }}';" type="button" value="Follow Topic" name="action" button
-        style="margin:5px;">Follow This Topic!</button>
+        style="margin:5px;">Follow This Muscle Group!</button>
     {% else %}
     <h1>No longer interested in {{ name }}?</h1>
     <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/unfollow_topic/{{ id }}';" type="button" value="Follow Topic" name="action" button
-      style="margin:5px;">Unfollow This Topic!</button>
+      style="margin:5px;">Unfollow This Muscle Group!</button>
     {% endif %}
   </div>
   {% endif %}

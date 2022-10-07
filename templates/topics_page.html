@@ -5,9 +5,9 @@
 
   {% if current_user.is_authenticated %}
 
-  <label> Make a New Topic
+  <label> Make a New Muscle Group
     <form action="/new_topic">
-      <input type="text" placeholder="Create a New Topic.." id="topicname"name="tname"maxlength="20">
+      <input type="text" placeholder="Create New Group.." id="topicname"name="tname"maxlength="20">
       <button type="submit">Create</button>
     </form>
   </label>
@@ -15,7 +15,7 @@
   {% endif %}
 
   <div class="column is-4 is-offset-4">
-    <h1 class="title">Existing Topics</h1>  
+    <h1 class="title">Existing Muscle Group</h1>  
     {{ topics_string|safe }}
   </div>
 </div>
