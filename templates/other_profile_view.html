@@ -8,7 +8,11 @@
       <!-- TODO: Add PFP display functionality -->
       {{ pfp_to_html(id)|safe }}
 
-      <h3>Name: {{ name }}</h3>
+      {%if user.admin %}
+          <h3>Name: {{ name }} -- ADMIN</h3>
+      {% else %}
+          <h3>Name: {{ name }} -- Regular User</h3>
+      {% endif %}
 
       {%if not current_user.is_blocking(user) %}
 
@@ -84,6 +88,20 @@
         style="margin:5px;">Unblock User</button>
     </form>
     {% endif %}
+    {%if current_user.admin %}
+        {%if not user.admin %}
+        <form action="/temp_admin_other/{{ id }}">
+          <button class="button is-block is-info is-large is-fullwidth" value="Block User" name="action" button
+            style="margin:5px;">Give admin</button>
+        </form>
+        {% else %}
+        <form action="/temp_admin_other/{{ id }}">
+          <button class="button is-block is-info is-large is-fullwidth" value="Unblock User" name="action" button
+            style="margin:5px;">Take Away admin</button>
+        </form>
+        {% endif %}
+    {% endif %}
+
     {% endif %}
   </div>
   {% endif %}

@@ -8,7 +8,11 @@
       <!-- TODO: Add PFP display functionality -->
       {{ pfp_to_html(id)|safe }}
 
-      <h3>Name: {{ name }}</h3>
+      {%if current_user.admin %}
+          <h3>Name: {{ name }} -- ADMIN</h3>
+      {% else %}
+          <h3>Name: {{ name }} -- Regular User</h3>
+      {% endif %}
       <h3>Bio: {{ bio }}</h3>
       <form method="GET" action="/edit_profile">
           <button class="button is-block is-info is-large is-fullwidth" value="Edit Profile" name="action"button style="margin:5px;">Edit Profile</button>
@@ -30,6 +34,17 @@
       <form action="/restrict_user/">
         <button class="button is-block is-info is-large is-fullwidth" value="Chatrestrict" name="action" button
           style="margin:5px;">Chat only mutuals</button>
+      </form>
+      {% endif %}
+      {%if current_user.admin %}
+      <form action="/temp_admin_self/">
+        <button class="button is-block is-info is-large is-fullwidth" value="Unchatrestrict" name="action" button
+          style="margin:5px;">No admin</button>
+      </form>
+      {% else %}
+      <form action="/temp_admin_self/">
+        <button class="button is-block is-info is-large is-fullwidth" value="Chatrestrict" name="action" button
+          style="margin:5px;">Give admin</button>
       </form>
       {% endif %}
   </div>

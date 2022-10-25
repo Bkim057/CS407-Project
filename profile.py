@@ -201,6 +201,28 @@ def unfollow_user(id):
     else:
         return redirect(url_for('prof.view_profile', id=id))
 
+@prof.route('/temp_admin_self/')
+def admin_give():
+    if (current_user.admin):
+        current_user.admin = False
+        db.session.commit()
+        return redirect(url_for('prof.profile'))
+    current_user.admin = True
+    db.session.commit()
+    return redirect(url_for('prof.profile'))
+
+@prof.route('/temp_admin_other/<id>')
+def admin_other_give(id):
+    user = User.query.filter_by(id=id).first()
+    if (user.admin):
+        user.admin = False
+        db.session.commit()
+        return redirect(url_for('prof.view_profile', id=id))
+    user.admin = True
+    db.session.commit()
+    return redirect(url_for('prof.view_profile', id=id))
+
+
 @prof.route('/unrestrict_user/')
 def unrestrict_user():
     current_user.chat_restriction = False
