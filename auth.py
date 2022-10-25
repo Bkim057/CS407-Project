@@ -92,7 +92,7 @@ def signup_post():
 
     # Create a new User with passed information
     # TODO: Create User with passed information into database
-    new_dude = User(email=email, name=name, password=generate_password_hash(password, method='sha256'), chat_restriction=True)
+    new_dude = User(email=email, name=name, password=generate_password_hash(password, method='sha256'), chat_restriction=True, admin=False)
 
     # TODO: Add new guy to database
     
