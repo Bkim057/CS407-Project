@@ -68,7 +68,6 @@ def post_creation_handler():
 @login_required
 def delete_post(id):
   obj = Post.query.filter_by(id=id).first()
-  print(f"VALUE: { obj.id }")
   # update relational databases
   q1 = post_topic.delete().where(post_topic.c.post_id == obj.id)
   db.session.execute(q1)
@@ -244,15 +243,16 @@ def post_to_html(post_id):
                       </div>"
     
     pfp_string = "https://bulma.io/images/placeholders/128x128.png"
-    print(user_for_post)
-    print(user_for_post.pfp_filename)
     if (user_for_post.pfp):
       img_src = Image.open(BytesIO(user_for_post.pfp))
       ext = os.path.splitext(user_for_post.pfp_filename)[1]
       image_location = "./static/pfp" + str(user_for_post.id) + ext
       img_src.save(image_location)
       pfp_string = image_location[1:]
-    print(pfp_string)
+
+    admin_status = "Admin"
+    if not user_for_post.admin:
+      admin_status = "Regular User"
 
     if not current_user.is_authenticated:
       return "<div class=\"box\"> \
@@ -265,7 +265,7 @@ def post_to_html(post_id):
           <div class=\"media-content\">\
             <div class=\"content\">\
               <p>\
-                <strong>" + str(username) + "</strong> <small>@placeholder</small> <small>31m</small>\
+                <strong>" + str(username) + "</strong> <small>" + admin_status + "</small> <small>31m</small>\
                 <br>" + tagged_topics_str + "</p>\
                 <br>" + str(contents) + "</p>\
             </div>\
@@ -284,7 +284,7 @@ def post_to_html(post_id):
           <div class=\"media-content\">\
             <div class=\"content\">\
               <p>\
-                <strong>" + str(username) + "</strong> <small>@placeholder</small> <small>31m</small>\
+                <strong>" + str(username) + "</strong> <small>" + admin_status + "</small> <small>31m</small>\
                 <br>" + tagged_topics_str + "</p>\
                 <br>" + str(contents) + "</p>\
             </div>\
@@ -414,8 +414,6 @@ def get_interactions_user(user_id):
         post_of_comment = Post.query.filter_by(id=comment.post_id).first()
         if post_of_comment.user_id not in blocked_user_ids:
           interaction_post_ids.append(comment.post_id)
-
-    print("Post ids >>> " + str(interaction_post_ids))
 
     # Then convert to html (special way for this specific grabber)
     # ^^^^ is to be done though
