@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="columns is-8">
+
+  <div class="column">
+    <h1 class="title">Moderation</h1>  
+      <form action="/moderate_posts_list/0">
+        <button class="button is-block is-info is-large is-fullwidth" value="Moderate Posts" name="action" button
+          style="margin:5px;">Moderate Unapproved Posts</button>
+      </form>
+  </div>
+
+  <div class="column">
+    <h1 class="title">Admin Perms</h1>  
+    <label> Give Admin to User
+      <form action="/give_admin">
+        <input type="text" placeholder="Enter a user's name" id="username"name="uname"maxlength="20">
+        <button type="submit">Search</button>
+      </form>
+    </label>
+  
+    <label> Take Admin from User
+      <form action="/take_admin">
+        <input type="text" placeholder="Enter a user's name" id="username"name="uname"maxlength="20">
+        <button type="submit">Search</button>
+      </form>
+    </label>
+  </div>
+</div>
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

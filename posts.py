@@ -43,12 +43,16 @@ def post_creation_handler():
         isValidFile = False if not file else file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'))
         anonymous = True if request.form.get('anonymous') == 'on' else False 
 
+        moderated_status = False
+        if current_user.admin:
+          moderated_status = True
+
         if (anonymous):
-          new_post = Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0) \
-            if not isValidFile else Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read())
+          new_post = Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status) \
+            if not isValidFile else Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), modertated=moderated_status)
         else:
-          new_post = Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0) \
-            if not isValidFile else Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read())
+          new_post = Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status) \
+            if not isValidFile else Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), moderated=moderated_status)
         
         if (topic):
           topic_obj = Topic.query.filter_by(name=topic).first()
@@ -96,9 +100,9 @@ def get_urls(contents):
 @login_required
 def view_temp():
     return render_template('posttemp.html')
-  
+
 # Function to get html to display a post AND a button to delete it
-def post_del_to_html(post_id):
+def post_to_approve_to_html(post_id, post_num):
     #Currently done as <h3> because that is what lines up with in where the 
     #Post html is placed in timeline.html
     cur_session['url'] = request.url
@@ -118,6 +122,12 @@ def post_del_to_html(post_id):
       contents = contents.replace(url, '<a href="' + url + '">' + url + '</a>')
 
     username = user_for_post.name
+    admin_status = "Admin"
+    if not user_for_post.admin:
+      admin_status = "Regular User"
+    moderated_status = ""
+    if not obj.moderated:
+      moderated_status = "Unmoderated"
 
     image_string = ""
     if (obj.filename):
@@ -145,7 +155,84 @@ def post_del_to_html(post_id):
           <div class=\"media-content\">\
             <div class=\"content\">\
               <p>\
-                <strong>" + str(username) + "</strong> <small>@placeholder</small> <small>31m</small>\
+                <strong>" + str(username) + "</strong> <small>" + admin_status + "</small> <small>31m</small>\
+                <br>" + tagged_topics_str + "</p>\
+                <br>" + str(contents) + "</p>\
+                <br>" + moderated_status + "</p>\
+            </div>\
+            " + image_string + "\
+            <nav class=\"level is-mobile\">\
+              <div class=\"level-right\">\
+                <form method=\"POST\" action=\"/approve_post/"+str(post_id)+"/" + str(post_num) +"\">\
+                  <button>Approve Post</button>\
+                </form>\
+                <form method=\"POST\" action=\"/unapprove_post/"+str(post_id)+"/" + str(post_num) +"\">\
+                  <button>Delete Post</button>\
+                </form>\
+              </div>\
+            </nav>\
+          </div>\
+        </article>\
+        </div>"
+
+    return html_string
+
+  
+# Function to get html to display a post AND a button to delete it
+def post_del_to_html(post_id):
+    #Currently done as <h3> because that is what lines up with in where the 
+    #Post html is placed in timeline.html
+    cur_session['url'] = request.url
+    obj = Post.query.filter_by(id=post_id).first()
+    user_for_post = User.query.filter_by(id=obj.user_id).first()
+    tagged_topics = obj.tagged_topics
+    tagged_topics_str = "Tags: "
+    count = 0
+    for topic in tagged_topics:
+      count += 1    
+      tagged_topics_str += topic.name
+      if count < (len(tagged_topics)):
+        tagged_topics_str += ", "
+    contents = obj.contents
+
+    for url in get_urls(contents):
+      contents = contents.replace(url, '<a href="' + url + '">' + url + '</a>')
+
+    username = user_for_post.name
+    admin_status = "Admin"
+    if not user_for_post.admin:
+      admin_status = "Regular User"
+    moderated_status = ""
+    if not obj.moderated:
+      moderated_status = "Unmoderated"
+
+    image_string = ""
+    if (obj.filename):
+      img_src = Image.open(BytesIO(obj.data))
+      image_location = "./static/" + obj.filename
+      img_src.save(image_location)
+      image_string = "<div class=\"Box-body\">\
+                        <img src=" + image_location[1:] + ">\
+                      </div>"
+    pfp_string = "https://bulma.io/images/placeholders/128x128.png"
+    if (user_for_post.pfp):
+      img_src = Image.open(BytesIO(user_for_post.pfp))
+      ext = os.path.splitext(user_for_post.pfp_filename)[1]
+      image_location = "./static/pfp" + str(user_for_post.id) + ext
+      img_src.save(image_location)
+      pfp_string = image_location[1:]
+
+    html_string = "<div class=\"box\"> \
+        <article class=\"media\">\
+          <figure class=\"media-left\">\
+            <p class=\"image is-64x64\">\
+              <img src=\"" + pfp_string + "\">\
+            </p>\
+          </figure>\
+          <div class=\"media-content\">\
+            <div class=\"content\">\
+              <p>\
+                <strong>" + str(username) + "</strong> <small>" + admin_status + "</small> <small>31m</small>\
                 <br>" + tagged_topics_str + "</p>\
                 <br>" + str(contents) + "</p>\
             </div>\
@@ -155,6 +242,7 @@ def post_del_to_html(post_id):
                 <form method=\"POST\" action=\"/delete_post/"+str(post_id)+"\">\
                   <button>Delete Post</button>\
                 </form>\
+                <strong>" + moderated_status + "<strong>\
               </div>\
             </nav>"
     comment_bar = "<form class=\"input-group\" method='POST' action=\"/create-comment/"+str(obj.id)+"\" >\
@@ -253,6 +341,9 @@ def post_to_html(post_id):
     admin_status = "Admin"
     if not user_for_post.admin:
       admin_status = "Regular User"
+    moderated_status = ""
+    if not obj.moderated:
+      moderated_status = "Unmoderated"
 
     if not current_user.is_authenticated:
       return "<div class=\"box\"> \
@@ -268,6 +359,7 @@ def post_to_html(post_id):
                 <strong>" + str(username) + "</strong> <small>" + admin_status + "</small> <small>31m</small>\
                 <br>" + tagged_topics_str + "</p>\
                 <br>" + str(contents) + "</p>\
+                <br>" + moderated_status + "</p>\
             </div>\
             " + image_string + "\
         </article>\
@@ -287,6 +379,7 @@ def post_to_html(post_id):
                 <strong>" + str(username) + "</strong> <small>" + admin_status + "</small> <small>31m</small>\
                 <br>" + tagged_topics_str + "</p>\
                 <br>" + str(contents) + "</p>\
+                <br>" + moderated_status + "</p>\
             </div>\
             " + image_string + "\
             <nav class=\"level is-mobile\">"
@@ -434,6 +527,8 @@ def get_posts_topics_followed(user_id):
     for topic in topics:
       post_list = topic.posts
       for post in post_list:
+        if (not post.moderated):
+          continue
         if (post.user_id in blocked_user_ids):
           continue
         if post.anonymous:   
@@ -449,6 +544,8 @@ def get_posts_user(user_id):
     posts_for_user = Post.query.filter_by(user_id=user_id)
     result = []
     for post in posts_for_user:
+      if (not post.moderated):
+        continue
       result.append(post.id)
     return result
 
@@ -490,7 +587,9 @@ def view_saved_posts(id, post_num):
     obj = User.query.get(id)    
     post_list = []
     for post in obj.saved_posts:
-        post_list.append(post.id)
+      if not post.moderated:
+        continue
+      post_list.append(post.id)
     if len(post_list) == 0:
         flash('No Saved Posts exist!')
         return redirect(url_for('prof.profile'))

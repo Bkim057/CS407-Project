@@ -182,6 +182,7 @@ class Post(UserMixin, db.Model):
     data = db.Column(db.LargeBinary)
     tagged_topics = db.relationship('Topic', secondary=post_topic, backref='posts_tagged_with')
     comments = db.relationship('Commented', backref='post', passive_deletes=True)
+    moderated = db.Column(db.Boolean)
 
 class Topic(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

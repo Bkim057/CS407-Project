@@ -72,6 +72,14 @@
                             {% endif %}
 
                             {% if current_user.is_authenticated %}
+                                {% if current_user.admin %}
+                                <a href="{{ url_for('admin_page.admin_page_options') }}" class="navbar-item">
+                                    Admin Menu
+                                </a>
+                                {% endif %}
+                            {% endif %}
+
+                            {% if current_user.is_authenticated %}
                             <div class="search-container">
                                 <form action="/search_user">
                                   <input type="text" placeholder="Search a User.." id="uname"name="search"maxlength="1000">

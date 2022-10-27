@@ -84,4 +84,7 @@ def create_app():
     from .muscle_groups import muscle_groups as mg_blueprint
     app.register_blueprint(mg_blueprint)
 
+    from.admin_page import admin_page as admin_page_blueprint
+    app.register_blueprint(admin_page_blueprint)
+
     return app
