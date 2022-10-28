@@ -62,7 +62,8 @@ class User(UserMixin, db.Model):
     # End of warning
     followed_topics = db.relationship('Topic', secondary=user_topic, backref='followed_by', lazy='dynamic')
     comments = db.relationship('Commented',  backref='user', passive_deletes=True)
-    saved_posts = db.relationship('Post', secondary=saved_post, backref='saved_by', lazy='dynamic')
+    saved_posts = db.relationship('Post', secondary=saved_post, backref='saved_by', lazy='dynamic', overlaps="saved_by,saved_posts")
+    
 
     def is_following_topic(self, topic):
         query_user_topic = User.query.join(user_topic).join(Topic).filter((user_topic.c.user_id == self.id) & (user_topic.c.topic_id == topic)).count()
@@ -134,9 +135,7 @@ class User(UserMixin, db.Model):
 
     #db.relationship('Topic', secondary=user_topic, backref='followed_by', lazy='dynamic')
 
-    liked = db.relationship(
-        'Post', secondary=liked_post,
-        backref=db.backref('liked_post', lazy='dynamic'), lazy='dynamic'
+    liked = db.relationship('Post', secondary=liked_post,backref=db.backref('liked_post', lazy='dynamic'), lazy='dynamic'
     )
 
     # Liking a post
@@ -152,10 +151,7 @@ class User(UserMixin, db.Model):
         return self.liked.filter(
         liked_post.c.liked_id == post.id).count() > 0  
 
-    saved = db.relationship(
-    'Post', secondary=saved_post,
-    backref=db.backref('saved_post', lazy='dynamic'), lazy='dynamic'
-    )
+    saved = db.relationship('Post', secondary=saved_post,backref=db.backref('saved_post', lazy='dynamic'), lazy='dynamic', overlaps="saved_by,saved_posts")
 
     # Check if user saved post
     def has_saved(self, post):
@@ -187,8 +183,8 @@ class Post(UserMixin, db.Model):
 class Topic(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
-    posts = db.relationship('Post', secondary=post_topic, backref='tags_mentioned')
-    users = db.relationship('User', secondary=user_topic, backref='tags_followed')
+    posts = db.relationship('Post', secondary=post_topic, backref='tags_mentioned', overlaps="posts_tagged_with,tagged_topics")
+    users = db.relationship('User', secondary=user_topic, backref='tags_followed', overlaps="followed_by,followed_topics")
 
 class Message(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

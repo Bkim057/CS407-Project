@@ -69,8 +69,10 @@ def view_topic(id, post_num):
         return redirect(url_for('topics.all_topics_page'))
     post_num = int(post_num)
     list_len = len(post_list)
+    while (post_num >= list_len):
+        post_num-=1
     post_html = post_to_html(post_list[post_num])
-    return render_template('topic.html', name = topic_to_view.name, id = id, post_num=post_num, post_html=post_html, list_len=list_len)
+    return render_template('topic.html', name = topic_to_view.name, id = id, post_num=post_num, post_html=post_html, list_len=list_len, post_id=post_list[post_num])
 
 # Update the database with a new topic
 def create_new_topic(topic_name):

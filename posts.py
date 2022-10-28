@@ -247,7 +247,7 @@ def post_del_to_html(post_id):
             </nav>"
     comment_bar = "<form class=\"input-group\" method='POST' action=\"/create-comment/"+str(obj.id)+"\" >\
           <input type=\"text\" id=\"text\" name=\"text\" class =\"form-control\ placeholder=\"Comment something\" />\
-          <button type=\"submit\" class=\"btn btn-primary\">Comment</button>  \
+          <button type=\"submit\" class=\"btn btn-primary\">Comment</button> </form> \
             <br>"
     html_string += comment_bar
     for comment in obj.comments:
@@ -265,14 +265,15 @@ def post_del_to_html(post_id):
       html_string += third_section
       html_string += fourth_section
     
+    html_string += "</div>"
+    if current_user.admin:
+      html_string_base += "<div class=\"media-right\">\
+                            <a href=\"/soft_unapprove/" + str(post_id) + "\" class=\"delete\"></a>\
+                          </div>"
     
-    end = "</div>\
-          <div class=\"media-right\">\
-            <button class=\"delete\"></button>\
-          </div>\
-        </article>\
+    html_string += "</article>\
         </div>"
-    html_string += end
+    
 
     return html_string
 
@@ -447,7 +448,7 @@ def post_to_html(post_id):
     # Add in whatever comments exist to the post's html
     comment_bar = "<form class=\"input-group\" method='POST' action=\"/create-comment/"+str(obj.id)+"\" >\
           <input type=\"text\" id=\"text\" name=\"text\" class =\"form-control\ placeholder=\"Comment something\" />\
-          <button type=\"submit\" class=\"btn btn-primary\">Comment</button>  \
+          <button type=\"submit\" class=\"btn btn-primary\">Comment</button> </form>  \
             <br>"
     html_string_base += comment_bar
     for comment in obj.comments:
@@ -466,14 +467,26 @@ def post_to_html(post_id):
       html_string_base += fourth_section
 
     # Finish off the whole html
-    html_string_base += "</div>\
-          <div class=\"media-right\">\
-            <button class=\"delete\"></button>\
-          </div>\
-        </article>\
+    html_string_base += "</div>"
+    if current_user.admin:
+      html_string_base += "<div class=\"media-right\">\
+                            <a href=\"/soft_unapprove/" + str(post_id) + "\" class=\"delete\"></a>\
+                          </div>"
+    
+    html_string_base += "</article>\
         </div>"
 
     return html_string_base
+
+@posts.route('/soft_unapprove/<post_id>')
+def soft_unapprove(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    post.moderated = False
+    db.session.commit()
+    if 'url' in cur_session:
+      return redirect(cur_session['url'])
+    else:
+      return redirect(url_for('admin_page.admin_page_options'))
 
 # TODO function to get all comments a user made
 def get_comments_user(user_id):
@@ -577,6 +590,11 @@ def manage_posts(id, post_num):
         return redirect(url_for('prof.profile'))
     post_num = int(post_num)
     list_len = len(post_list)
+    if (list_len == 0):
+        flash('No posts')
+        return render_template('prof.profile')
+    while (post_num >= list_len):
+        post_num-=1
     post_html = post_del_to_html(post_list[post_num])
     return render_template('manage_posts.html', id = id, post_num=post_num, post_html=post_html, list_len=list_len)
 # added above for manage posts
@@ -595,6 +613,11 @@ def view_saved_posts(id, post_num):
         return redirect(url_for('prof.profile'))
     post_num = int(post_num)
     list_len = len(post_list)
+    if (list_len == 0):
+        flash('No posts saved')
+        return render_template('prof.profile')
+    while (post_num >= list_len):
+        post_num-=1
     post_html = post_to_html(post_list[post_num])
     return render_template('saved_posts.html', id = id, post_num=post_num, post_html=post_html, list_len=list_len)
 
@@ -617,6 +640,8 @@ def disp_userline(id, post_num, type):
     # TODO add another elif for getting interactions
     post_num = int(post_num)
     list_len = len(post_list)
+    while (post_num >= list_len):
+        post_num-=1
     post_html = post_to_html(post_list[post_num])
 
     return render_template('userline.html', id=id, post_num=post_num, post_html=post_html, type=type, list_len=list_len)
@@ -640,6 +665,8 @@ def disp_timeline(id, post_num, type):
     # TODO add another elif for getting interactions
     post_num = int(post_num)
     list_len = len(post_list)
+    while (post_num >= list_len):
+      post_num-=1
     post_html = post_to_html(post_list[post_num])
 
     return render_template('timeline.html', id=id, post_num=post_num, post_html=post_html, type=type, list_len=list_len)
@@ -670,6 +697,23 @@ def unlike_post(id):
       return redirect(cur_session['url'])
     else:
       return redirect(url_for('prof.view_profile', id=id))
+
+@posts.route("/edit_post/<post_id>", methods=['POST'])
+def edit_post(post_id):
+  new_contents = request.form.get('contents')
+  print("Here")
+  if not new_contents:
+    flash('Post cannot be made empty', category='error')
+    print("Exiting")
+  else:
+    print("Editing post to contain " + new_contents + " instead")
+    post = Post.query.filter_by(id=post_id)
+    if post:
+      post.content=new_contents
+      db.session.execute('''UPDATE post SET contents = :x WHERE id = :y''', {"x":new_contents, "y":post_id})
+      db.session.flush()
+      db.session.commit()
+  return redirect(cur_session['url'])
 
 @posts.route("/create-comment/<post_id>", methods=['POST'])
 @login_required

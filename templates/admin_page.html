@@ -13,16 +13,9 @@
 
   <div class="column">
     <h1 class="title">Admin Perms</h1>  
-    <label> Give Admin to User
-      <form action="/give_admin">
-        <input type="text" placeholder="Enter a user's name" id="username"name="uname"maxlength="20">
-        <button type="submit">Search</button>
-      </form>
-    </label>
-  
-    <label> Take Admin from User
-      <form action="/take_admin">
-        <input type="text" placeholder="Enter a user's name" id="username"name="uname"maxlength="20">
+    <label> Give or Take admin to or from User
+      <form action="/search_user">
+        <input type="text" placeholder="Enter a user's name" id="username"name="search"maxlength="20">
         <button type="submit">Search</button>
       </form>
     </label>

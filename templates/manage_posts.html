@@ -2,14 +2,15 @@
 
 {% block content %}
 
-<div class="column is-4 is-offset-4">
+<div class="columns is-4 is-offset-4">
 
-  <h1 class="title">Posts You Created</h1>
+  
 
     {% if current_user.is_authenticated %}
         <!--Added below-->
         {% if post_num != NULL %}
         <div class="column">
+            <h1 class="title">Posts You Created</h1>
 
             <h1 class="title">Post #{{ post_num }}</h1>
             <div class="box">
@@ -32,6 +33,20 @@
             </div>
             {% endif %}
 
+        </div>
+        <div class="column">
+          <h1 class="title">Edit post contents</h1>
+          <div class="box">
+            <form method="POST" action="/edit_post/{{ post_id }}">
+              <div class="field">
+                <div class="control">
+                    <textarea class="textarea" name="contents" placeholder="Contents"></textarea>
+                </div>
+                <button class="button is-block is-info is-large is-fullwidth" type="submit"value="Edit Post" name="action" button
+                style="margin: 5px;">Save Changes</button>
+              </div>
+            </form>
+          </div>
         </div>
         {% endif %}
         <!--Added above-->

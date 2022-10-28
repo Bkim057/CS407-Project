@@ -2,26 +2,48 @@
 
 {% block content %}
 
-<div class="column is-4 is-offset-4">
-  <h1 class="title">Timeline: Post #{{ post_num }}</h1>
-  <div class="box">
-      <!-- TODO: Must implement function to get post html -->
-        {{ post_html|safe }}
+<div class="columns is-4 is-offset-4">
+  <div class="column">
+    <h1 class="title">Timeline: Post #{{ post_num }}</h1>
+    <div class="box">
+        <!-- TODO: Must implement function to get post html -->
+          {{ post_html|safe }}
+    </div>
+  
+    <h1 class="title">Actions</h1>
+    <div class="box">
+  
+      {% if post_num < list_len - 1 %}
+      <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/disp_timeline/{{ id }}/{{ post_num + 1 }}/{{ type }}';" type="button"value="Next Post" name="action" button
+        style="margin:5px;">Next Post</button>
+      {% endif %}
+  
+      {% if post_num > 0 %}
+      <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/disp_timeline/{{ id }}/{{ post_num - 1 }}/{{ type }}';" type="button"value="Previous Post" name="action" button
+        style="margin:5px;">Previous Post</button>
+      {% endif %}
+    </div>
   </div>
-
-  <h1 class="title">Actions</h1>
-  <div class="box">
-
-    {% if post_num < list_len - 1 %}
-    <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/disp_timeline/{{ id }}/{{ post_num + 1 }}/{{ type }}';" type="button"value="Next Post" name="action" button
-      style="margin:5px;">Next Post</button>
-    {% endif %}
-
-    {% if post_num > 0 %}
-    <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/disp_timeline/{{ id }}/{{ post_num - 1 }}/{{ type }}';" type="button"value="Previous Post" name="action" button
-      style="margin:5px;">Previous Post</button>
-    {% endif %}
+  {% if current_user.admin %}
+  <div class="column">
+    <h1 class="title">Edit post contents</h1>
+    <div class="box">
+      <form method="POST" action="/edit_post/{{ post_id }}">
+        <div class="field">
+          <div class="control">
+              <textarea class="textarea" name="contents" placeholder="Contents"></textarea>
+          </div>
+          <button class="button is-block is-info is-large is-fullwidth" type="submit"value="Edit Post" name="action" button
+          style="margin: 5px;">Save Changes</button>
+        </div>
+      </form>
+    </div>
   </div>
+  {% else %}
+  <div class="column">
+  </div>
+  {% endif %}
+
   
 </div>
 
