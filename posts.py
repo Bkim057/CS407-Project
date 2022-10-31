@@ -267,7 +267,7 @@ def post_del_to_html(post_id):
     
     html_string += "</div>"
     if current_user.admin:
-      html_string_base += "<div class=\"media-right\">\
+      html_string += "<div class=\"media-right\">\
                             <a href=\"/soft_unapprove/" + str(post_id) + "\" class=\"delete\"></a>\
                           </div>"
     
@@ -596,7 +596,7 @@ def manage_posts(id, post_num):
     while (post_num >= list_len):
         post_num-=1
     post_html = post_del_to_html(post_list[post_num])
-    return render_template('manage_posts.html', id = id, post_num=post_num, post_html=post_html, list_len=list_len)
+    return render_template('manage_posts.html', id = id, post_num=post_num, post_html=post_html, list_len=list_len, post_id=post_list[post_num])
 # added above for manage posts
 
 # Display timeline of saved posts
