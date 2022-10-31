@@ -43,16 +43,18 @@ def post_creation_handler():
         isValidFile = False if not file else file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'))
         anonymous = True if request.form.get('anonymous') == 'on' else False 
 
+        high_risk = True if request.form.get('risk') == 'on' else False
+
         moderated_status = False
         if current_user.admin:
           moderated_status = True
 
         if (anonymous):
-          new_post = Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status) \
-            if not isValidFile else Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), modertated=moderated_status)
+          new_post = Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk) \
+            if not isValidFile else Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), modertated=moderated_status, high_risk=high_risk)
         else:
-          new_post = Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status) \
-            if not isValidFile else Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), moderated=moderated_status)
+          new_post = Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk) \
+            if not isValidFile else Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), moderated=moderated_status, high_risk=high_risk)
         
         if (topic):
           topic_obj = Topic.query.filter_by(name=topic).first()
@@ -111,6 +113,14 @@ def post_to_approve_to_html(post_id, post_num):
     tagged_topics = obj.tagged_topics
     tagged_topics_str = "Tags: "
     count = 0
+    
+    # High risk flag insertion onto post string
+    high_risk_string = ""
+    high_risk_border = ""
+    if (obj.high_risk):
+      high_risk_string = "<b style=\"color: red;\"> HIGH RISK </b>"
+      high_risk_border = "style=\"border-style: solid; border-color: red;\""
+
     for topic in tagged_topics:
       count += 1    
       tagged_topics_str += topic.name
@@ -145,9 +155,10 @@ def post_to_approve_to_html(post_id, post_num):
       img_src.save(image_location)
       pfp_string = image_location[1:]
 
-    html_string = "<div class=\"box\"> \
+    html_string = "<div " + high_risk_border + "class=\"box\"> \
         <article class=\"media\">\
           <figure class=\"media-left\">\
+            " + high_risk_string + "\
             <p class=\"image is-64x64\">\
               <img src=\"" + pfp_string + "\">\
             </p>\
@@ -177,7 +188,8 @@ def post_to_approve_to_html(post_id, post_num):
 
     return html_string
 
-  
+
+
 # Function to get html to display a post AND a button to delete it
 def post_del_to_html(post_id):
     #Currently done as <h3> because that is what lines up with in where the 
@@ -188,6 +200,14 @@ def post_del_to_html(post_id):
     tagged_topics = obj.tagged_topics
     tagged_topics_str = "Tags: "
     count = 0
+
+    # High risk flag insertion onto post string
+    high_risk_string = ""
+    high_risk_border = ""
+    if (obj.high_risk):
+      high_risk_string = "<b style=\"color: red;\"> HIGH RISK </b>"
+      high_risk_border = "style=\"border-style: solid; border-color: red;\""
+
     for topic in tagged_topics:
       count += 1    
       tagged_topics_str += topic.name
@@ -222,9 +242,10 @@ def post_del_to_html(post_id):
       img_src.save(image_location)
       pfp_string = image_location[1:]
 
-    html_string = "<div class=\"box\"> \
+    html_string = "<div " + high_risk_border + "class=\"box\"> \
         <article class=\"media\">\
           <figure class=\"media-left\">\
+                                            " + high_risk_string + "\
             <p class=\"image is-64x64\">\
               <img src=\"" + pfp_string + "\">\
             </p>\
@@ -306,6 +327,14 @@ def post_to_html(post_id):
     tagged_topics = obj.tagged_topics
     tagged_topics_str = "Tags: "
     count = 0
+
+    # High risk flag insertion onto post string
+    high_risk_string = ""
+    high_risk_border = ""
+    if (obj.high_risk):
+      high_risk_string = "<b style=\"color: red;\"> HIGH RISK </b>"
+      high_risk_border = "style=\"border-style: solid; border-color: red;\""
+
     for topic in tagged_topics:
       count += 1    
       tagged_topics_str += topic.name
@@ -347,9 +376,10 @@ def post_to_html(post_id):
       moderated_status = "Unmoderated"
 
     if not current_user.is_authenticated:
-      return "<div class=\"box\"> \
+      return "<div " + high_risk_border + "class=\"box\"> \
         <article class=\"media\">\
           <figure class=\"media-left\">\
+            " + high_risk_string + "\
             <p class=\"image is-64x64\">\
               <img src=\"" + pfp_string + "\">\
             </p>\
@@ -367,9 +397,10 @@ def post_to_html(post_id):
         </div>"
 
     # Setup the initial html_string
-    html_string_base = "<div class=\"box\"> \
+    html_string_base = "<div " + high_risk_border + "class=\"box\"> \
         <article class=\"media\">\
           <figure class=\"media-left\">\
+            " + high_risk_string + "\
             <p class=\"image is-64x64\">\
               <img src=\"" + pfp_string + "\">\
             </p>\
