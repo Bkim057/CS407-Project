@@ -180,6 +180,7 @@ class Post(UserMixin, db.Model):
     comments = db.relationship('Commented', backref='post', passive_deletes=True)
     moderated = db.Column(db.Boolean)
     high_risk = db.Column(db.Boolean)
+    precautions = db.Column(db.String(300))
 
 
 class Topic(UserMixin, db.Model):

@@ -39,6 +39,7 @@ def post_creation_handler():
         topic = request.form.get('topic')
         contents = request.form.get('contents')
         file = request.files['attachment']
+        precautions = request.form.get('safety_precaution')
         
         isValidFile = False if not file else file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'))
         anonymous = True if request.form.get('anonymous') == 'on' else False 
@@ -50,11 +51,13 @@ def post_creation_handler():
           moderated_status = True
 
         if (anonymous):
-          new_post = Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk) \
-            if not isValidFile else Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), modertated=moderated_status, high_risk=high_risk)
+          new_post = Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk, precautions=precautions) \
+            if not isValidFile else Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), modertated=moderated_status, high_risk=high_risk,
+            precautions=precautions)
         else:
-          new_post = Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk) \
-            if not isValidFile else Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), moderated=moderated_status, high_risk=high_risk)
+          new_post = Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk, precautions=precautions) \
+            if not isValidFile else Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), moderated=moderated_status, high_risk=high_risk,
+            precautions=precautions)
         
         if (topic):
           topic_obj = Topic.query.filter_by(name=topic).first()
@@ -113,7 +116,14 @@ def post_to_approve_to_html(post_id, post_num):
     tagged_topics = obj.tagged_topics
     tagged_topics_str = "Tags: "
     count = 0
-    
+
+     # Precautions box associated with the posts
+    precautions = obj.precautions
+    precautions_string = "<p style=\" font-weight: normal;\">No safety precautions indicated</p>"
+    if (precautions):
+      precautions_string = "<p style=\" font-weight: normal; color: red;\">" + precautions + "</p>"
+
+
     # High risk flag insertion onto post string
     high_risk_string = ""
     high_risk_border = ""
@@ -181,6 +191,10 @@ def post_to_approve_to_html(post_id, post_num):
                   <button>Delete Post</button>\
                 </form>\
               </div>\
+              <div style=\"border-style:solid; border-radius:5px; width: 50%; font-size:80%; float:right;\">\
+                  <b>Safety Precautions: \
+                             " + precautions_string + "\
+               </div> \
             </nav>\
           </div>\
         </article>\
@@ -200,6 +214,12 @@ def post_del_to_html(post_id):
     tagged_topics = obj.tagged_topics
     tagged_topics_str = "Tags: "
     count = 0
+
+    # Precautions box associated with the posts
+    precautions = obj.precautions
+    precautions_string = "<p style=\" font-weight: normal;\">No safety precautions indicated</p>"
+    if (precautions):
+      precautions_string = "<p style=\" font-weight: normal; color: red;\">" + precautions + "</p>"
 
     # High risk flag insertion onto post string
     high_risk_string = ""
@@ -265,6 +285,10 @@ def post_del_to_html(post_id):
                 </form>\
                 <strong>" + moderated_status + "<strong>\
               </div>\
+                <div style=\"border-style:solid; border-radius:5px; width: 50%; font-size:80%; float:right;\">\
+                  <b>Safety Precautions: \
+                             " + precautions_string + "\
+                  </div> \
             </nav>"
     comment_bar = "<form class=\"input-group\" method='POST' action=\"/create-comment/"+str(obj.id)+"\" >\
           <input type=\"text\" id=\"text\" name=\"text\" class =\"form-control\ placeholder=\"Comment something\" />\
@@ -327,6 +351,11 @@ def post_to_html(post_id):
     tagged_topics = obj.tagged_topics
     tagged_topics_str = "Tags: "
     count = 0
+
+    precautions = obj.precautions
+    precautions_string = "<p style=\" font-weight: normal;\">No safety precautions indicated</p>"
+    if (precautions):
+      precautions_string = "<p style=\" font-weight: normal; color: red;\">" + precautions + "</p>"
 
     # High risk flag insertion onto post string
     high_risk_string = ""
@@ -470,10 +499,14 @@ def post_to_html(post_id):
         html_string_base += html_string_unliked_unsaved
 
     # Finish off whatever button state the post had
-    html_string_base += "<div class=\"content\">\
+    html_string_base += "<div class=\"level-left\">\
               <p>\
                 Likes: " + str(likes) + "</p>\
               </div>\
+                <div style=\"border-style:solid; margin-left:15%; border-radius:5px; width: 50%; font-size:80%; float:right;\">\
+                  <b>Safety Precautions: \
+                             " + precautions_string + "\
+                  </div> \
             </nav>"
 
     # Add in whatever comments exist to the post's html
