@@ -1,5 +1,6 @@
 import re
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, redirect, render_template, request, url_for, flash
+from flask import session as cur_session
 from flask_login import login_required, current_user
 from numpy import delete
 from .models import User, Post, Workout, Muscle
@@ -28,6 +29,27 @@ def lower_body_page():
 def workout_splits():
     return render_template('workout_splits.html')
 
+@muscle_groups.route('/like_workout/<id>')
+def like_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    #target_muscle = Muscle.query.filter_by(name=id).first()
+    if current_user.is_liking_exercise(workout):
+        return redirect(url_for('muscle_groups.muscles_page'))
+    workout.likes += 1
+    current_user.like_exercise(workout)
+    db.session.commit()
+    return redirect(url_for('muscle_groups.muscles_page'))
+
+@muscle_groups.route('/unlike_workout/<id>')
+def unlike_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if workout is None:
+        return redirect(url_for('index', id=id))
+    workout.likes -= 1
+    current_user.remove_like(workout)
+    db.session.commit()
+    return redirect(url_for('muscle_groups.muscles_page'))
+
 @muscle_groups.route('/view_workout/<id>')
 def view_workout(id):
     # query for the id
@@ -54,8 +76,22 @@ def view_workout(id):
                         <p class=\"has-text-left\">{workout.description}</p>\
                         <button class=\"button is-block is-info is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
                             style=\"margin: 5px;\"><a href=\"{workout.URL}\">workout\
-                                details</a></button>\
-                    </div>\
+                                details</a></button>"
+            if (current_user.is_liking_exercise(workout)):
+                workout_html  += f"<form action=\"/unlike_workout/"+str(workout.id)+"\">\
+                    <button>Remove Like</button>\
+                        </form>"
+            else:
+                workout_html  += f"<form action=\"/like_workout/"+str(workout.id)+"\">\
+                    <button>Like</button>\
+                        </form>"
+
+
+            workout_html += f"</div>\
+                <div class=\"level-left\">\
+              <p>\
+                Likes: " + str(workout.likes) + "</p>\
+              </div>\
                 </div>\
             </div>"
 

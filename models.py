@@ -37,6 +37,12 @@ liked_post = db.Table('liked_post',
     db.Column('liked_id', db.Integer, db.ForeignKey('post.id'))
 )
 
+# Likes in exercises
+liked_exercise = db.Table('liked_exercise',
+    db.Column('user_like', db.Integer, db.ForeignKey('user.id')),
+    db.Column('exercise_liked', db.Integer, db.ForeignKey('workout.id'))
+)
+
 # User to post relational db to store saved_posts
 saved_post = db.Table('saved_post',
     db.Column('saving_id', db.Integer, db.ForeignKey('user.id')),
@@ -137,6 +143,8 @@ class User(UserMixin, db.Model):
 
     liked = db.relationship('Post', secondary=liked_post,backref=db.backref('liked_post', lazy='dynamic'), lazy='dynamic'
     )
+    # Relationship for liked exercise
+    liked_workout_relationship = db.relationship('Workout', secondary=liked_exercise,backref=db.backref('liked_exercise', lazy='dynamic'), lazy='dynamic')
 
     # Liking a post
     def like(self, post):
@@ -150,6 +158,21 @@ class User(UserMixin, db.Model):
     def is_liking(self, post):
         return self.liked.filter(
         liked_post.c.liked_id == post.id).count() > 0  
+
+    # Liking an exercise
+    def like_exercise(self, workout):
+        if not self.is_liking_exercise(workout):
+            self.liked_workout_relationship.append(workout)
+    
+    # Removing like from a liked workout
+    def remove_like(self, workout):
+        if self.is_liking_exercise(workout):
+            self.liked_workout_relationship.remove(workout)
+
+    # Function that checks if workout was already liked
+    def is_liking_exercise(self, workout):
+        return self.liked_workout_relationship.filter(
+        liked_exercise.c.exercise_liked == workout.id).count() > 0
 
     saved = db.relationship('Post', secondary=saved_post,backref=db.backref('saved_post', lazy='dynamic'), lazy='dynamic', overlaps="saved_by,saved_posts")
 
@@ -210,5 +233,5 @@ class Workout(UserMixin, db.Model):
     exercise_name = db.Column(db.String(15))
     description = db.Column(db.String(500))
     URL = db.Column(db.String(2048))
-    
     muscle_groups = db.relationship('Muscle', secondary=workout_muscle_groups)
+    likes = db.Column(db.Integer)

@@ -10,7 +10,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, flash
 from flask import session as cur_session
 from flask_login import login_required, current_user
 from requests import session
-from .models import User, Post, Topic, Commented, post_topic, liked_post, saved_post
+from .models import User, Post, Topic, Commented, post_topic, liked_post, saved_post, Workout, liked_exercise
 from . import db
 from werkzeug.security import generate_password_hash
 
