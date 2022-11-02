@@ -802,6 +802,559 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "4002ec42-3a3e-4789-ad20-6f09ad0b329f",
+    "name": "Like/Dislike Post",
+    "commands": [{
+      "id": "1e507d67-5223-4942-811f-3aaa010043cd",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fbfc3590-878c-4fc3-b976-c330164a1c40",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1558x842",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "edfa8c5c-60fe-4ab2-bf91-29ed59afecf3",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7705c58-62b3-4e14-84e8-746ec9edfbeb",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.field:nth-child(1) .input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b2922f86-7eda-415a-b53f-13c0d007e62e",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.field:nth-child(1) .input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "bryan@gmail.com"
+    }, {
+      "id": "6266d6ac-7c50-4688-aeb3-fbca934fed3e",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.field:nth-child(2) .input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "123"
+    }, {
+      "id": "a8720480-0e45-4caa-82b6-c143990891fa",
+      "comment": "",
+      "command": "click",
+      "target": "css=.button:nth-child(4)",
+      "targets": [
+        ["css=.button:nth-child(4)", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1b3d436-a225-418b-9b0c-943915b9b712",
+      "comment": "",
+      "command": "click",
+      "target": "css=.hero-body",
+      "targets": [
+        ["css=.hero-body", "css:finder"],
+        ["xpath=//section/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6920451c-f073-432e-8777-bd1bf6b798f2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Muscle Groups",
+      "targets": [
+        ["linkText=Muscle Groups", "linkText"],
+        ["css=.navbar-item:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'Muscle Groups')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/all_topics_page')]", "xpath:href"],
+        ["xpath=//a[4]", "xpath:position"],
+        ["xpath=//a[contains(.,'Muscle Groups')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f32ffcc7-6b55-4c6b-98bd-85bd1a38aa5e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.box:nth-child(2) button",
+      "targets": [
+        ["css=.box:nth-child(2) button", "css:finder"],
+        ["xpath=//div[2]/div/div/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'View Workouts')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4a9ebf8c-0be7-4ec8-91c7-8a4764811a9b",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-right:nth-child(2) button",
+      "targets": [
+        ["css=.level-right:nth-child(2) button", "css:finder"],
+        ["xpath=//div[2]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Like')]", "xpath:innerText"]
+      ],
+      "value": "Like"
+    }, {
+      "id": "5909e8f5-75c8-44f3-964f-a6c5c9525cb3",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left > p",
+      "targets": [
+        ["css=.level-left > p", "css:finder"],
+        ["xpath=//div[2]/div/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Likes: 1')]", "xpath:innerText"]
+      ],
+      "value": "Likes: 0"
+    }, {
+      "id": "cb2cba02-f038-4306-9174-82a6e258555c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.level-right:nth-child(2) button",
+      "targets": [
+        ["css=.level-right:nth-child(2) button", "css:finder"],
+        ["xpath=//div[2]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Like')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f0e40b68-76d8-4038-b084-6f4abaf2c924",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-right:nth-child(2) button",
+      "targets": [
+        ["css=.level-right:nth-child(2) button", "css:finder"],
+        ["xpath=//div[2]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dislike')]", "xpath:innerText"]
+      ],
+      "value": "Dislike"
+    }, {
+      "id": "580adbee-af10-436c-8b63-13cee0555700",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left > p",
+      "targets": [
+        ["css=.level-left > p", "css:finder"],
+        ["xpath=//div[2]/div/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Likes: 1')]", "xpath:innerText"]
+      ],
+      "value": "Likes: 1"
+    }, {
+      "id": "74d8f540-e1ba-4efa-9eb2-1643a5179497",
+      "comment": "",
+      "command": "click",
+      "target": "css=.level-right:nth-child(2) button",
+      "targets": [
+        ["css=.level-right:nth-child(2) button", "css:finder"],
+        ["xpath=//div[2]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dislike')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3b9ba54-79e6-46de-bfb9-32ea8cd46a57",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-right:nth-child(2) button",
+      "targets": [
+        ["css=.level-right:nth-child(2) button", "css:finder"],
+        ["xpath=//div[2]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Like')]", "xpath:innerText"]
+      ],
+      "value": "Like"
+    }, {
+      "id": "82791ef8-cbc1-4f2e-b16b-2b94b032228f",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left > p",
+      "targets": [
+        ["css=.level-left > p", "css:finder"],
+        ["xpath=//div[2]/div/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Likes: 1')]", "xpath:innerText"]
+      ],
+      "value": "Likes: 0"
+    }, {
+      "id": "a19732a6-09be-4e76-b4c8-acf8d0def19e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.navbar-item:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ed7fab23-a966-42a2-afda-210ebf4c602a",
+    "name": "Like/Dislike Exercise",
+    "commands": [{
+      "id": "785b49e0-9674-4739-8ba9-b769c03e577f",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3dc772ab-4a81-4ac9-9949-f89b32c53b7f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4d77d511-1c4c-4362-9c08-1d02bc83aa03",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fabda81b-cc39-4630-9624-bdc488688603",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.field:nth-child(1) .input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "bryan@gmail.com"
+    }, {
+      "id": "948f6d66-07f9-4aa1-ba44-52d38d098b70",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.field:nth-child(2) .input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "123"
+    }, {
+      "id": "dde80d26-a407-4a0d-8c8c-4d2a4b4786e2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.button:nth-child(4)",
+      "targets": [
+        ["css=.button:nth-child(4)", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6fe0b612-a746-470b-8527-c24a3d7d9434",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Explore Workouts",
+      "targets": [
+        ["linkText=Explore Workouts", "linkText"],
+        ["css=.navbar-item:nth-child(5)", "css:finder"],
+        ["xpath=//a[contains(text(),'Explore Workouts')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/muscles_page')]", "xpath:href"],
+        ["xpath=//a[5]", "xpath:position"],
+        ["xpath=//a[contains(.,'Explore Workouts')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "140d0f98-fd4b-4e50-a5b4-63b02ca25e2f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.column:nth-child(1) button",
+      "targets": [
+        ["css=.column:nth-child(1) button", "css:finder"],
+        ["xpath=//div[2]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'View Muscles')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bae9a75c-76ab-496b-a159-f44bf1dbb9f1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.box:nth-child(2) button",
+      "targets": [
+        ["css=.box:nth-child(2) button", "css:finder"],
+        ["xpath=//div[2]/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'View Exercises')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7cab3cb3-8b02-40ec-8de8-b03e4af84523",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left:nth-child(2) > p",
+      "targets": [
+        ["css=.level-left:nth-child(2) > p", "css:finder"],
+        ["xpath=//div[2]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Likes: 0')]", "xpath:innerText"]
+      ],
+      "value": "Likes: 0"
+    }, {
+      "id": "b34993c7-8c97-4f9c-b4a9-8d9c1cf4482b",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left:nth-child(3) > p",
+      "targets": [
+        ["css=.level-left:nth-child(3) > p", "css:finder"],
+        ["xpath=//div[3]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Dislikes: 0')]", "xpath:innerText"]
+      ],
+      "value": "Dislikes: 0"
+    }, {
+      "id": "1f5a2591-91fd-4bd8-a3f4-a632d92c4a79",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=form:nth-child(5) > button",
+      "targets": [
+        ["css=form:nth-child(5) > button", "css:finder"],
+        ["xpath=//div[2]/div/div/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Like')]", "xpath:innerText"]
+      ],
+      "value": "Like"
+    }, {
+      "id": "2a0f43e2-bf5a-488b-bce3-6194a48e7380",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=form:nth-child(6) > button",
+      "targets": [
+        ["css=form:nth-child(6) > button", "css:finder"],
+        ["xpath=//form[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dislike')]", "xpath:innerText"]
+      ],
+      "value": "Dislike"
+    }, {
+      "id": "3427770b-e2cf-4e05-be33-88b1fe4d5d53",
+      "comment": "",
+      "command": "click",
+      "target": "css=form:nth-child(5) > button",
+      "targets": [
+        ["css=form:nth-child(5) > button", "css:finder"],
+        ["xpath=//div[2]/div/div/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Like')]", "xpath:innerText"]
+      ],
+      "value": "Like"
+    }, {
+      "id": "1733814b-9b6a-46cd-997f-d42bb8b5a482",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left:nth-child(2) > p",
+      "targets": [
+        ["css=.level-left:nth-child(2) > p", "css:finder"],
+        ["xpath=//div[2]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Likes: 0')]", "xpath:innerText"]
+      ],
+      "value": "Likes: 1"
+    }, {
+      "id": "3024e5c9-d759-42d9-a544-4fe7aafca662",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left:nth-child(3) > p",
+      "targets": [
+        ["css=.level-left:nth-child(3) > p", "css:finder"],
+        ["xpath=//div[3]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Dislikes: 0')]", "xpath:innerText"]
+      ],
+      "value": "Dislikes: 0"
+    }, {
+      "id": "45297051-62f3-4dbc-bba3-dc9b5dc7ad04",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=form:nth-child(5) > button",
+      "targets": [
+        ["css=form:nth-child(5) > button", "css:finder"],
+        ["xpath=//div[2]/div/div/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Remove Like')]", "xpath:innerText"]
+      ],
+      "value": "Remove Like"
+    }, {
+      "id": "59266110-6751-4d70-aabd-541a4e219e0d",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=form:nth-child(6) > button",
+      "targets": [
+        ["css=form:nth-child(6) > button", "css:finder"],
+        ["xpath=//form[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dislike')]", "xpath:innerText"]
+      ],
+      "value": "Dislike"
+    }, {
+      "id": "2c38ef49-db6e-4b28-ab42-3e70a1b09aca",
+      "comment": "",
+      "command": "click",
+      "target": "css=form:nth-child(5) > button",
+      "targets": [
+        ["css=form:nth-child(5) > button", "css:finder"],
+        ["xpath=//div[2]/div/div/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Remove Like')]", "xpath:innerText"]
+      ],
+      "value": "Remove Like"
+    }, {
+      "id": "8dfdd49b-a5d5-42ef-a34c-15e0d6f5d151",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left:nth-child(2) > p",
+      "targets": [
+        ["css=.level-left:nth-child(2) > p", "css:finder"],
+        ["xpath=//div[2]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Likes: 0')]", "xpath:innerText"]
+      ],
+      "value": "Likes: 0"
+    }, {
+      "id": "874f98d3-2853-4442-bebd-24d78693b161",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=form:nth-child(5) > button",
+      "targets": [
+        ["css=form:nth-child(5) > button", "css:finder"],
+        ["xpath=//div[2]/div/div/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Like')]", "xpath:innerText"]
+      ],
+      "value": "Like"
+    }, {
+      "id": "ebfc8b19-238e-402c-9c56-0182fd20cef2",
+      "comment": "",
+      "command": "click",
+      "target": "css=form:nth-child(6) > button",
+      "targets": [
+        ["css=form:nth-child(6) > button", "css:finder"],
+        ["xpath=//form[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dislike')]", "xpath:innerText"]
+      ],
+      "value": "Dislike"
+    }, {
+      "id": "455df7e8-4f1a-40a4-a5d7-e91e00a5c7dd",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left:nth-child(2) > p",
+      "targets": [
+        ["css=.level-left:nth-child(2) > p", "css:finder"],
+        ["xpath=//div[2]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Likes: 0')]", "xpath:innerText"]
+      ],
+      "value": "Likes: 0"
+    }, {
+      "id": "0ac63baa-de96-4a5a-93d5-817cf91a1c8f",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left:nth-child(3) > p",
+      "targets": [
+        ["css=.level-left:nth-child(3) > p", "css:finder"],
+        ["xpath=//div[3]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Dislikes: 0')]", "xpath:innerText"]
+      ],
+      "value": "Dislikes: 1"
+    }, {
+      "id": "4891bf3f-92da-4afb-b384-3c0c7a722352",
+      "comment": "",
+      "command": "click",
+      "target": "css=form:nth-child(6) > button",
+      "targets": [
+        ["css=form:nth-child(6) > button", "css:finder"],
+        ["xpath=//form[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Remove Dislike')]", "xpath:innerText"]
+      ],
+      "value": "Remove Dislike"
+    }, {
+      "id": "519247ee-96b0-489b-96b1-67dad946b7d6",
+      "comment": "",
+      "command": "click",
+      "target": "css=form:nth-child(5) > button",
+      "targets": [
+        ["css=form:nth-child(5) > button", "css:finder"],
+        ["xpath=//div[2]/div/div/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Like')]", "xpath:innerText"]
+      ],
+      "value": "Like"
+    }, {
+      "id": "ac5a151f-14c2-4d51-accc-85e174470dbc",
+      "comment": "",
+      "command": "click",
+      "target": "css=form:nth-child(5) > button",
+      "targets": [
+        ["css=form:nth-child(5) > button", "css:finder"],
+        ["xpath=//div[2]/div/div/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Remove Like')]", "xpath:innerText"]
+      ],
+      "value": "Remove Like"
+    }, {
+      "id": "e6387997-ac6c-4915-87db-652a7607249f",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left:nth-child(2) > p",
+      "targets": [
+        ["css=.level-left:nth-child(2) > p", "css:finder"],
+        ["xpath=//div[2]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Likes: 0')]", "xpath:innerText"]
+      ],
+      "value": "Likes: 0"
+    }, {
+      "id": "9dfec5fd-f2c1-45f8-a6c6-2138ac66f63c",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.level-left:nth-child(3) > p",
+      "targets": [
+        ["css=.level-left:nth-child(3) > p", "css:finder"],
+        ["xpath=//div[3]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Dislikes: 0')]", "xpath:innerText"]
+      ],
+      "value": "Dislikes: 0"
+    }, {
+      "id": "b8e5aab7-b1d8-4a5d-9dbe-fa44fa080659",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.navbar-item:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "f44e917e-c274-4915-8414-85292e012dd9",

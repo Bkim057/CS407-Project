@@ -40,7 +40,11 @@ def like_workout(id):
     workout.likes += 1
     current_user.like_exercise(workout)
     db.session.commit()
-    return redirect(url_for('muscle_groups.muscles_page'))
+    if 'url' in cur_session:
+        return redirect(cur_session['url'])
+    else:
+        return redirect(url_for('muscle_groups.muscles_page'))
+    
 
 @muscle_groups.route('/unlike_workout/<id>')
 def unlike_workout(id):
@@ -50,7 +54,10 @@ def unlike_workout(id):
     workout.likes -= 1
     current_user.remove_like(workout)
     db.session.commit()
-    return redirect(url_for('muscle_groups.muscles_page'))
+    if 'url' in cur_session:
+        return redirect(cur_session['url'])
+    else:
+        return redirect(url_for('muscle_groups.muscles_page'))
 
 @muscle_groups.route('/dislike_workout/<id>')
 def dislike_workout(id):
@@ -63,7 +70,10 @@ def dislike_workout(id):
     workout.dislikes += 1
     current_user.dislike_exercise(workout)
     db.session.commit()
-    return redirect(url_for('muscle_groups.muscles_page'))
+    if 'url' in cur_session:
+        return redirect(cur_session['url'])
+    else:
+        return redirect(url_for('muscle_groups.muscles_page'))
 
 @muscle_groups.route('/undislike_workout/<id>')
 def undislike_workout(id):
@@ -73,10 +83,14 @@ def undislike_workout(id):
     workout.dislikes -= 1
     current_user.remove_dislike(workout)
     db.session.commit()
-    return redirect(url_for('muscle_groups.muscles_page'))
+    if 'url' in cur_session:
+        return redirect(cur_session['url'])
+    else:
+        return redirect(url_for('muscle_groups.muscles_page'))
 
 @muscle_groups.route('/view_workout/<id>')
 def view_workout(id):
+    cur_session['url'] = request.url
     # query for the id
     print(id)
     target_muscle = Muscle.query.filter_by(name=id).first()
