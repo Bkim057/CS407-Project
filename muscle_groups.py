@@ -32,6 +32,8 @@ def workout_splits():
 @muscle_groups.route('/like_workout/<id>')
 def like_workout(id):
     workout = Workout.query.filter_by(id=id).first()
+    if current_user.is_disliking_exercise(workout): 
+        undislike_workout(id) 
     #target_muscle = Muscle.query.filter_by(name=id).first()
     if current_user.is_liking_exercise(workout):
         return redirect(url_for('muscle_groups.muscles_page'))
@@ -47,6 +49,29 @@ def unlike_workout(id):
         return redirect(url_for('index', id=id))
     workout.likes -= 1
     current_user.remove_like(workout)
+    db.session.commit()
+    return redirect(url_for('muscle_groups.muscles_page'))
+
+@muscle_groups.route('/dislike_workout/<id>')
+def dislike_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if current_user.is_liking_exercise(workout): 
+        unlike_workout(id) 
+    #target_muscle = Muscle.query.filter_by(name=id).first()
+    if current_user.is_disliking_exercise(workout):
+        return redirect(url_for('muscle_groups.muscles_page'))
+    workout.dislikes += 1
+    current_user.dislike_exercise(workout)
+    db.session.commit()
+    return redirect(url_for('muscle_groups.muscles_page'))
+
+@muscle_groups.route('/undislike_workout/<id>')
+def undislike_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if workout is None:
+        return redirect(url_for('index', id=id))
+    workout.dislikes -= 1
+    current_user.remove_dislike(workout)
     db.session.commit()
     return redirect(url_for('muscle_groups.muscles_page'))
 
@@ -86,11 +111,24 @@ def view_workout(id):
                     <button>Like</button>\
                         </form>"
 
+            if (current_user.is_disliking_exercise(workout)):
+                workout_html  += f"<form action=\"/undislike_workout/"+str(workout.id)+"\">\
+                    <button>Remove Dislike</button>\
+                        </form>"
+            else:
+                workout_html  += f"<form action=\"/dislike_workout/"+str(workout.id)+"\">\
+                    <button>Dislike</button>\
+                        </form>"
+
 
             workout_html += f"</div>\
                 <div class=\"level-left\">\
               <p>\
                 Likes: " + str(workout.likes) + "</p>\
+              </div>\
+                <div class=\"level-left\">\
+              <p>\
+                Dislikes: " + str(workout.dislikes) + "</p>\
               </div>\
                 </div>\
             </div>"
