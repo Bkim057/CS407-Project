@@ -179,10 +179,7 @@ def follow_user(id):
     current_user.follow(user)
     flash('You are following {}!'.format(user.name))
     db.session.commit()
-    if 'url' in cur_session:
-            return redirect(cur_session['url'])
-    else:
-        return redirect(url_for('prof.view_profile', id=id))
+    return redirect(url_for('prof.view_profile', id=id))
 
 # Unfollowing another dude
 @prof.route('/unfollow_user/<id>')
@@ -196,10 +193,7 @@ def unfollow_user(id):
         return redirect(url_for('user', id=id))
     current_user.unfollow(user)
     db.session.commit()
-    if 'url' in cur_session:
-        return redirect(cur_session['url'])
-    else:
-        return redirect(url_for('prof.view_profile', id=id))
+    return redirect(url_for('prof.view_profile', id=id))
 
 @prof.route('/temp_admin_self/')
 def admin_give():

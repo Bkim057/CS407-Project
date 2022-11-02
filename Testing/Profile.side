@@ -714,21 +714,21 @@
     "id": "7da703b7-53d4-4305-b0ae-5ad16962244b",
     "name": "Follow/Unfollow a User",
     "commands": [{
-      "id": "7ca17c94-b793-49a1-8743-e68562027d14",
+      "id": "2a787d41-682b-4038-9cfb-24c6b9e80f67",
       "comment": "",
       "command": "open",
       "target": "/",
       "targets": [],
       "value": ""
     }, {
-      "id": "5c3dde8d-cfe0-4cf1-ac75-7756d857e61c",
+      "id": "86544726-3887-43da-8a0d-cdad501db9b7",
       "comment": "",
       "command": "setWindowSize",
       "target": "1936x1048",
       "targets": [],
       "value": ""
     }, {
-      "id": "9ec4ef68-765d-4f2d-bd98-c113a75e4ddd",
+      "id": "0596ff73-3d52-4683-b629-d065ccec9b49",
       "comment": "",
       "command": "click",
       "target": "linkText=Login",
@@ -742,7 +742,7 @@
       ],
       "value": ""
     }, {
-      "id": "6562eed5-d1ee-4b72-a1ab-7cbe6a21d792",
+      "id": "6c418c35-026c-48b9-9491-955204fa3be6",
       "comment": "",
       "command": "type",
       "target": "name=email",
@@ -754,7 +754,7 @@
       ],
       "value": "bryan@gmail.com"
     }, {
-      "id": "430ca2c5-9443-4607-ac07-d39d2c14bb02",
+      "id": "79ec259a-789f-4db7-a8ce-ba285a2d7f98",
       "comment": "",
       "command": "type",
       "target": "name=password",
@@ -766,7 +766,7 @@
       ],
       "value": "123"
     }, {
-      "id": "9db038ef-0395-4d31-9dc3-0b4c7f4fcc10",
+      "id": "99d8f020-23c4-44ac-ba37-8da9784c573a",
       "comment": "",
       "command": "click",
       "target": "css=.button:nth-child(4)",
@@ -777,7 +777,7 @@
       ],
       "value": ""
     }, {
-      "id": "5ecadd6f-2c14-4834-8f9e-d7117b776174",
+      "id": "bd5906eb-ba79-43a5-af02-3123c5b1351b",
       "comment": "",
       "command": "click",
       "target": "id=uname",
@@ -790,7 +790,7 @@
       ],
       "value": ""
     }, {
-      "id": "b4932eb2-7880-46a0-b648-223a9b138dbb",
+      "id": "c30945ea-515c-497c-8e24-cbaa5c7b8a7b",
       "comment": "",
       "command": "type",
       "target": "id=uname",
@@ -803,7 +803,7 @@
       ],
       "value": "frogs"
     }, {
-      "id": "db9e362d-9744-4316-81ea-c875640e2953",
+      "id": "72cfeb7b-513d-4c19-b566-cd332a7b49c9",
       "comment": "",
       "command": "click",
       "target": "css=button:nth-child(2)",
@@ -815,7 +815,7 @@
       ],
       "value": ""
     }, {
-      "id": "6a2d4bef-a106-4fb4-a17c-5b904f750462",
+      "id": "0b8e27d8-b189-45b7-9a3a-53d0acb1abb4",
       "comment": "",
       "command": "click",
       "target": "css=button:nth-child(1)",
@@ -826,51 +826,7 @@
       ],
       "value": ""
     }, {
-      "id": "db24aa4b-263f-41eb-9bfe-189145648a0a",
-      "comment": "",
-      "command": "click",
-      "target": "css=.box:nth-child(6) > form:nth-child(1) > .button",
-      "targets": [
-        ["css=.box:nth-child(6) > form:nth-child(1) > .button", "css:finder"],
-        ["xpath=(//button[@name='action'])[3]", "xpath:attributes"],
-        ["xpath=//div[3]/form/button", "xpath:position"],
-        ["xpath=//button[contains(.,'Follow User')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "563d2d28-711b-415e-bbd8-71fdbf369ce8",
-      "comment": "",
-      "command": "click",
-      "target": "css=.notification",
-      "targets": [
-        ["css=.notification", "css:finder"],
-        ["xpath=//div[2]/div/div[2]", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "df670d93-4d4f-45ce-a599-9e1b4fbf4376",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "css=.notification",
-      "targets": [
-        ["css=.notification", "css:finder"],
-        ["xpath=//div[2]/div/div[2]", "xpath:position"]
-      ],
-      "value": "You are following frogs!"
-    }, {
-      "id": "97e217d9-3e99-4eeb-bc00-062bd24f5374",
-      "comment": "",
-      "command": "click",
-      "target": "css=.box:nth-child(6) > form:nth-child(1) > .button",
-      "targets": [
-        ["css=.box:nth-child(6) > form:nth-child(1) > .button", "css:finder"],
-        ["xpath=(//button[@name='action'])[3]", "xpath:attributes"],
-        ["xpath=//div[3]/form/button", "xpath:position"],
-        ["xpath=//button[contains(.,'Unfollow User')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "9d0380a0-629d-4fef-9d1b-20ee70f814b8",
+      "id": "a5119d51-df51-425a-972d-fae0f1431eaa",
       "comment": "",
       "command": "assertElementPresent",
       "target": "css=.box:nth-child(6) > form:nth-child(1) > .button",
@@ -882,7 +838,65 @@
       ],
       "value": "Follow User"
     }, {
-      "id": "2ed2e1bc-b72f-4766-bb50-554fcd4e47c8",
+      "id": "2adc456c-303d-4652-88a3-272ab7441767",
+      "comment": "",
+      "command": "click",
+      "target": "css=.box:nth-child(6) > form:nth-child(1) > .button",
+      "targets": [
+        ["css=.box:nth-child(6) > form:nth-child(1) > .button", "css:finder"],
+        ["xpath=(//button[@name='action'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Follow User')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "455b43d9-1411-4d6e-860c-88e1961fc53e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.notification",
+      "targets": [
+        ["css=.notification", "css:finder"],
+        ["xpath=//div/div[2]", "xpath:position"]
+      ],
+      "value": "You are following frogs!"
+    }, {
+      "id": "67fe9da2-e8e6-4f8b-9613-6ae5e0458b5b",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.box:nth-child(6) > form:nth-child(1) > .button",
+      "targets": [
+        ["css=.box:nth-child(6) > form:nth-child(1) > .button", "css:finder"],
+        ["xpath=(//button[@name='action'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Unfollow User')]", "xpath:innerText"]
+      ],
+      "value": "Unfollow User"
+    }, {
+      "id": "beb201b9-ba0b-416a-8eb8-21160d29c5d4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.box:nth-child(6) > form:nth-child(1) > .button",
+      "targets": [
+        ["css=.box:nth-child(6) > form:nth-child(1) > .button", "css:finder"],
+        ["xpath=(//button[@name='action'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Unfollow User')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "17b0162c-a2cb-487d-ac1e-8c1943d4c0d3",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.box:nth-child(6) > form:nth-child(1) > .button",
+      "targets": [
+        ["css=.box:nth-child(6) > form:nth-child(1) > .button", "css:finder"],
+        ["xpath=(//button[@name='action'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Follow User')]", "xpath:innerText"]
+      ],
+      "value": "Follow User"
+    }, {
+      "id": "0bd2733b-5cdf-439f-bca2-b95c748480d5",
       "comment": "",
       "command": "click",
       "target": "linkText=Logout",
