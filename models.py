@@ -76,6 +76,7 @@ class User(UserMixin, db.Model):
     pfp_filename = db.Column(db.String(50))
     pfp = db.Column(LargeBinary)
     admin = db.Column(db.Boolean)
+    private = db.Column(db.Boolean)
     # End of warning
     followed_topics = db.relationship('Topic', secondary=user_topic, backref='followed_by', lazy='dynamic')
     comments = db.relationship('Commented',  backref='user', passive_deletes=True)

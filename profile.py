@@ -133,6 +133,15 @@ def user_to_html(user_id):
  
     return html_string
 
+@prof.route('/handle_private/')
+def make_private():
+    if (current_user.private):
+        current_user.private = False
+        db.session.commit()
+        return redirect(url_for('prof.profile'))
+    current_user.private = True
+    db.session.commit()
+    return redirect(url_for('prof.profile'))
 
 # Create a list of all the possible people a user could have been searching for
 @prof.route('/search_user', methods=['GET'])
@@ -147,7 +156,7 @@ def search_user():
         id_cur = possible_people[i].id
         user = possible_people[i]
         print(id_cur)
-        if (not user.is_blocking(current_user)):
+        if (not user.is_blocking(current_user) and not user.private):
             everyone_get_in_here += user_to_html(id_cur)
 
     # String will be empty if no possible users were found, add the error

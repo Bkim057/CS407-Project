@@ -36,6 +36,17 @@
           style="margin:5px;">Chat only mutuals</button>
       </form>
       {% endif %}
+      {%if current_user.private %}
+      <form action="/handle_private/">
+        <button class="button is-block is-info is-large is-fullwidth" value="Unchatrestrict" name="action" button
+          style="margin:5px;">Make Public</button>
+      </form>
+      {% else %}
+      <form action="/handle_private/">
+        <button class="button is-block is-info is-large is-fullwidth" value="Chatrestrict" name="action" button
+          style="margin:5px;">Make Private</button>
+      </form>
+      {% endif %}
       {%if current_user.admin %}
       <form action="/temp_admin_self/">
         <button class="button is-block is-info is-large is-fullwidth" value="Unchatrestrict" name="action" button
