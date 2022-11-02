@@ -84,7 +84,15 @@
     </form>
 
   </div>
+  <h1 class="title">My Exercises</h1>
+  <div class="box">
 
+    <form action="/saved_workout_list/{{ id }}">
+      <button class="button is-block is-info is-large is-fullwidth" value="Saved Exercises" name="action" button
+        style="margin:5px;">View Saved Exercises</button>
+    </form>
+  </div>
+</div>
 {% with messages = get_flashed_messages() %}
 {% if messages %}
     <div class="notification is-danger">

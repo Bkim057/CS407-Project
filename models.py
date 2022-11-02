@@ -55,6 +55,11 @@ saved_post = db.Table('saved_post',
     db.Column('saved_id', db.Integer, db.ForeignKey('post.id'))
 )
 
+saved_workout = db.Table('saved_workout',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('workout_id', db.Integer, db.ForeignKey('workout.id'))
+)
+
 workout_muscle_groups = db.Table('workout_muscle_groups',
     db.Column('workout_id', db.Integer, db.ForeignKey('workout.id')),
     db.Column('muscle', db.String, db.ForeignKey('muscle.name')))
@@ -213,6 +218,23 @@ class User(UserMixin, db.Model):
     def unsave(self, post):
         if self.has_saved(post):
             self.saved.remove(post)
+
+    saved_workouts = db.relationship('Workout', secondary=saved_workout, backref='workout_saved_by', lazy='dynamic')
+
+    # Check if user has saved workout
+    def has_saved_workout(self, workout):
+        return self.saved_workouts.filter(
+            saved_workout.c.workout_id == workout.id).count() > 0
+    
+    # Save a workout
+    def save_workout(self, workout):
+        if not self.has_saved_workout(workout):
+            self.saved_workouts.append(workout)
+
+    # Unsave a workout
+    def unsave_workout(self, workout):
+        if self.has_saved_workout(workout):
+            self.saved_workouts.remove(workout)
 
 class Post(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

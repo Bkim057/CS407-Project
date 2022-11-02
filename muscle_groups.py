@@ -3,8 +3,8 @@ from flask import Blueprint, redirect, render_template, request, url_for, flash
 from flask import session as cur_session
 from flask_login import login_required, current_user
 from numpy import delete
-from .models import User, Post, Workout, Muscle
-from . import db
+from .models import User, Post, Workout, Muscle, saved_workout, workout_muscle_groups
+from . import db, share
 from werkzeug.security import generate_password_hash
 
 muscle_groups = Blueprint('muscle_groups', __name__)
@@ -116,6 +116,15 @@ def view_workout(id):
                         <button class=\"button is-block is-info is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
                             style=\"margin: 5px;\"><a href=\"{workout.URL}\">workout\
                                 details</a></button>"
+            
+            if (not current_user.has_saved_workout(workout)):
+                workout_html += f"<form action=\"/save_workout/"+str(workout.id)+"\">\
+                        <button>Save</button>\
+                            </form>"
+            else:
+                workout_html += f"<form action=\"/unsave_workout/"+str(workout.id)+"\">\
+                        <button>Unsave</button>\
+                            </form>"
             if (current_user.is_liking_exercise(workout)):
                 workout_html  += f"<form action=\"/unlike_workout/"+str(workout.id)+"\">\
                     <button>Remove Like</button>\
@@ -150,3 +159,69 @@ def view_workout(id):
 
 
     return render_template('view_exercise.html', workout_html=workout_html)
+
+@muscle_groups.route('/save_workout/<id>')
+def save_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if current_user.has_saved_workout(workout):
+        flash('workout already saved!')
+        return redirect(url_for('muscle_groups.muscles_page'))
+    current_user.save_workout(workout)
+    db.session.commit()
+    if 'url' in cur_session:
+        return redirect(cur_session['url'])
+    else:
+        return redirect(url_for('muscle_groups.muscles_page'))
+
+@muscle_groups.route('/unsave_workout/<id>')
+def unsave_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if workout is None:
+        return redirect(url_for('index', id=id))
+    current_user.unsave_workout(workout)
+    db.session.commit()
+    if 'url' in cur_session:
+      return redirect(cur_session['url'])
+    else:
+      return redirect(url_for('muscle_groups.muscles_page'))
+
+@muscle_groups.route('/saved_workout_list/<id>')
+def saved_workout_list(id):
+
+    saved_workouts_obj = db.session.query(saved_workout).all()
+    saved_workout_html = ""
+    for s_workout in saved_workouts_obj:
+        muscle_name_list = ""
+        if s_workout.user_id == current_user.id:
+            workout_info = Workout.query.filter_by(id=s_workout.workout_id).first()
+
+            muscle_names = db.session.query(workout_muscle_groups).filter_by(workout_id=workout_info.id)
+            for musc_obj in muscle_names:
+                muscle_name_list += musc_obj.muscle + ", "
+
+            if muscle_name_list:
+                muscle_name_list = muscle_name_list[:-2]
+
+            saved_workout_html += f"<html><div class=\"column is-half is-offset-one-quarter\">\
+                <div class=\"box\">\
+                    <div class=\"content\">\
+                        <h3 class=\"title is-3 has-text-black has-text-left\">{workout_info.exercise_name}</h3>\
+                        <h4 class=\"has-text-left has-text-black\">targetted muscles: {muscle_name_list}</h4>\
+                        <p class=\"has-text-left\">{workout_info.description}</p>\
+                        <button class=\"button is-block is-info is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
+                            style=\"margin: 5px;\"><a href=\"{workout_info.URL}\">workout\
+                                details</a></button>\
+                    </div>\
+                </div>\
+            </div>"
+
+    saved_workout_html += f"<head>\
+        <meta charset=\"UTF-8\">\
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\
+        <title>Flask-Share Demo</title>\
+        {share.load()}\
+    </head>\
+    <body>\
+            { share.create(title='Share with: ',sites='facebook,twitter,wechat',mobile_sites='facebook,twitter,wechat') }\
+    </body></html>"
+    return render_template('saved_workout_list.html', saved_workout_html=saved_workout_html)
