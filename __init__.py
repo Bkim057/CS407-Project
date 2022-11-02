@@ -5,8 +5,9 @@ import os
 from flask_mail import Mail
 from flask_socketio import SocketIO, join_room
 from faunadb import query as q
+from flask_share import Share
 
-
+share = Share()
 
 # Database created
 db = SQLAlchemy()
@@ -14,6 +15,7 @@ def create_app():
     global app 
     global mail
     app = Flask(__name__)
+    share.init_app(app)
     # mail.init_app(app)
     @app.before_first_request
     def create_tables():

@@ -70,7 +70,6 @@
                                 Explore Workouts
                             </a>
                             {% endif %}
-
                             {% if current_user.is_authenticated %}
                                 {% if current_user.admin %}
                                 <a href="{{ url_for('admin_page.admin_page_options') }}" class="navbar-item">

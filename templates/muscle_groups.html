@@ -123,5 +123,14 @@
                 border-radius: 5px;">View Workout Splits</button>
         </form>
     </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Flask-Share Demo</title>
+        {{ share.load() }}
+    </head>
+    <body>
+            {{ share.create(title='Share with: ',sites='facebook,twitter,wechat',mobile_sites='facebook,twitter,wechat') }}
+    </body>
 </html>
 {% endblock %}
