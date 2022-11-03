@@ -5,13 +5,11 @@
 <div class="columns is-4 is-offset-4">
   <div class="column">
       <h1 class="title is-1">My Saved Workouts</h1>
-      {% if current_user.is_authenticated %}
         <div class="column">
             <div class="box has-background-light">
                 {{ saved_workout_html|safe }}
             </div>
         </div>
-  {% endif %}
   </div>
 </div>
 

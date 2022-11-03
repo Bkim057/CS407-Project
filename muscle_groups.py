@@ -40,6 +40,7 @@ def like_workout(id):
     workout.likes += 1
     current_user.like_exercise(workout)
     db.session.commit()
+    print(cur_session)
     if 'url' in cur_session:
         return redirect(cur_session['url'])
     else:
@@ -87,6 +88,31 @@ def undislike_workout(id):
         return redirect(cur_session['url'])
     else:
         return redirect(url_for('muscle_groups.muscles_page'))
+
+@muscle_groups.route('/save_workout/<id>')
+def save_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if current_user.has_saved_workout(workout):
+        flash('workout already saved!')
+        return redirect(url_for('muscle_groups.muscles_page'))
+    current_user.save_workout(workout)
+    db.session.commit()
+    if 'url' in cur_session:
+        return redirect(cur_session['url'])
+    else:
+        return redirect(url_for('muscle_groups.muscles_page'))
+
+@muscle_groups.route('/unsave_workout/<id>')
+def unsave_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if workout is None:
+        return redirect(url_for('index', id=id))
+    current_user.unsave_workout(workout)
+    db.session.commit()
+    if 'url' in cur_session:
+      return redirect(cur_session['url'])
+    else:
+      return redirect(url_for('muscle_groups.muscles_page'))
 
 @muscle_groups.route('/view_workout/<id>')
 def view_workout(id):
@@ -163,34 +189,9 @@ def view_workout(id):
 
     return render_template('view_exercise.html', workout_html=workout_html)
 
-@muscle_groups.route('/save_workout/<id>')
-def save_workout(id):
-    workout = Workout.query.filter_by(id=id).first()
-    if current_user.has_saved_workout(workout):
-        flash('workout already saved!')
-        return redirect(url_for('muscle_groups.muscles_page'))
-    current_user.save_workout(workout)
-    db.session.commit()
-    if 'url' in cur_session:
-        return redirect(cur_session['url'])
-    else:
-        return redirect(url_for('muscle_groups.muscles_page'))
-
-@muscle_groups.route('/unsave_workout/<id>')
-def unsave_workout(id):
-    workout = Workout.query.filter_by(id=id).first()
-    if workout is None:
-        return redirect(url_for('index', id=id))
-    current_user.unsave_workout(workout)
-    db.session.commit()
-    if 'url' in cur_session:
-      return redirect(cur_session['url'])
-    else:
-      return redirect(url_for('muscle_groups.muscles_page'))
-
 @muscle_groups.route('/saved_workout_list/<id>')
 def saved_workout_list(id):
-
+    cur_session['url'] = request.url
     saved_workouts_obj = db.session.query(saved_workout).all()
     saved_workout_html = ""
     for s_workout in saved_workouts_obj:
@@ -213,11 +214,42 @@ def saved_workout_list(id):
                         <p class=\"has-text-left\">{workout_info.description}</p>\
                         <button class=\"button is-block is-black is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
                             style=\"margin: 5px;\"><a href=\"{workout_info.URL}\">workout\
-                                details</a></button>\
-                    </div>\
-                </div>\
-            </div>"
+                                details</a></button><div class=\"field is-grouped\" style=\"padding-top: 10px;\">"
+            if (current_user.is_authenticated and current_user.id == id):
+                saved_workout_html += "<p class=\"control\">"
+                if (current_user.id != -1): 
+                    if (not current_user.has_saved_workout(workout_info)):
+                        saved_workout_html += f"<form action=\"/save_workout/"+str(workout_info.id)+"\">\
+                                <button class=\"button is-primary is-outlined is-small\">Save</button>\
+                                    </form>"
+                    else:
+                        saved_workout_html += f"<form action=\"/unsave_workout/"+str(workout_info.id)+"\">\
+                                <button class=\"button is-primary is-small\">Unsave</button>\
+                                    </form>"
+                saved_workout_html += "</p>"
+                saved_workout_html += "<p class=\"control\">"
+                if (current_user.is_liking_exercise(workout_info)):
+                    saved_workout_html  += f"<form action=\"/unlike_workout/"+str(workout_info.id)+"\">\
+                        <button class=\"button is-link is-small\">Remove Like</button>\
+                            </form>"
+                else:
+                    saved_workout_html  += f"<form action=\"/like_workout/"+str(workout_info.id)+"\">\
+                        <button class=\"button is-link is-small is-outlined\">Like</button>\
+                            </form>"
+                saved_workout_html += "</p>"
+                saved_workout_html += "<p class=\"control\">"
+                if (current_user.is_disliking_exercise(workout_info)):
+                    saved_workout_html  += f"<form action=\"/undislike_workout/"+str(workout_info.id)+"\">\
+                        <button class=\"button is-danger is-small\">Remove Dislike</button>\
+                            </form>"
+                else:
+                    saved_workout_html  += f"<form action=\"/dislike_workout/"+str(workout_info.id)+"\">\
+                        <button class=\"button is-danger is-outlined is-small\">Dislike</button>\
+                            </form>"
+                saved_workout_html += "</p>"
+            saved_workout_html += f"</div></div></div></div>"
 
+    
     saved_workout_html += f"<head>\
         <meta charset=\"UTF-8\">\
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\
