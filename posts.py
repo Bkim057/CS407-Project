@@ -445,6 +445,17 @@ def post_to_html(post_id):
             " + image_string + "\
             <nav class=\"level is-mobile\">"
 
+    # Setup strings for post_html for guest users (no save button)
+    html_string_unliked = "<div class=\"level-right\">\
+                <form action=\"/like_post/"+str(post_id)+"\">\
+                  <button>Like</button>\
+                </form>"
+
+    html_string_liked = "<div class=\"level-right\">\
+              <form action=\"/unlike_post/"+str(post_id)+"\">\
+                <button>Dislike</button>\
+              </form>" 
+
     # Setup strings for post_html based on like or saved status by the user
     html_string_unliked_saved = "<div class=\"level-right\">\
                 <form action=\"/unsave_post/"+str(post_id)+"\">\
@@ -487,16 +498,22 @@ def post_to_html(post_id):
               </form>"
 
     # Add saving and liking buttons based on state of post + user
-    if current_user.is_liking(obj): # user does not like post
-      if current_user.has_saved(obj):
-        html_string_base += html_string_liked_saved
+    if current_user.id != -1:
+      if current_user.is_liking(obj):
+        if current_user.has_saved(obj):
+          html_string_base += html_string_liked_saved
+        else:
+          html_string_base += html_string_liked_unsaved
       else:
-        html_string_base += html_string_liked_unsaved
-    else:
-      if current_user.has_saved(obj):
-        html_string_base += html_string_unliked_saved
+        if current_user.has_saved(obj):
+          html_string_base += html_string_unliked_saved
+        else:
+          html_string_base += html_string_unliked_unsaved
+    else: # guest user
+      if current_user.is_liking(obj):
+        html_string_base += html_string_liked
       else:
-        html_string_base += html_string_unliked_unsaved
+        html_string_base += html_string_unliked 
 
     # Finish off whatever button state the post had
     html_string_base += "<div class=\"level-left\">\

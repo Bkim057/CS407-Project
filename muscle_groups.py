@@ -116,15 +116,15 @@ def view_workout(id):
                         <button class=\"button is-block is-black is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
                             style=\"margin: 5px;\"><a href=\"{workout.URL}\">workout\
                                 details</a></button>"
-            
-            if (not current_user.has_saved_workout(workout)):
-                workout_html += f"<form action=\"/save_workout/"+str(workout.id)+"\">\
-                        <button>Save</button>\
-                            </form>"
-            else:
-                workout_html += f"<form action=\"/unsave_workout/"+str(workout.id)+"\">\
-                        <button>Unsave</button>\
-                            </form>"
+            if (current_user.id != -1): 
+                if (not current_user.has_saved_workout(workout)):
+                    workout_html += f"<form action=\"/save_workout/"+str(workout.id)+"\">\
+                            <button>Save</button>\
+                                </form>"
+                else:
+                    workout_html += f"<form action=\"/unsave_workout/"+str(workout.id)+"\">\
+                            <button>Unsave</button>\
+                                </form>"
             if (current_user.is_liking_exercise(workout)):
                 workout_html  += f"<form action=\"/unlike_workout/"+str(workout.id)+"\">\
                     <button>Remove Like</button>\
