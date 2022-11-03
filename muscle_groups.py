@@ -192,7 +192,7 @@ def saved_workout_list(id):
     saved_workout_html = ""
     for s_workout in saved_workouts_obj:
         muscle_name_list = ""
-        if s_workout.user_id == current_user.id:
+        if str(s_workout.user_id) == str(id):
             workout_info = Workout.query.filter_by(id=s_workout.workout_id).first()
 
             muscle_names = db.session.query(workout_muscle_groups).filter_by(workout_id=workout_info.id)
