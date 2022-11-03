@@ -1113,10 +1113,10 @@
       "id": "bae9a75c-76ab-496b-a159-f44bf1dbb9f1",
       "comment": "",
       "command": "click",
-      "target": "css=.box:nth-child(2) button",
+      "target": "css=.box:nth-child(1) .button",
       "targets": [
-        ["css=.box:nth-child(2) button", "css:finder"],
-        ["xpath=//div[2]/div/div/form/button", "xpath:position"],
+        ["css=.box:nth-child(1) .button", "css:finder"],
+        ["xpath=//section/div[2]/div/div/div/form/button", "xpath:position"],
         ["xpath=//button[contains(.,'View Exercises')]", "xpath:innerText"]
       ],
       "value": ""
@@ -1157,10 +1157,10 @@
       "id": "2a0f43e2-bf5a-488b-bce3-6194a48e7380",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "css=form:nth-child(6) > button",
+      "target": "css=.is-danger",
       "targets": [
-        ["css=form:nth-child(6) > button", "css:finder"],
-        ["xpath=//form[2]/button", "xpath:position"],
+        ["css=.is-danger", "css:finder"],
+        ["xpath=//form[3]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Dislike')]", "xpath:innerText"]
       ],
       "value": "Dislike"
@@ -1209,13 +1209,13 @@
       ],
       "value": "Remove Like"
     }, {
-      "id": "59266110-6751-4d70-aabd-541a4e219e0d",
+      "id": "b6d3476c-2470-4963-9166-1afb88c11b83",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "css=form:nth-child(6) > button",
+      "target": "css=.is-danger",
       "targets": [
-        ["css=form:nth-child(6) > button", "css:finder"],
-        ["xpath=//form[2]/button", "xpath:position"],
+        ["css=.is-danger", "css:finder"],
+        ["xpath=//form[3]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Dislike')]", "xpath:innerText"]
       ],
       "value": "Dislike"
@@ -1253,13 +1253,13 @@
       ],
       "value": "Like"
     }, {
-      "id": "ebfc8b19-238e-402c-9c56-0182fd20cef2",
+      "id": "8ff09b62-3936-476c-b8a8-fe157017793c",
       "comment": "",
-      "command": "click",
-      "target": "css=form:nth-child(6) > button",
+      "command": "assertElementPresent",
+      "target": "css=.is-danger",
       "targets": [
-        ["css=form:nth-child(6) > button", "css:finder"],
-        ["xpath=//form[2]/button", "xpath:position"],
+        ["css=.is-danger", "css:finder"],
+        ["xpath=//form[3]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Dislike')]", "xpath:innerText"]
       ],
       "value": "Dislike"
@@ -1289,10 +1289,10 @@
       "id": "4891bf3f-92da-4afb-b384-3c0c7a722352",
       "comment": "",
       "command": "click",
-      "target": "css=form:nth-child(6) > button",
+      "target": "css=.is-danger",
       "targets": [
-        ["css=form:nth-child(6) > button", "css:finder"],
-        ["xpath=//form[2]/button", "xpath:position"],
+        ["css=.is-danger", "css:finder"],
+        ["xpath=//form[3]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Remove Dislike')]", "xpath:innerText"]
       ],
       "value": "Remove Dislike"
