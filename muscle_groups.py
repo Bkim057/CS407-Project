@@ -115,36 +115,39 @@ def view_workout(id):
                         <p class=\"has-text-left\">{workout.description}</p>\
                         <button class=\"button is-block is-black is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
                             style=\"margin: 5px;\"><a href=\"{workout.URL}\">workout\
-                                details</a></button>"
+                                details</a></button><div class=\"field is-grouped\" style=\"padding-top: 10px;\">"
+            workout_html += "<p class=\"control\">"
             if (current_user.id != -1): 
                 if (not current_user.has_saved_workout(workout)):
                     workout_html += f"<form action=\"/save_workout/"+str(workout.id)+"\">\
-                            <button>Save</button>\
+                            <button class=\"button is-primary is-outlined is-small\">Save</button>\
                                 </form>"
                 else:
                     workout_html += f"<form action=\"/unsave_workout/"+str(workout.id)+"\">\
-                            <button>Unsave</button>\
+                            <button class=\"button is-primary is-small\">Unsave</button>\
                                 </form>"
+            workout_html += "</p>"
+            workout_html += "<p class=\"control\">"
             if (current_user.is_liking_exercise(workout)):
                 workout_html  += f"<form action=\"/unlike_workout/"+str(workout.id)+"\">\
-                    <button>Remove Like</button>\
+                    <button class=\"button is-link is-small\">Remove Like</button>\
                         </form>"
             else:
                 workout_html  += f"<form action=\"/like_workout/"+str(workout.id)+"\">\
-                    <button>Like</button>\
+                    <button class=\"button is-link is-small is-outlined\">Like</button>\
                         </form>"
-
+            workout_html += "</p>"
+            workout_html += "<p class=\"control\">"
             if (current_user.is_disliking_exercise(workout)):
                 workout_html  += f"<form action=\"/undislike_workout/"+str(workout.id)+"\">\
-                    <button>Remove Dislike</button>\
+                    <button class=\"button is-danger is-small\">Remove Dislike</button>\
                         </form>"
             else:
                 workout_html  += f"<form action=\"/dislike_workout/"+str(workout.id)+"\">\
-                    <button>Dislike</button>\
+                    <button class=\"button is-danger is-outlined is-small\">Dislike</button>\
                         </form>"
-
-
-            workout_html += f"</div>\
+            workout_html += "</p>"
+            workout_html += f"</div></div>\
                 <div class=\"level-left\">\
               <p>\
                 Likes: " + str(workout.likes) + "</p>\
