@@ -2,30 +2,34 @@
 
 {% block content %}
 <html>
-    <img src="{{url_for('static', filename='lowerbody.png')}}" align="middle" style="width:70%;height:30%; border-radius: 5px; padding-bottom: 2%;" />
-<div class=box>
-    <h3>Glutes</h3>
-    <form action="/view_workout/glutes">
-        <button>View Exercises</button>
-    </form>
+<img src="{{url_for('static', filename='lowerbody.png')}}" align="middle"
+    style="width:15%;height:15%; border-radius: 5px; padding-bottom: 2%;background-color: white;padding-left: 20px; padding-right: 20px; padding-top: 20px;padding-bottom: -10px;" />
+<div class="column is-half is-offset-one-quarter" style="padding: 30px 0 0 ">
+    <div class=box>
+        <h3 class="title is-3 has-text-black has-text-left">Glutes</h3>
+        <form action="/view_workout/glutes">
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
+        </form>
+    </div>
+    <div class=box>
+        <h3 class="title is-3 has-text-black has-text-left">Quads</h3>
+        <form action="/view_workout/quads">
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
+        </form>
+    </div>
+    <div class=box>
+        <h3 class="title is-3 has-text-black has-text-left">Calves</h3>
+        <form action="/view_workout/calves">
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
+        </form>
+    </div>
+    <div class=box>
+        <h3 class="title is-3 has-text-black has-text-left">Hamstrings</h3>
+        <form action="/view_workout/hamstrings">
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
+        </form>
+    </div>
 </div>
-<div class=box>
-    <h3>Quads</h3>
-    <form action="/view_workout/quads">
-        <button>View Exercises</button>
-    </form>
-</div>
-<div class=box>
-    <h3>Calves</h3>
-    <form action="/view_workout/calves">
-        <button>View Exercises</button>
-    </form>
-</div>
-<div class=box>
-    <h3>Hamstrings</h3>
-    <form action="/view_workout/hamstrings">
-        <button>View Exercises</button>
-    </form>
-</div>
+
 </html>
 {% endblock %}

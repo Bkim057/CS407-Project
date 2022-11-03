@@ -113,7 +113,7 @@ def view_workout(id):
                         <h3 class=\"title is-3 has-text-black has-text-left\">{workout.exercise_name}</h3>\
                         <h4 class=\"has-text-left has-text-black\">targetted muscles: {muscles_worked_list}</h4>\
                         <p class=\"has-text-left\">{workout.description}</p>\
-                        <button class=\"button is-block is-info is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
+                        <button class=\"button is-block is-black is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
                             style=\"margin: 5px;\"><a href=\"{workout.URL}\">workout\
                                 details</a></button>"
             
@@ -208,7 +208,7 @@ def saved_workout_list(id):
                         <h3 class=\"title is-3 has-text-black has-text-left\">{workout_info.exercise_name}</h3>\
                         <h4 class=\"has-text-left has-text-black\">targetted muscles: {muscle_name_list}</h4>\
                         <p class=\"has-text-left\">{workout_info.description}</p>\
-                        <button class=\"button is-block is-info is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
+                        <button class=\"button is-block is-black is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
                             style=\"margin: 5px;\"><a href=\"{workout_info.URL}\">workout\
                                 details</a></button>\
                     </div>\

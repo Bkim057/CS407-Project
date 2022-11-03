@@ -22,12 +22,12 @@
             <div class="box">
         
             {% if post_num < list_len - 1 %}
-            <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/manage_posts/{{ id }}/{{ post_num + 1 }}';" 
+            <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/manage_posts/{{ id }}/{{ post_num + 1 }}';" 
                 type="button"value="Next Post" name="action" button style="margin:5px;">Next Post</button>
             {% endif %}
         
             {% if post_num > 0 %}
-            <button class="button is-block is-info is-large is-fullwidth" onclick="location.href='/manage_posts/{{ id }}/{{ post_num - 1 }}';" 
+            <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/manage_posts/{{ id }}/{{ post_num - 1 }}';" 
                 type="button"value="Previous Post" name="action" button style="margin:5px;">Previous Post</button>
             {% endif %}
             </div>
@@ -42,7 +42,7 @@
                 <div class="control">
                     <textarea class="textarea" name="contents" placeholder="Contents"></textarea>
                 </div>
-                <button class="button is-block is-info is-large is-fullwidth" type="submit"value="Edit Post" name="action" button
+                <button class="button is-block is-black is-large is-fullwidth" type="submit"value="Edit Post" name="action" button
                 style="margin: 5px;">Save Changes</button>
               </div>
             </form>

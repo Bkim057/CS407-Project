@@ -2,36 +2,40 @@
 
 {% block content %}
 <html>
-    <img src="{{url_for('static', filename='upperbody.png')}}" align="middle" style="width:70%;height:30%; border-radius: 5px; padding-bottom: 2%;" />
+<img src="{{url_for('static', filename='upperbody.png')}}" align="middle"
+    style="width:20%;height:10%; border-radius: 5px; padding-bottom: 2%;background-color: white;padding: 31.3847234px;" />
+<div class="column is-half is-offset-one-quarter" style="padding: 40px 0 0 ">
     <div class="box">
-        <h3>Shoulders</h3>
+        <h3 class="title is-3 has-text-black has-text-left">Shoulders</h3>
         <form action="/view_workout/shoulders">
-            <button>View Exercises</a></button>
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</a></button>
         </form>
     </div>
     <div class=box>
-        <h3>Back</h3>
+        <h3 class="title is-3 has-text-black has-text-left">Back</h3>
         <form action="/view_workout/back">
-            <button>View Exercises</button>
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
         </form>
     </div>
     <div class=box>
-        <h3>Triceps</h3>
+        <h3 class="title is-3 has-text-black has-text-left">Triceps</h3>
         <form action="/view_workout/triceps">
-            <button>View Exercises</button>
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
         </form>
     </div>
     <div class=box>
-        <h3>Biceps</h3>
+        <h3 class="title is-3 has-text-black has-text-left">Biceps</h3>
         <form action="/view_workout/biceps">
-            <button>View Exercises</button>
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
         </form>
     </div>
     <div class=box>
-        <h3>Chest</h3>
+        <h3 class="title is-3 has-text-black has-text-left">Chest</h3>
         <form action="/view_workout/chest">
-            <button>View Exercises</button>
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
         </form>
     </div>
+</div>
+
 </html>
 {% endblock %}

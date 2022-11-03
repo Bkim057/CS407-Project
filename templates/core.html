@@ -2,24 +2,26 @@
 
 {% block content %}
 <html>
-    <img src="{{url_for('static', filename='core.png')}}" align="middle" style="width:70%;height:30%; border-radius: 5px; padding-bottom: 2%;" />
+    <img src="{{url_for('static', filename='core.png')}}" align="middle" style="width:20%;height:10%; border-radius: 5px; padding-bottom: 2%; background-color:#FFFFFF" />
+    <div class="column is-half is-offset-one-quarter" style="padding: 50px 0 0 ">
     <div class=box>
-        <h3>Lower Back</h3>
+        <h3 class="title is-3 has-text-black has-text-left">Lower Back</h3>
         <form action="/view_workout/lower back">
-            <button>View Exercises</button>
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
         </form>
     </div>
     <div class=box>
-        <h3>Abs</h3>
+        <h3 class="title is-3 has-text-black has-text-left">Abs</h3>
         <form action="/view_workout/abs">
-            <button>View Exercises</button>
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
         </form>
     </div>
     <div class=box>
-        <h3>Obliques</h3>
+        <h3 class="title is-3 has-text-black has-text-left">Obliques</h3>
         <form action="/view_workout/obliques">
-            <button>View Exercises</button>
+            <button class="button is-block is-black is-medium is-fullwidth">View Exercises</button>
         </form>
+    </div>
     </div>
 </html>
 {% endblock %}

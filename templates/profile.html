@@ -15,46 +15,46 @@
       {% endif %}
       <h3>Bio: {{ bio }}</h3>
       <form method="GET" action="/edit_profile">
-          <button class="button is-block is-info is-large is-fullwidth" value="Edit Profile" name="action"button style="margin:5px;">Edit Profile</button>
+          <button class="button is-block is-black is-large is-fullwidth" value="Edit Profile" name="action"button style="margin:5px;">Edit Profile</button>
       </form>
 
       <form method="GET" action="/all_following">
-        <button class="button is-block is-info is-large is-fullwidth" value="Manage Following" name="action"button style="margin:5px;">Manage Following</button>
+        <button class="button is-block is-black is-large is-fullwidth" value="Manage Following" name="action"button style="margin:5px;">Manage Following</button>
       </form>
 
       <form method="POST" action="/profile">
-          <button class="button is-block is-info is-large is-fullwidth" value="Delete Account" name="action"button style="margin:5px;">Delete Account</button>
+          <button class="button is-block is-black is-large is-fullwidth" value="Delete Account" name="action"button style="margin:5px;">Delete Account</button>
       </form>
       {%if current_user.chat_restriction %}
       <form action="/unrestrict_user/">
-        <button class="button is-block is-info is-large is-fullwidth" value="Unchatrestrict" name="action" button
+        <button class="button is-block is-black is-large is-fullwidth" value="Unchatrestrict" name="action" button
           style="margin:5px;">Chat with anyone</button>
       </form>
       {% else %}
       <form action="/restrict_user/">
-        <button class="button is-block is-info is-large is-fullwidth" value="Chatrestrict" name="action" button
+        <button class="button is-block is-black is-large is-fullwidth" value="Chatrestrict" name="action" button
           style="margin:5px;">Chat only mutuals</button>
       </form>
       {% endif %}
       {%if current_user.private %}
       <form action="/handle_private/">
-        <button class="button is-block is-info is-large is-fullwidth" value="Unchatrestrict" name="action" button
+        <button class="button is-block is-black is-large is-fullwidth" value="Unchatrestrict" name="action" button
           style="margin:5px;">Make Public</button>
       </form>
       {% else %}
       <form action="/handle_private/">
-        <button class="button is-block is-info is-large is-fullwidth" value="Chatrestrict" name="action" button
+        <button class="button is-block is-black is-large is-fullwidth" value="Chatrestrict" name="action" button
           style="margin:5px;">Make Private</button>
       </form>
       {% endif %}
       {%if current_user.admin %}
       <form action="/temp_admin_self/">
-        <button class="button is-block is-info is-large is-fullwidth" value="Unchatrestrict" name="action" button
+        <button class="button is-block is-black is-large is-fullwidth" value="Unchatrestrict" name="action" button
           style="margin:5px;">No admin</button>
       </form>
       {% else %}
       <form action="/temp_admin_self/">
-        <button class="button is-block is-info is-large is-fullwidth" value="Chatrestrict" name="action" button
+        <button class="button is-block is-black is-large is-fullwidth" value="Chatrestrict" name="action" button
           style="margin:5px;">Give admin</button>
       </form>
       {% endif %}
@@ -63,17 +63,17 @@
   <h1 class="title">Posts</h1>
   <div class="box">
     <form method="POST" action="/create_post">
-      <button class="button is-block is-info is-large is-fullwidth" value="Create Post" name="action" button
+      <button class="button is-block is-black is-large is-fullwidth" value="Create Post" name="action" button
         style="margin:5px;">Create Post</button>
     </form>
 
     <form action="/manage_posts/{{ id }}/0">
-      <button class="button is-block is-info is-large is-fullwidth" value="Manage Posts" name="action" button
+      <button class="button is-block is-black is-large is-fullwidth" value="Manage Posts" name="action" button
         style="margin:5px;">Manage Created Posts</button>
     </form>
 
     <form action="/saved_posts/{{ id }}/0">
-      <button class="button is-block is-info is-large is-fullwidth" value="Saved Posts" name="action" button
+      <button class="button is-block is-black is-large is-fullwidth" value="Saved Posts" name="action" button
         style="margin:5px;">Saved Posts</button>
     </form>
 
@@ -83,14 +83,14 @@
   <div class="box">
 
     <form action="/disp_timeline/{{ id }}/0/Topic">
-      <button class="button is-block is-info is-large is-fullwidth" value="Followed Topics" name="action" button
+      <button class="button is-block is-black is-large is-fullwidth" value="Followed Topics" name="action" button
         style="margin:5px;">Followed Muscle Groups Timeline</button>
     </form>
 
 
 
     <form action="/disp_timeline/{{ id }}/0/Users">
-      <button class="button is-block is-info is-large is-fullwidth" value="Followed Users" name="action" button
+      <button class="button is-block is-black is-large is-fullwidth" value="Followed Users" name="action" button
         style="margin:5px;">Followed Users Timeline</button>
     </form>
 
@@ -99,7 +99,7 @@
   <div class="box">
 
     <form action="/saved_workout_list/{{ id }}">
-      <button class="button is-block is-info is-large is-fullwidth" value="Saved Exercises" name="action" button
+      <button class="button is-block is-black is-large is-fullwidth" value="Saved Exercises" name="action" button
         style="margin:5px;">View Saved Exercises</button>
     </form>
   </div>

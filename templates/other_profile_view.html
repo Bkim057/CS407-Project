@@ -26,12 +26,12 @@
   <h1 class="title">Userline</h1>
   <div class="box">
     <form action="/disp_userline/{{ id }}/0/Posts">
-      <button class="button is-block is-info is-large is-fullwidth" value="Post Activity" name="action" button
+      <button class="button is-block is-black is-large is-fullwidth" value="Post Activity" name="action" button
         style="margin:5px;">View user's post activity</button>
     </form>
 
     <form action="/disp_userline/{{ id }}/0/Interactions">
-      <button class="button is-block is-info is-large is-fullwidth" value="Interactions" name="action" button
+      <button class="button is-block is-black is-large is-fullwidth" value="Interactions" name="action" button
         style="margin:5px;">View user's post interactions</button>
     </form>
   </div>
@@ -50,12 +50,12 @@
     {% if not current_user.is_blocking(user) %}
       {% if not current_user.is_following(user) %}
         <form action="/follow_user/{{ id }}">
-          <button class="button is-block is-info is-large is-fullwidth" value="Follow User" name="action" button
+          <button class="button is-block is-black is-large is-fullwidth" value="Follow User" name="action" button
             style="margin:5px;">Follow User</button>
         </form>
       {% else %}
         <form action="/unfollow_user/{{ id }}">
-          <button class="button is-block is-info is-large is-fullwidth" value="Unfollow User" name="action" button
+          <button class="button is-block is-black is-large is-fullwidth" value="Unfollow User" name="action" button
             style="margin:5px;">Unfollow User</button>
         </form>
       {% endif %}
@@ -65,13 +65,13 @@
       {% if user.chat_restriction %}
           {% if user.is_following(current_user) %}
             <form action="/chat_with/{{ id }}">
-              <button class="button is-block is-info is-large is-fullwidth" value="Chat With User" name="action" button
+              <button class="button is-block is-black is-large is-fullwidth" value="Chat With User" name="action" button
                 style="margin:5px;">Chat With User</button>
               </form>
           {% endif %}
       {% else %}
         <form action="/chat_with/{{ id }}">
-          <button class="button is-block is-info is-large is-fullwidth" value="chatting" name="action" button
+          <button class="button is-block is-black is-large is-fullwidth" value="chatting" name="action" button
             style="margin:5px;">Chat With User</button>
         </form>
       {% endif %}
@@ -79,24 +79,24 @@
     
     {%if not current_user.is_blocking(user) %}
     <form action="/block_user/{{ id }}">
-      <button class="button is-block is-info is-large is-fullwidth" value="Block User" name="action" button
+      <button class="button is-block is-black is-large is-fullwidth" value="Block User" name="action" button
         style="margin:5px;">Block User</button>
     </form>
     {% else %}
     <form action="/unblock_user/{{ id }}">
-      <button class="button is-block is-info is-large is-fullwidth" value="Unblock User" name="action" button
+      <button class="button is-block is-black is-large is-fullwidth" value="Unblock User" name="action" button
         style="margin:5px;">Unblock User</button>
     </form>
     {% endif %}
     {%if current_user.admin %}
         {%if not user.admin %}
         <form action="/temp_admin_other/{{ id }}">
-          <button class="button is-block is-info is-large is-fullwidth" value="Block User" name="action" button
+          <button class="button is-block is-black is-large is-fullwidth" value="Block User" name="action" button
             style="margin:5px;">Give admin</button>
         </form>
         {% else %}
         <form action="/temp_admin_other/{{ id }}">
-          <button class="button is-block is-info is-large is-fullwidth" value="Unblock User" name="action" button
+          <button class="button is-block is-black is-large is-fullwidth" value="Unblock User" name="action" button
             style="margin:5px;">Take Away admin</button>
         </form>
         {% endif %}

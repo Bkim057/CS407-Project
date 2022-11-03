@@ -24,9 +24,9 @@ def existing_topics_ids():
 def topic_to_html(name, id):
     # html conversion
     html_string =  "<div class=\"box\">\
-                        <h3>" + str(name) + "</h3>\
+                        <h3 class=\"title is-3 has-text-black has-text-left\">" + str(name) + "</h3>\
                         <form action=\"/view_topic/" + str(id) + "/" + str("0") + "\">\
-                            <button>View Workouts</button>\
+                            <button class=\"button is-block is-black is-medium is-fullwidth\">View Workouts</button>\
                         </form>\
                     </div>"
     return html_string
