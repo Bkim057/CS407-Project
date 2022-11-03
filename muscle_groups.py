@@ -215,7 +215,7 @@ def saved_workout_list(id):
                         <button class=\"button is-block is-black is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
                             style=\"margin: 5px;\"><a href=\"{workout_info.URL}\">workout\
                                 details</a></button><div class=\"field is-grouped\" style=\"padding-top: 10px;\">"
-            if (current_user.is_authenticated and current_user.id == id):
+            if (current_user.is_authenticated and str(current_user.id) == str(id)):
                 saved_workout_html += "<p class=\"control\">"
                 if (current_user.id != -1): 
                     if (not current_user.has_saved_workout(workout_info)):
@@ -246,8 +246,16 @@ def saved_workout_list(id):
                     saved_workout_html  += f"<form action=\"/dislike_workout/"+str(workout_info.id)+"\">\
                         <button class=\"button is-danger is-outlined is-small\">Dislike</button>\
                             </form>"
-                saved_workout_html += "</p>"
-            saved_workout_html += f"</div></div></div></div>"
+                saved_workout_html += "</p></div>"
+                saved_workout_html += f"<div class=\"level-left\">\
+                <p>\
+                    Likes: " + str(workout_info.likes) + "</p>\
+                </div>\
+                    <div class=\"level-left\">\
+                <p>\
+                    Dislikes: " + str(workout_info.dislikes) + "</p>\
+                </div>"
+            saved_workout_html += f"</div></div></div>"
 
     
     saved_workout_html += f"<head>\
