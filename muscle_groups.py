@@ -255,7 +255,9 @@ def saved_workout_list(id):
                 <p>\
                     Dislikes: " + str(workout_info.dislikes) + "</p>\
                 </div>"
-            saved_workout_html += f"</div></div></div></div>"
+                saved_workout_html += f"</div></div></div>"
+            else:
+                saved_workout_html += f"</div></div></div></div>"
 
     
     saved_workout_html += f"<head>\
