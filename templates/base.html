@@ -80,6 +80,9 @@
                                 </a>
                                 {% endif %}
                             {% endif %}
+                            <a href="{{ url_for('calc.calc_page') }}" class="navbar-item">
+                                TDEE Calculator
+                            </a>
 
                             {% if current_user.is_authenticated %}
                             <div class="search-container">

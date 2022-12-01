@@ -89,4 +89,7 @@ def create_app():
     from.admin_page import admin_page as admin_page_blueprint
     app.register_blueprint(admin_page_blueprint)
 
+    from .calc import calc as calc_blueprint
+    app.register_blueprint(calc_blueprint)
+
     return app

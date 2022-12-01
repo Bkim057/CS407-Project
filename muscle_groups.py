@@ -110,12 +110,18 @@ def view_workout(id):
             workout_html += f"<div class=\"column is-half is-offset-one-quarter\">\
                 <div class=\"box\">\
                     <div class=\"content\">\
-                        <h3 class=\"title is-3 has-text-black has-text-left\">{workout.exercise_name}</h3>\
-                        <h4 class=\"has-text-left has-text-black\">targetted muscles: {muscles_worked_list}</h4>\
-                        <p class=\"has-text-left\">{workout.description}</p>\
-                        <button class=\"button is-block is-black is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
-                            style=\"margin: 5px;\"><a href=\"{workout.URL}\">workout\
-                                details</a></button><div class=\"field is-grouped\" style=\"padding-top: 10px;\">"
+                        <h3 class=\"title is-3 has-text-black has-text-left\">{workout.exercise_name}</h3>"
+            if (workout.video_link != None) and (workout.video_link != "") and ("https://www.youtube.com/embed/" in workout.video_link):
+                workout_html += "<div class=\"Box-body\">\
+                            <iframe width=\"360\" height=\"315\"\
+                                src=\"" + workout.video_link + "\">\
+                            </iframe>\
+                        </div>"
+            workout_html += f"<h4 class=\"has-text-left has-text-black\">targetted muscles: {muscles_worked_list}</h4>\
+                <p class=\"has-text-left\">{workout.description}</p>\
+                <button class=\"button is-block is-black is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
+                    style=\"margin: 5px;\"><a href=\"{workout.URL}\">workout\
+                        details</a></button><div class=\"field is-grouped\" style=\"padding-top: 10px;\">"
             workout_html += "<p class=\"control\">"
             if (current_user.id != -1): 
                 if (not current_user.has_saved_workout(workout)):
@@ -208,8 +214,14 @@ def saved_workout_list(id):
             saved_workout_html += f"<html><div class=\"column is-half is-offset-one-quarter\">\
                 <div class=\"box\">\
                     <div class=\"content\">\
-                        <h3 class=\"title is-3 has-text-black has-text-left\">{workout_info.exercise_name}</h3>\
-                        <h4 class=\"has-text-left has-text-black\">targetted muscles: {muscle_name_list}</h4>\
+                        <h3 class=\"title is-3 has-text-black has-text-left\">{workout_info.exercise_name}</h3>"
+            if (workout_info.video_link != None) and (workout_info.video_link != "") and ("https://www.youtube.com/embed/" in workout_info.video_link):
+                saved_workout_html += "<div class=\"Box-body\">\
+                            <iframe width=\"360\" height=\"315\"\
+                                src=\"" + workout_info.video_link + "\">\
+                            </iframe>\
+                        </div>"
+            saved_workout_html += f"<h4 class=\"has-text-left has-text-black\">targetted muscles: {muscle_name_list}</h4>\
                         <p class=\"has-text-left\">{workout_info.description}</p>\
                         <button class=\"button is-block is-black is-medium is-fullwidth\" value=\"Post Created\" name=\"action\" button\
                             style=\"margin: 5px;\"><a href=\"{workout_info.URL}\">workout\
@@ -217,7 +229,6 @@ def saved_workout_list(id):
                     </div>\
                 </div>\
             </div>"
-
     saved_workout_html += f"<head>\
         <meta charset=\"UTF-8\">\
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\

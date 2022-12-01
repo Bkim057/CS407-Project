@@ -279,6 +279,7 @@ class Workout(UserMixin, db.Model):
     exercise_name = db.Column(db.String(15))
     description = db.Column(db.String(500))
     URL = db.Column(db.String(2048))
+    video_link = db.Column(db.String(2048))
     muscle_groups = db.relationship('Muscle', secondary=workout_muscle_groups)
     likes = db.Column(db.Integer)
     dislikes = db.Column(db.Integer)

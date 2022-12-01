@@ -34,7 +34,7 @@ def approve_post(post_id, post_num):
     while (post_num >= list_len):
         post_num-=1
     post_html = post_to_approve_to_html(post_list[post_num], post_num)
-    return render_template('moderate_post.html', id = id, post_num=post_num, post_html=post_html, list_len=list_len)
+    return render_template('moderate_post.html', id = id, post_num=post_num, post_html=post_html, list_len=list_len, post_id = post_list[post_num])
 
 @admin_page.route('/unapprove_post/<id>/<post_num>', methods=['POST'])
 def unapprove_post(id, post_num):
@@ -66,7 +66,7 @@ def unapprove_post(id, post_num):
     while (post_num >= list_len):
         post_num-=1
     post_html = post_to_approve_to_html(post_list[post_num], post_num)
-    return render_template('moderate_post.html', id = id, post_num=post_num, post_html=post_html, list_len=list_len)
+    return render_template('moderate_post.html', id = id, post_num=post_num, post_html=post_html, list_len=list_len, post_id = post_list[post_num])
 
 # Access the list of all unapproved posts
 @admin_page.route('/moderate_posts_list/<post_num>')
@@ -85,7 +85,7 @@ def moderate_posts_list(post_num):
     while (post_num >= list_len):
         post_num-=1
     post_html = post_to_approve_to_html(post_list[post_num], post_num)
-    return render_template('moderate_post.html', id = id, post_num=post_num, post_html=post_html, list_len=list_len)
+    return render_template('moderate_post.html', id = id, post_num=post_num, post_html=post_html, list_len=list_len, post_id = post_list[post_num])
 
 # Give admin to a certain user
 @admin_page.route('/give_admin', methods=['GET'])
