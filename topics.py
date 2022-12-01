@@ -60,9 +60,16 @@ def view_topic(id, post_num):
     for blocked_user in blocked_users:
       blocked_user_ids.append(blocked_user.id)
     for post in topic_to_view.posts:
-        if not post.moderated:
-            continue
-        if post.user_id not in blocked_user_ids:
+        searching = post.user_id
+        user = User.query.filter_by(id=searching).first()
+        if not current_user.admin:
+            if user.private:
+                continue
+            if not post.moderated:
+                continue
+            if post.user_id not in blocked_user_ids:
+                post_list.append(post.id)
+        else:
             post_list.append(post.id)
     if len(post_list) == 0:
         flash('No Content for that Topic Exists')

@@ -381,13 +381,16 @@ def post_to_html(post_id):
 
     image_location = None
     image_string = ""
-    if (obj.filename):
-      img_src = Image.open(BytesIO(obj.data))
-      image_location = "./static/" + obj.filename
-      img_src.save(image_location)
-      image_string = "<div class=\"Box-body\">\
-                        <img src=" + image_location[1:] + ">\
-                      </div>"
+    try:
+      if (obj.filename):
+        img_src = Image.open(BytesIO(obj.data))
+        image_location = "./static/" + obj.filename
+        img_src.save(image_location)
+        image_string = "<div class=\"Box-body\">\
+                          <img src=" + image_location[1:] + ">\
+                        </div>"
+    except:
+      print("file not found")
     
     pfp_string = "https://bulma.io/images/placeholders/128x128.png"
     if (user_for_post.pfp):
@@ -621,10 +624,13 @@ def get_posts_topics_followed(user_id):
     for topic in topics:
       post_list = topic.posts
       for post in post_list:
-        if (not post.moderated):
-          continue
-        if (post.user_id in blocked_user_ids):
-          continue
+        if (current_user.admin == False):
+          if user.private:
+            continue
+          if (not post.moderated):
+            continue
+          if (post.user_id in blocked_user_ids):
+            continue
         if post.anonymous:   
           continue    
         post_ids.append(post.id)
@@ -638,8 +644,12 @@ def get_posts_user(user_id):
     posts_for_user = Post.query.filter_by(user_id=user_id)
     result = []
     for post in posts_for_user:
-      if (not post.moderated):
-        continue
+      if (current_user.admin == False):
+        user = User.query.get(user_id).first()
+        if user.private:
+          continue
+        if (not post.moderated):
+          continue
       result.append(post.id)
     return result
 
@@ -653,8 +663,11 @@ def get_posts_users_followed(user_id):
       flash('No followed?')    
     result = list()
     for user in users:
-      if user.is_blocking(user):
-        continue
+      if (current_user.admin == False):
+        if user.private:
+          continue
+        if cur_user.is_blocking(user):
+          continue
       for post in get_posts_user(user.id):   
         result.append(post)
     return result
@@ -686,8 +699,13 @@ def view_saved_posts(id, post_num):
     obj = User.query.get(id)    
     post_list = []
     for post in obj.saved_posts:
-      if not post.moderated:
-        continue
+      if (current_user.admin == False):
+        searching = post.user_id
+        user = User.query.filter_by(id=searching).first()
+        if user.private:
+          continue
+        if not post.moderated:
+          continue
       post_list.append(post.id)
     if len(post_list) == 0:
         flash('No Saved Posts exist!')

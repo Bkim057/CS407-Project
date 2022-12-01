@@ -156,7 +156,10 @@ def search_user():
         id_cur = possible_people[i].id
         user = possible_people[i]
         print(id_cur)
-        if (not user.is_blocking(current_user) and not user.private):
+        if (current_user.admin == False):
+            if (not user.is_blocking(current_user) and not user.private):
+                everyone_get_in_here += user_to_html(id_cur)
+        else:
             everyone_get_in_here += user_to_html(id_cur)
 
     # String will be empty if no possible users were found, add the error
