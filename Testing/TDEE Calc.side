@@ -1,0 +1,372 @@
+{
+  "id": "bf538941-ca65-49a5-baa7-ed8887d3b200",
+  "version": "2.0",
+  "name": "TDEE Calc",
+  "url": "http://127.0.0.1:5000",
+  "tests": [{
+    "id": "0f5c5932-793b-43dc-b37c-50ad4babcc0a",
+    "name": "TDEE correct Value",
+    "commands": [{
+      "id": "9c6e86c5-877c-4619-bb79-8db2dda7d6ad",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a4324040-bfdd-40b5-89e4-d7a3f1558fc3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c05d5804-9a28-4364-834c-a3038008ce0f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b7cf8395-3136-4bb8-92c6-343bdd8b726c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=TDEE Calculator",
+      "targets": [
+        ["linkText=TDEE Calculator", "linkText"],
+        ["css=.navbar-item:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'TDEE Calculator')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/calc_page')]", "xpath:href"],
+        ["xpath=//a[4]", "xpath:position"],
+        ["xpath=//a[contains(.,'TDEE Calculator')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3c8231a0-6973-4783-a40c-7f7084700b1a",
+      "comment": "",
+      "command": "click",
+      "target": "id=female",
+      "targets": [
+        ["id=female", "id"],
+        ["css=#female", "css:finder"],
+        ["xpath=//input[@id='female']", "xpath:attributes"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "30de2c3e-6e33-44d0-96c9-ba7f19e04e15",
+      "comment": "",
+      "command": "click",
+      "target": "id=age",
+      "targets": [
+        ["id=age", "id"],
+        ["name=age", "name"],
+        ["css=#age", "css:finder"],
+        ["xpath=//input[@id='age']", "xpath:attributes"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d315d04-da9c-4cf3-ae73-f7a291867cf7",
+      "comment": "",
+      "command": "type",
+      "target": "id=age",
+      "targets": [
+        ["id=age", "id"],
+        ["name=age", "name"],
+        ["css=#age", "css:finder"],
+        ["xpath=//input[@id='age']", "xpath:attributes"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": "30"
+    }, {
+      "id": "f56f5861-be56-4228-a1eb-90556d6882ff",
+      "comment": "",
+      "command": "click",
+      "target": "id=weight",
+      "targets": [
+        ["id=weight", "id"],
+        ["name=weight", "name"],
+        ["css=#weight", "css:finder"],
+        ["xpath=//input[@id='weight']", "xpath:attributes"],
+        ["xpath=//tr[3]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4431fb91-e05b-46c0-ae4b-95fdbfe6c933",
+      "comment": "",
+      "command": "type",
+      "target": "id=weight",
+      "targets": [
+        ["id=weight", "id"],
+        ["name=weight", "name"],
+        ["css=#weight", "css:finder"],
+        ["xpath=//input[@id='weight']", "xpath:attributes"],
+        ["xpath=//tr[3]/td[2]/input", "xpath:position"]
+      ],
+      "value": "120"
+    }, {
+      "id": "4327bbc9-8a00-4352-a8bf-e6a3e10f5338",
+      "comment": "",
+      "command": "click",
+      "target": "id=height",
+      "targets": [
+        ["id=height", "id"],
+        ["name=height", "name"],
+        ["css=#height", "css:finder"],
+        ["xpath=//select[@id='height']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d06b71f-d5ec-460c-b7b5-7086e24de543",
+      "comment": "",
+      "command": "select",
+      "target": "id=height",
+      "targets": [],
+      "value": "label=5ft 6in"
+    }, {
+      "id": "df1a00a4-d52f-4a09-97cc-ca9d32a25828",
+      "comment": "",
+      "command": "click",
+      "target": "name=activity",
+      "targets": [
+        ["name=activity", "name"],
+        ["css=tr:nth-child(5) .form-control", "css:finder"],
+        ["xpath=//select[@name='activity']", "xpath:attributes"],
+        ["xpath=//tr[5]/td[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1193b487-13d9-4e4c-adce-88c93407e844",
+      "comment": "",
+      "command": "select",
+      "target": "name=activity",
+      "targets": [],
+      "value": "label=Moderate Exercise (6-7 days/week)"
+    }, {
+      "id": "e8538058-4389-4725-80de-e2eae2f4b2b4",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit-vals",
+      "targets": [
+        ["id=submit-vals", "id"],
+        ["name=submit", "name"],
+        ["css=#submit-vals", "css:finder"],
+        ["xpath=//input[@id='submit-vals']", "xpath:attributes"],
+        ["xpath=//tr[6]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c72580e3-6a7c-4d61-b67c-ca848378c8b6",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.notification",
+      "targets": [
+        ["css=.notification", "css:finder"],
+        ["xpath=//form/div", "xpath:position"]
+      ],
+      "value": "Your TDEE is 2076 calories a day"
+    }, {
+      "id": "96ee36c7-2908-4331-b899-184990dd217b",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "03d55ee1-df1f-4e40-adb3-f01c5cbbe365",
+    "name": "TDEE Incorrect Input",
+    "commands": [{
+      "id": "e1422c66-b9bd-455a-afd0-ceb9ff5f4a4e",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d10e3a00-7714-4ba5-82e6-db61cd804122",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a24e7e5-6a25-43c4-a627-567313879f95",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=TDEE Calculator",
+      "targets": [
+        ["linkText=TDEE Calculator", "linkText"],
+        ["css=.navbar-item:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'TDEE Calculator')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/calc_page')]", "xpath:href"],
+        ["xpath=//a[4]", "xpath:position"],
+        ["xpath=//a[contains(.,'TDEE Calculator')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "abeb0255-8043-4ce4-93eb-55f72fa5e8e2",
+      "comment": "",
+      "command": "click",
+      "target": "id=age",
+      "targets": [
+        ["id=age", "id"],
+        ["name=age", "name"],
+        ["css=#age", "css:finder"],
+        ["xpath=//input[@id='age']", "xpath:attributes"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4e08a51e-5ba1-47d5-9e19-752a907a7e89",
+      "comment": "",
+      "command": "type",
+      "target": "id=age",
+      "targets": [
+        ["id=age", "id"],
+        ["name=age", "name"],
+        ["css=#age", "css:finder"],
+        ["xpath=//input[@id='age']", "xpath:attributes"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": "30"
+    }, {
+      "id": "38ffa4e2-fe28-460c-9c98-01041f1c5a82",
+      "comment": "",
+      "command": "click",
+      "target": "id=weight",
+      "targets": [
+        ["id=weight", "id"],
+        ["name=weight", "name"],
+        ["css=#weight", "css:finder"],
+        ["xpath=//input[@id='weight']", "xpath:attributes"],
+        ["xpath=//tr[3]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4df53f41-1787-4f0d-8ca4-9cbfaae8f35e",
+      "comment": "",
+      "command": "type",
+      "target": "id=weight",
+      "targets": [
+        ["id=weight", "id"],
+        ["name=weight", "name"],
+        ["css=#weight", "css:finder"],
+        ["xpath=//input[@id='weight']", "xpath:attributes"],
+        ["xpath=//tr[3]/td[2]/input", "xpath:position"]
+      ],
+      "value": "gww"
+    }, {
+      "id": "45dc40bb-b2b4-40ab-b9c0-702fd189b1aa",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit-vals",
+      "targets": [
+        ["id=submit-vals", "id"],
+        ["name=submit", "name"],
+        ["css=#submit-vals", "css:finder"],
+        ["xpath=//input[@id='submit-vals']", "xpath:attributes"],
+        ["xpath=//tr[6]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b05cabe2-383e-4a2d-8201-0efb79512a86",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.notification",
+      "targets": [
+        ["css=.notification", "css:finder"],
+        ["xpath=//form/div", "xpath:position"]
+      ],
+      "value": "Make sure age and weight are integer values"
+    }, {
+      "id": "86814383-b51f-4b46-9142-73d5e578af84",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "8541af9f-c246-4635-8471-04e8b0964ee5",
+    "name": "TDEE Empty Input",
+    "commands": [{
+      "id": "5c7fcfd4-c890-48a8-b76c-f8af74dee6ad",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "37f0b531-8798-4cda-9112-28a4615fb56f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6871a1c6-41d3-40e9-b860-5d7ca9536b98",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=TDEE Calculator",
+      "targets": [
+        ["linkText=TDEE Calculator", "linkText"],
+        ["css=.navbar-item:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'TDEE Calculator')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/calc_page')]", "xpath:href"],
+        ["xpath=//a[4]", "xpath:position"],
+        ["xpath=//a[contains(.,'TDEE Calculator')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e6de88e8-215f-42be-a917-f1d5cdcf027f",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit-vals",
+      "targets": [
+        ["id=submit-vals", "id"],
+        ["name=submit", "name"],
+        ["css=#submit-vals", "css:finder"],
+        ["xpath=//input[@id='submit-vals']", "xpath:attributes"],
+        ["xpath=//tr[6]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8d1cf01-3302-4611-b030-95dd82658edf",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.notification",
+      "targets": [
+        ["css=.notification", "css:finder"],
+        ["xpath=//form/div", "xpath:position"]
+      ],
+      "value": "Make sure age and weight are integer values"
+    }, {
+      "id": "48dba83a-0dff-4643-bb90-3d7096255505",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "7d78782f-9548-4f4b-9008-211e1870613a",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["0f5c5932-793b-43dc-b37c-50ad4babcc0a"]
+  }],
+  "urls": ["http://127.0.0.1:5000/"],
+  "plugins": []
+}

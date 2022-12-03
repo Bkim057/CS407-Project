@@ -1,5 +1,6 @@
 from flask import Blueprint, redirect, render_template, request, url_for, flash
 from flask_login import login_required, current_user
+from flask import session as cur_session
 from . import db
 
 calc = Blueprint('calc', __name__)
@@ -8,6 +9,7 @@ calc = Blueprint('calc', __name__)
 # Display all currently available topics
 @calc.route('/calc_page')
 def calc_page():
+    cur_session.pop('_flashes', None)
     return render_template('calc.html')
 
 @calc.route('/calc_page', methods=['POST'])
@@ -24,7 +26,7 @@ def calc_post():
         age_num = int(age)
         weight_num = int(weight)
     except:
-        flash('Make sure age, weight, and bodyfat are integer values')
+        flash('Make sure age and weight are integer values')
         return render_template('calc.html')
     
     height_num = int(height)

@@ -190,6 +190,133 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "2c70ff93-0a43-4449-a54d-72dfca0e4179",
+    "name": "Check for Video Embed",
+    "commands": [{
+      "id": "4af6be31-3f77-4b6a-a900-54a646529db8",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c3feb0b5-83d8-48fd-8416-2c8fbd2c48ef",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1d8dc7ae-775d-4e54-83e9-94f3c6a5806f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.navbar-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9aab59c5-842a-4cb1-b922-50742fd8d37d",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.field:nth-child(1) .input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "bryan@gmail.com"
+    }, {
+      "id": "83e97b25-1a31-410e-b360-f99218d9efb0",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.field:nth-child(2) .input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "123"
+    }, {
+      "id": "100113b2-1e7e-47de-a8e3-2112742a40b4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.button:nth-child(4)",
+      "targets": [
+        ["css=.button:nth-child(4)", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "00a6f6e3-dc1c-4405-aabe-2388b884c94f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Explore Workouts",
+      "targets": [
+        ["linkText=Explore Workouts", "linkText"],
+        ["css=.navbar-item:nth-child(5)", "css:finder"],
+        ["xpath=//a[contains(text(),'Explore Workouts')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/muscles_page')]", "xpath:href"],
+        ["xpath=//a[5]", "xpath:position"],
+        ["xpath=//a[contains(.,'Explore Workouts')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "75b2154e-9185-4612-bd0a-1a1efbd576cb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.column:nth-child(1) button",
+      "targets": [
+        ["css=.column:nth-child(1) button", "css:finder"],
+        ["xpath=//div[2]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'View Muscles')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "13dd7ce8-0f16-4cab-845d-20faeb2137e4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.box:nth-child(1) .button",
+      "targets": [
+        ["css=.box:nth-child(1) .button", "css:finder"],
+        ["xpath=//section/div[2]/div/div/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'View Exercises')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4940dd29-744b-46f6-a5ab-fc28ab86bb52",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.Box-body",
+      "targets": [
+        ["css=.Box-body", "css:finder"],
+        ["xpath=//div[2]/div/div/div/div/div", "xpath:position"]
+      ],
+      "value": "3000"
+    }, {
+      "id": "74788011-ab8e-4751-bf72-95408eb6b664",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.navbar-item:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "72eaba82-7123-47d6-9458-5561f5aa97c1",
