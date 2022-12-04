@@ -49,6 +49,16 @@ disliked_exercise = db.Table('disliked_exercise',
     db.Column('exercise_disliked', db.Integer, db.ForeignKey('workout.id'))
 )
 
+upvoted_exercise = db.Table('upvoted_exercise',
+    db.Column('user_upvoted', db.Integer, db.ForeignKey('user.id')),
+    db.Column('exercise_upvoted', db.Integer, db.ForeignKey('workout.id'))
+)
+
+downvoted_exercise = db.Table('downvoted_exercise',
+    db.Column('user_downvoted', db.Integer, db.ForeignKey('user.id')),
+    db.Column('exercise_downvoted', db.Integer, db.ForeignKey('workout.id'))
+)
+
 # User to post relational db to store saved_posts
 saved_post = db.Table('saved_post',
     db.Column('saving_id', db.Integer, db.ForeignKey('user.id')),
@@ -155,11 +165,17 @@ class User(UserMixin, db.Model):
 
     liked = db.relationship('Post', secondary=liked_post,backref=db.backref('liked_post', lazy='dynamic'), lazy='dynamic'
     )
-    # Relationship for liked exercise
+    # Relationship for liked exercises
     liked_workout_relationship = db.relationship('Workout', secondary=liked_exercise,backref=db.backref('liked_exercise', lazy='dynamic'), lazy='dynamic')
     
     # Relationship for disliked exercises
     disliked_workout_relationship = db.relationship('Workout', secondary=disliked_exercise,backref=db.backref('disliked_exercise', lazy='dynamic'), lazy='dynamic')
+
+    # Relationship for upvoted exercises
+    upvoted_workout_relationship = db.relationship('Workout', secondary=upvoted_exercise,backref=db.backref('upvoted_exercise', lazy='dynamic'), lazy='dynamic')
+    
+    # Relationship for downvoted exercises
+    downvoted_workout_relationship = db.relationship('Workout', secondary=downvoted_exercise,backref=db.backref('downvoted_exercise', lazy='dynamic'), lazy='dynamic')
 
     # Liking a post
     def like(self, post):
@@ -169,6 +185,7 @@ class User(UserMixin, db.Model):
     def unlike(self, post):
         if self.is_liking(post):
             self.liked.remove(post)
+
     # Function that checks if the user has already liked the post
     def is_liking(self, post):
         return self.liked.filter(
@@ -202,6 +219,31 @@ class User(UserMixin, db.Model):
     def is_disliking_exercise(self, workout):
         return self.disliked_workout_relationship.filter(
         disliked_exercise.c.exercise_disliked == workout.id).count() > 0
+
+    def upvote_exercise(self, workout):
+        if not self.upvoted_exercise(workout):
+            self.upvoted_workout_relationship.append(workout)
+    
+    def downvote_exercise(self, workout):
+        if not self.downvoted_exercise(workout):
+            self.downvoted_workout_relationship.append(workout)
+    
+    def remove_upvote(self, workout):
+        if self.upvoted_exercise(workout):
+            self.upvoted_workout_relationship.remove(workout)
+
+    def remove_downvote(self, workout):
+        if self.downvoted_exercise(workout):
+            self.downvoted_workout_relationship.remove(workout)
+
+    def upvoted_exercise(self, workout):
+        return self.upvoted_workout_relationship.filter(
+        upvoted_exercise.c.exercise_upvoted == workout.id).count() > 0
+
+    # Function that checks if workout was already been disliked
+    def downvoted_exercise(self, workout):
+        return self.downvoted_workout_relationship.filter(
+        downvoted_exercise.c.exercise_downvoted == workout.id).count() > 0 
 
     saved = db.relationship('Post', secondary=saved_post,backref=db.backref('saved_post', lazy='dynamic'), lazy='dynamic', overlaps="saved_by,saved_posts")
 
@@ -283,3 +325,5 @@ class Workout(UserMixin, db.Model):
     muscle_groups = db.relationship('Muscle', secondary=workout_muscle_groups)
     likes = db.Column(db.Integer)
     dislikes = db.Column(db.Integer)
+    upvotes = db.Column(db.Integer)
+    downvotes = db.Column(db.Integer)

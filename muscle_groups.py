@@ -114,6 +114,64 @@ def unsave_workout(id):
     else:
       return redirect(url_for('muscle_groups.muscles_page'))
 
+@muscle_groups.route('/upvote_workout/<id>')
+def upvoted_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if current_user.downvoted_exercise(workout): 
+        undownvote_workout(id) 
+    if current_user.upvoted_exercise(workout):
+        return redirect(url_for('muscle_groups.muscles_page'))
+    workout.upvotes += 1
+    current_user.upvote_exercise(workout)
+    db.session.commit()
+    print(cur_session)
+    if 'url' in cur_session:
+        return redirect(cur_session['url'])
+    else:
+        return redirect(url_for('muscle_groups.muscles_page'))
+    
+
+@muscle_groups.route('/unupvote_workout/<id>')
+def unupvote_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if workout is None:
+        return redirect(url_for('index', id=id))
+    workout.upvotes -= 1
+    current_user.remove_upvote(workout)
+    db.session.commit()
+    if 'url' in cur_session:
+        return redirect(cur_session['url'])
+    else:
+        return redirect(url_for('muscle_groups.muscles_page'))
+
+@muscle_groups.route('/downvote_workout/<id>')
+def downvote_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if current_user.upvoted_exercise(workout): 
+        unupvote_workout(id) 
+    if current_user.downvoted_exercise(workout):
+        return redirect(url_for('muscle_groups.muscles_page'))
+    workout.downvotes += 1
+    current_user.downvote_exercise(workout)
+    db.session.commit()
+    if 'url' in cur_session:
+        return redirect(cur_session['url'])
+    else:
+        return redirect(url_for('muscle_groups.muscles_page'))
+
+@muscle_groups.route('/undownvote_workout/<id>')
+def undownvote_workout(id):
+    workout = Workout.query.filter_by(id=id).first()
+    if workout is None:
+        return redirect(url_for('index', id=id))
+    workout.downvotes -= 1
+    current_user.remove_downvote(workout)
+    db.session.commit()
+    if 'url' in cur_session:
+        return redirect(cur_session['url'])
+    else:
+        return redirect(url_for('muscle_groups.muscles_page'))
+
 @muscle_groups.route('/view_workout/<id>')
 def view_workout(id):
     cur_session['url'] = request.url
@@ -126,7 +184,7 @@ def view_workout(id):
     for workout in workout_objs:
         muscles_worked = [muscle_group.name for muscle_group in workout.muscle_groups]
         if (muscles_worked):
-            muscles_worked.sort()
+            muscles_worked.sort() # TODO: Sort by upvote/downvote count
         if (target_muscle.name in muscles_worked):
             muscles_worked_list = ""
             for mn in muscles_worked:
@@ -178,7 +236,29 @@ def view_workout(id):
                 workout_html  += f"<form action=\"/dislike_workout/"+str(workout.id)+"\">\
                     <button class=\"button is-danger is-outlined is-small\">Dislike</button>\
                         </form>"
+             # TODO: add upvote/downvote functionality!
             workout_html += "</p>"
+            workout_html += "<p class=\"control\">"
+            if (current_user.upvoted_exercise(workout)):
+                workout_html  += f"<form action=\"/unupvote_workout/"+str(workout.id)+"\">\
+                    <button class=\"button is-info is-light is-small\">Remove Upvote</button>\
+                        </form>"
+            else:
+                workout_html  += f"<form action=\"/upvote_workout/"+str(workout.id)+"\">\
+                    <button class=\"button is-info is-light is-small is-outlined\">Upvote</button>\
+                        </form>"
+            workout_html += "</p>"
+            workout_html += "<p class=\"control\">"
+            if (current_user.downvoted_exercise(workout)):
+                workout_html  += f"<form action=\"/undownvote_workout/"+str(workout.id)+"\">\
+                    <button class=\"button is-warning is-light is-small\">Remove Downvote</button>\
+                        </form>"
+            else:
+                workout_html  += f"<form action=\"/downvote_workout/"+str(workout.id)+"\">\
+                    <button class=\"button is-warning is-light is-outlined is-small\">Downvote</button>\
+                        </form>"
+            workout_html += "</p>"
+            vote_count = workout.upvotes - workout.downvotes;
             workout_html += f"</div></div>\
                 <div class=\"level-left\">\
               <p>\
@@ -188,10 +268,12 @@ def view_workout(id):
               <p>\
                 Dislikes: " + str(workout.dislikes) + "</p>\
               </div>\
+                <div class=\"level-left\">\
+              <p>\
+                Vote Count: " + str(vote_count) + "</p>\
+              </div>\
                 </div>\
             </div>"
-
-
 
     return render_template('view_exercise.html', workout_html=workout_html)
 
