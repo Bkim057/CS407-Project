@@ -172,6 +172,11 @@ def undownvote_workout(id):
     else:
         return redirect(url_for('muscle_groups.muscles_page'))
 
+# Function to sort workouts
+def myFunc(workout):
+    vote_count = workout.downvotes - workout.upvotes; 
+    return vote_count;
+
 @muscle_groups.route('/view_workout/<id>')
 def view_workout(id):
     cur_session['url'] = request.url
@@ -179,12 +184,14 @@ def view_workout(id):
     print(id)
     target_muscle = Muscle.query.filter_by(name=id).first()
     workout_objs = Workout.query.all()
+    workout_objs.sort(key=myFunc)
 
     workout_html = ""
     for workout in workout_objs:
+        print("Processing..." + workout.exercise_name)
         muscles_worked = [muscle_group.name for muscle_group in workout.muscle_groups]
         if (muscles_worked):
-            muscles_worked.sort() # TODO: Sort by upvote/downvote count
+            muscles_worked.sort()
         if (target_muscle.name in muscles_worked):
             muscles_worked_list = ""
             for mn in muscles_worked:
@@ -236,7 +243,6 @@ def view_workout(id):
                 workout_html  += f"<form action=\"/dislike_workout/"+str(workout.id)+"\">\
                     <button class=\"button is-danger is-outlined is-small\">Dislike</button>\
                         </form>"
-             # TODO: add upvote/downvote functionality!
             workout_html += "</p>"
             workout_html += "<p class=\"control\">"
             if (current_user.upvoted_exercise(workout)):
