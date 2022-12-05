@@ -3,7 +3,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, flash
 from flask import session as cur_session
 from flask_login import login_required, current_user
 from numpy import delete
-from .models import User, Post, Workout, Muscle, saved_workout, workout_muscle_groups
+from .models import User, Post, Workout, Muscle, Workout_Comment, saved_workout, workout_muscle_groups
 from . import db, share
 from werkzeug.security import generate_password_hash
 
@@ -114,6 +114,35 @@ def unsave_workout(id):
     else:
       return redirect(url_for('muscle_groups.muscles_page'))
 
+@muscle_groups.route("/create-workout-comment/<workout_id>", methods=['POST'])
+@login_required
+def create_workout_comment(workout_id):
+  contents = request.form.get('text')
+
+  if not contents:
+    flash('Comment cannot be empty!', category='error')
+  else:
+    workout = Workout.query.filter_by(id=workout_id)
+    if workout:
+      comment = Workout_Comment(contents=contents, author=current_user.id, author_name=current_user.name,workout_id=workout_id)
+      db.session.add(comment)
+      db.session.commit()
+    
+  return redirect(cur_session['url'])
+
+@muscle_groups.route("/delete-workout-comment/<comment_id>")
+@login_required
+def delete_workout_comment(comment_id):
+  comment = Workout_Comment.query.filter_by(id=comment_id).first()
+
+  if not comment:
+    flash('Comment does not exist')
+  else:
+    db.session.delete(comment)
+    db.session.commit()
+
+  return redirect(cur_session['url'])
+
 @muscle_groups.route('/view_workout/<id>')
 def view_workout(id):
     cur_session['url'] = request.url
@@ -186,10 +215,31 @@ def view_workout(id):
               </div>\
                 <div class=\"level-left\">\
               <p>\
-                Dislikes: " + str(workout.dislikes) + "</p>\
-              </div>\
-                </div>\
-            </div>"
+                Dislikes: " + str(workout.dislikes) + "</p></div>"
+            comment_bar = "<form class=\"input-group\" method='POST' action=\"/create-workout-comment/"+str(workout.id)+"\" >\
+          <input type=\"text\" id=\"text\" name=\"text\" class =\"form-control\ placeholder=\"Comment something\" />\
+          <button type=\"submit\" class=\"btn btn-primary\">Comment</button> </form> \
+            <br>"
+            if current_user.id != -1:
+                workout_html += comment_bar
+        for comment in workout.comments:
+            comments = comment.contents
+            if current_user.id == comment.author:
+                poster = current_user.name
+            else:
+                author = User.query.filter_by(id=comment.author).first()
+                poster = author.name
+            third_section = "<p><strong>" + str(poster) + ": </strong>" + str(comments) + ""
+            if current_user.id == comment.author or current_user.admin:
+                fourth_section = "&nbsp; &nbsp; <a href=\"/delete-workout-comment/"+str(comment.id)+"\" style=\"color:red\">Delete</a></p>"
+            else:
+                fourth_section = ''
+            workout_html += third_section
+            workout_html += fourth_section
+    
+    workout_html += "</div>"
+    workout_html += "</article>\
+        </div>"
 
 
 

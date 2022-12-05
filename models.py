@@ -80,6 +80,7 @@ class User(UserMixin, db.Model):
     # End of warning
     followed_topics = db.relationship('Topic', secondary=user_topic, backref='followed_by', lazy='dynamic')
     comments = db.relationship('Commented',  backref='user', passive_deletes=True)
+    workout_comments = db.relationship('Workout_Comment', backref='user', passive_deletes=True)
     saved_posts = db.relationship('Post', secondary=saved_post, backref='saved_by', lazy='dynamic', overlaps="saved_by,saved_posts")
     
 
@@ -271,6 +272,13 @@ class Commented(UserMixin, db.Model):
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id', ondelete="CASCADE"), nullable=False)
 
+class Workout_Comment(UserMixin,db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    contents = db.Column(db.String(200))
+    author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
+    author_name = db.Column(db.String(50))
+    workout_id = db.Column(db.Integer, db.ForeignKey('workout.id', ondelete="CASCADE"), nullable=False)
+
 class Muscle(UserMixin, db.Model):
     name = db.Column(db.String(15), primary_key=True)
 
@@ -281,5 +289,6 @@ class Workout(UserMixin, db.Model):
     URL = db.Column(db.String(2048))
     video_link = db.Column(db.String(2048))
     muscle_groups = db.relationship('Muscle', secondary=workout_muscle_groups)
+    comments = db.relationship('Workout_Comment', backref='post', passive_deletes=True)
     likes = db.Column(db.Integer)
     dislikes = db.Column(db.Integer)
