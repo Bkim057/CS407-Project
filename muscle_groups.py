@@ -305,8 +305,6 @@ def view_workout(id):
                 <div class=\"level-left\">\
                 <p>\
                 Vote Count: " + str(vote_count) + "</p>\
-                </div>\
-                </div>\
                 </div>"
             comment_bar = "<form class=\"input-group\" method='POST' action=\"/create-workout-comment/"+str(workout.id)+"\" >\
           <input type=\"text\" id=\"text\" name=\"text\" class =\"form-control\ placeholder=\"Comment something\" />\
