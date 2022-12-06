@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="/clear_goals">
+        <button class="button is-block is-black is-medium is-fullwidth">Clear Goals</button>
+    </form>
+{{ nutrition_goals_html | safe }}
+
+{% endblock %}

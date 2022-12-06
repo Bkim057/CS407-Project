@@ -92,4 +92,7 @@ def create_app():
     from .calc import calc as calc_blueprint
     app.register_blueprint(calc_blueprint)
 
+    from .nutrition_goals import nutrition_goals as nutrition_goals_blueprint
+    app.register_blueprint(nutrition_goals_blueprint)
+
     return app

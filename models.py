@@ -74,6 +74,11 @@ workout_muscle_groups = db.Table('workout_muscle_groups',
     db.Column('workout_id', db.Integer, db.ForeignKey('workout.id')),
     db.Column('muscle', db.String, db.ForeignKey('muscle.name')))
 
+added_nutrition_goals = db.Table('nutrition_goals_relationship',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('nutr_id', db.Integer, db.ForeignKey('nutrition.id'))
+)
+
 class User(UserMixin, db.Model):
 
     # Some of these fields are required
@@ -177,6 +182,23 @@ class User(UserMixin, db.Model):
     
     # Relationship for downvoted exercises
     downvoted_workout_relationship = db.relationship('Workout', secondary=downvoted_exercise,backref=db.backref('downvoted_exercise', lazy='dynamic'), lazy='dynamic')
+
+    # Relationship for adding nutritional goal
+    nutritional_goal_relationship = db.relationship('Nutrition', secondary=added_nutrition_goals,backref=db.backref('add_nutr_goal', lazy='dynamic'), lazy='dynamic')
+
+    # Adding goal
+    def add_nutr_goal(self, nutrition):
+        if not self.has_added_nutr_goal(nutrition):
+            self.nutritional_goal_relationship.append(nutrition)
+
+    # Removing goal
+    def remove_nutr_goal(self, nutrition):
+        if not self.has_added_nutr_goal(nutrition):
+            self.nutritional_goal_relationship.remove(nutrition)
+    
+    def has_added_nutr_goal(self, nutrition):
+            return self.nutritional_goal_relationship.filter(
+            added_nutrition_goals.c.nutr_id == nutrition.id).count() > 0
 
     # Liking a post
     def like(self, post):
@@ -336,3 +358,8 @@ class Workout(UserMixin, db.Model):
     dislikes = db.Column(db.Integer)
     upvotes = db.Column(db.Integer)
     downvotes = db.Column(db.Integer)
+
+class Nutrition(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.Integer)
+    goal = db.Column(db.String(500))

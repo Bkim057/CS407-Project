@@ -203,7 +203,7 @@ def undownvote_workout(id):
 # Function to sort workouts
 def myFunc(workout):
     vote_count = workout.downvotes - workout.upvotes; 
-    return vote_count;
+    return vote_count
 
 @muscle_groups.route('/view_workout/<id>')
 def view_workout(id):

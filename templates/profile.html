@@ -103,10 +103,34 @@
         style="margin:5px;">View Saved Exercises</button>
     </form>
   </div>
+  <h1 class="title">Nutritional Goals</h1>
+  <div class="box">
+    <form action="/add_goal/1">
+      <button>Fruits and Vegetables Goals</button>
+    </form>
+    <form action="/add_goal/2">
+      <button>Protein Goals</button>
+    </form>
+    <form action="/add_goal/3">
+      <button>Beverage Goals</button>
+    </form>
+    <form action="/add_goal/4">
+      <button>Meal Planning Goals</button>
+    </form>
+    <form action="/add_goal/5">
+      <button>Mindful Eating Goals</button>
+    </form>
+    <!-- <input type="checkbox" id="goals1" name="goals1" value="fruits_vegetables"> -->
+    <!-- <input type="checkbox" id="goals2" name="goals2" value="protein"> -->
+    <!-- <input type="checkbox" id="goals3" name="goals3" value="beverage"> -->
+    <!-- <input type="checkbox" id="goals4" name="goals4" value="meal_planning"> -->
+    <!-- <input type="checkbox" id="goals5" name="goals5" value="mindful_eating"> -->
+  </div>
 </div>
+
 {% with messages = get_flashed_messages() %}
 {% if messages %}
-    <div class="notification is-danger">
+    <div class="notification is-danger" style="height: 100px;">
         {{ messages[0] }}
     </div>
 {% endif %}

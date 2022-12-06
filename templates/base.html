@@ -80,6 +80,11 @@
                                 </a>
                                 {% endif %}
                             {% endif %}
+                            {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('nutrition_goals.nutrition_goals_page') }}" class="navbar-item">
+                                    Nutritional Goals
+                                </a>
+                            {% endif %}
                             <a href="{{ url_for('calc.calc_page') }}" class="navbar-item">
                                 TDEE Calculator
                             </a>
