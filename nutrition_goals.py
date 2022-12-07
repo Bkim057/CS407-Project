@@ -63,13 +63,4 @@ def clear_goals():
         q1 = added_nutrition_goals.delete().where(added_nutrition_goals.c.nutr_id == tip.nutr_id)
         db.session.execute(q1)
         db.session.commit()
-    return redirect(url_for('prof.profile'))
-
-
-# @nutrition_goals.route('/nutrition_goals/<id>')
-# def nutrition_goals_list(id):
-#     cur_session['url'] = request.url
-#     # Query the nutritional goal array of the user, which will be determined by the checkboxes
-#     nutrition_goals = db.session.query(current_user.nutritional_goal)
-
-#     # Will have different sections for each of the 5 nutritional goals
+    return redirect(url_for('nutrition_goals.nutrition_goals_page'))

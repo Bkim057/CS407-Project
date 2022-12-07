@@ -11,7 +11,7 @@
         {% if post_num != NULL %}
         <div class="column">
             <h1 class="title">Posts You Created</h1>
-
+            {{ sorting_options|safe }}
             <h1 class="title">Post #{{ post_num }}</h1>
             <div class="box">
                 {{ post_html|safe }}

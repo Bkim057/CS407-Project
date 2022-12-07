@@ -3,12 +3,28 @@
 {% block content %}
 
 <div class="columns is-4 is-offset-4">
+  <div>
+    <h1 style="font-size:larger;">Sort By:</h1>
+    <form action="/view_topic/{{ id }}/0">
+      <button style="margin-bottom: 5%; width: 9.5em;" class="button is-block is-black is-medium is-fullwidth">Oldest to Newest</button>
+    </form>
+    <form action="/view_topic_newest/{{ id }}/0">
+      <button style="margin-bottom: 5%; width: 9.5em;" class="button is-block is-black is-medium is-fullwidth">Newest to Oldest</button>
+    </form>
+    <form action="/view_topic_by_likes/{{ id }}/0">
+      <button style="margin-bottom: 5%; width: 9.5em;" class="button is-block is-black is-medium is-fullwidth">By Likes</button>
+    </form>
+    <form action="/view_topic_by_comments/{{ id }}/0">
+      <button style="width: 9.5em;" class="button is-block is-black is-medium is-fullwidth\">By Comments</button>
+    </form>
+  </div>
 
   <!--Added below-->
   {% if post_num != NULL %}
   <div class="column">
     <h1 class="title">This Page is About {{ name }}!</h1>
     <h1 class="title">Tagged Post #{{ post_num }}</h1>
+
     <div class="box">
           {{ post_html|safe }}
     </div>
@@ -18,13 +34,41 @@
     <div class="box">
   
       {% if post_num < list_len - 1 %}
-        <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/view_topic/{{ id }}/{{ post_num + 1 }}';" type="button"value="Next Post" name="action" button
+        {% if sort_num == 1 %}
+          <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/view_topic/{{ id }}/{{ post_num + 1 }}';" type="button"value="Next Post" name="action" button
+            style="margin:5px;">Next Post</button>
+        {% endif %}
+        {% if sort_num == 2 %}
+          <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/view_topic_newest/{{ id }}/{{ post_num + 1 }}';" type="button"value="Next Post" name="action" button
           style="margin:5px;">Next Post</button>
+        {% endif %}
+        {% if sort_num == 3 %}
+          <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/view_topic_by_likes/{{ id }}/{{ post_num + 1 }}';" type="button"value="Next Post" name="action" button
+          style="margin:5px;">Next Post</button>
+        {% endif %}
+        {% if sort_num == 4 %}
+          <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/view_topic_by_comments/{{ id }}/{{ post_num + 1 }}';" type="button"value="Next Post" name="action" button
+          style="margin:5px;">Next Post</button>
+        {% endif %}
       {% endif %}
   
       {% if post_num > 0 %}
-        <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/view_topic/{{ id }}/{{ post_num - 1 }}';" type="button" value="Previous Post" name="action" button
+        {% if sort_num == 1 %}
+          <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/view_topic/{{ id }}/{{ post_num - 1 }}';" type="button" value="Previous Post" name="action" button
+            style="margin:5px;">Previous Post</button>
+        {% endif %}
+        {% if sort_num == 2 %}
+          <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/view_topic_newest/{{ id }}/{{ post_num - 1 }}';" type="button"value="Previous Post" name="action" button
           style="margin:5px;">Previous Post</button>
+        {% endif %}
+        {% if sort_num == 3 %}
+          <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/view_topic_by_likes/{{ id }}/{{ post_num - 1 }}';" type="button"value="Previous Post" name="action" button
+          style="margin:5px;">Previous Post</button>
+        {% endif %}
+        {% if sort_num == 4 %}
+          <button class="button is-block is-black is-large is-fullwidth" onclick="location.href='/view_topic_by_comments/{{ id }}/{{ post_num - 1 }}';" type="button"value="Previous Post" name="action" button
+          style="margin:5px;">Previous Post</button>
+        {% endif %}
       {% endif %}
     </div>
     {% endif %}
