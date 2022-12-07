@@ -315,7 +315,7 @@ class Post(UserMixin, db.Model):
     moderated = db.Column(db.Boolean)
     high_risk = db.Column(db.Boolean)
     precautions = db.Column(db.String(300))
-
+    video_link = db.Column(db.String(2048))
 
 class Topic(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
