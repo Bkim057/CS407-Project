@@ -40,6 +40,7 @@ def post_creation_handler():
         contents = request.form.get('contents')
         file = request.files['attachment']
         precautions = request.form.get('safety_precaution')
+        video_link = request.form.get('video_link') # video_link data is validated before rendering as HTML
         
         isValidFile = False if not file else file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'))
         anonymous = True if request.form.get('anonymous') == 'on' else False 
@@ -51,13 +52,13 @@ def post_creation_handler():
           moderated_status = True
 
         if (anonymous):
-          new_post = Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk, precautions=precautions) \
+          new_post = Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk, precautions=precautions, video_link=video_link) \
             if not isValidFile else Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), modertated=moderated_status, high_risk=high_risk,
-            precautions=precautions)
+            precautions=precautions, video_link=video_link)
         else:
-          new_post = Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk, precautions=precautions) \
+          new_post = Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk, precautions=precautions, video_link=video_link) \
             if not isValidFile else Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), moderated=moderated_status, high_risk=high_risk,
-            precautions=precautions)
+            precautions=precautions, video_link=video_link)
         
         if (topic):
           topic_obj = Topic.query.filter_by(name=topic).first()
@@ -157,6 +158,15 @@ def post_to_approve_to_html(post_id, post_num):
       image_string = "<div class=\"Box-body\">\
                         <img src=" + image_location[1:] + ">\
                       </div>"
+    
+    video_string = ""
+    if (obj.video_link != None) and (obj.video_link != "") and ("https://www.youtube.com/embed/" in obj.video_link):
+      video_string += "<div class=\"Box-body\">\
+          <iframe width=\"360\" height=\"315\"\
+            src=\"" + obj.video_link + "\">\
+          </iframe>\
+        </div>"
+
     pfp_string = "https://bulma.io/images/placeholders/128x128.png"
     if (user_for_post.pfp):
       img_src = Image.open(BytesIO(user_for_post.pfp))
@@ -182,6 +192,7 @@ def post_to_approve_to_html(post_id, post_num):
                 <br>" + moderated_status + "</p>\
             </div>\
             " + image_string + "\
+            " + video_string + "\
             <nav class=\"level is-mobile\">\
               <div class=\"level-right\">\
                 <form method=\"POST\" action=\"/approve_post/"+str(post_id)+"/" + str(post_num) +"\">\
@@ -254,6 +265,15 @@ def post_del_to_html(post_id):
       image_string = "<div class=\"Box-body\">\
                         <img src=" + image_location[1:] + ">\
                       </div>"
+    
+    video_string = ""
+    if (obj.video_link != None) and (obj.video_link != "") and ("https://www.youtube.com/embed/" in obj.video_link):
+      video_string += "<div class=\"Box-body\">\
+          <iframe width=\"360\" height=\"315\"\
+            src=\"" + obj.video_link + "\">\
+          </iframe>\
+        </div>"
+    
     pfp_string = "https://bulma.io/images/placeholders/128x128.png"
     if (user_for_post.pfp):
       img_src = Image.open(BytesIO(user_for_post.pfp))
@@ -278,6 +298,7 @@ def post_del_to_html(post_id):
                 <br>" + str(contents) + "</p>\
             </div>\
             " + image_string + "\
+            " + video_string + "\
             <nav class=\"level is-mobile\">\
               <div class=\"level-right\">\
                 <form method=\"POST\" action=\"/delete_post/"+str(post_id)+"\">\
@@ -392,6 +413,17 @@ def post_to_html(post_id):
     except:
       print("file not found")
     
+    video_string = ""
+    try:
+      if (obj.video_link != None) and (obj.video_link != "") and ("https://www.youtube.com/embed/" in obj.video_link):
+        video_string += "<div class=\"Box-body\">\
+            <iframe width=\"360\" height=\"315\"\
+              src=\"" + obj.video_link + "\">\
+            </iframe>\
+          </div>"
+    except:
+      print("could not render video")
+    
     pfp_string = "https://bulma.io/images/placeholders/128x128.png"
     if (user_for_post.pfp):
       img_src = Image.open(BytesIO(user_for_post.pfp))
@@ -425,6 +457,7 @@ def post_to_html(post_id):
                 <br>" + moderated_status + "</p>\
             </div>\
             " + image_string + "\
+            " + video_string + "\
         </article>\
         </div>"
 
@@ -446,6 +479,7 @@ def post_to_html(post_id):
                 <br>" + moderated_status + "</p>\
             </div>\
             " + image_string + "\
+            " + video_string + "\
             <nav class=\"level is-mobile\">"
 
     # Setup strings for post_html for guest users (no save button)
