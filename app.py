@@ -33,3 +33,5 @@ def create_app(test_config=None):
     app.register_blueprint(main_blueprint)
 
     return app
+
+my_app = create_app()
