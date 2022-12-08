@@ -25,7 +25,10 @@ def create_app(test_config=None):
         pass
 
     # Load in portion of app that is in auth.py
-    from .auth import auth as auth_blueprint
+    try:
+        from .auth import auth as auth_blueprint
+    except ImportError:
+        import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
     # Load in portion of app that is in main.py
