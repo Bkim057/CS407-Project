@@ -1,9 +1,11 @@
 from itsdangerous import URLSafeTimedSerializer
 
-if __name__ == "__main__":
-    import app
-else: 
+try:
+    # Assume we're a sub-module in a package.
     from . import app
+except ImportError:
+    # Apparently no higher-level package has been imported, fall back to a local import.
+    import app
 
 def generate_confirmation_token(email):
     serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
