@@ -1,0 +1,15 @@
+{% extends "muscle_groups.html" %}
+
+{% block content %}
+
+
+<div class="columns">
+    <div class="column is-6 is-offset-2">
+        <form method="POST" action="/muscle_page/workout_splits/workout_planned">
+            {{ workout_html|safe }}
+            <input type="submit" class="button btn-submit" id="submit-vals" name="submit" value="Submit & View">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

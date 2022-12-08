@@ -15,14 +15,15 @@
 
         <div class="hero-head">
             <nav class="navbar">
-                <div class="navbar-burger burger" onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');">
+                <div class="navbar-burger burger"
+                    onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
                 <div class="container">
                     <div class="navbar-menu">
-                        <div class="navbar-end">
+                        <div class="navbar-start">
 
                             <a href="{{ url_for('main.index') }}" class="navbar-item">
                                 Home
@@ -61,7 +62,7 @@
                                 Logout
                             </a>
                             {% endif %}
-                            
+
                             {% if current_user.is_authenticated %}
                             <a href="{{ url_for('topics.all_topics_page') }}" class="navbar-item">
                                 Muscle Groups
@@ -74,26 +75,30 @@
                             </a>
                             {% endif %}
                             {% if current_user.is_authenticated %}
-                                {% if current_user.admin %}
-                                <a href="{{ url_for('admin_page.admin_page_options') }}" class="navbar-item">
-                                    Admin Menu
-                                </a>
-                                {% endif %}
+                            {% if current_user.admin %}
+                            <a href="{{ url_for('admin_page.admin_page_options') }}" class="navbar-item">
+                                Admin Menu
+                            </a>
+                            {% endif %}
                             {% endif %}
                             {% if current_user.is_authenticated %}
-                                <a href="{{ url_for('nutrition_goals.nutrition_goals_page') }}" class="navbar-item">
-                                    Nutritional Goals
-                                </a>
+                            <a href="{{ url_for('nutrition_goals.nutrition_goals_page') }}" class="navbar-item">
+                                Nutritional Goals
+                            </a>
                             {% endif %}
                             <a href="{{ url_for('calc.calc_page') }}" class="navbar-item">
                                 TDEE Calculator
                             </a>
 
+
+                        </div>
+                        <div class="navbar-end">
                             {% if current_user.is_authenticated %}
-                            <div class="search-container">
+                            <div class="search-container" style="padding: 12px 24px">
                                 <form action="/search_user">
-                                  <input type="text" placeholder="Search a User.." id="uname"name="search"maxlength="1000">
-                                  <button type="submit">Submit</button>
+                                    <input type="text" placeholder="Search a User.." id="uname" name="search"
+                                        maxlength="1000">
+                                    <button type="submit">Submit</button>
                                 </form>
                             </div>
                             {% endif %}
@@ -105,8 +110,8 @@
 
         <div class="hero-body">
             <div class="container has-text-centered">
-               {% block content %}
-               {% endblock %}
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
     </section>
