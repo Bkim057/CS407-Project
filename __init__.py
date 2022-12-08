@@ -65,7 +65,11 @@ def create_app():
         return User.query.get(int(user_id))
 
     # blueprint for auth routes in our app
-    from .auth import auth as auth_blueprint
+
+    try:
+        from .auth import auth as auth_blueprint
+    except ImportError:
+        import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
     # blueprint for main runner of app
