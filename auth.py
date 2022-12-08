@@ -4,11 +4,23 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # from . import generate_confirmation_token, confirm_token
 from datetime import datetime
-from .models import User
+
+try:
+    from .models import User
+except ImportError:
+    from models import User
+
 from flask_login import login_user, login_required, logout_user, current_user
-from . import db
-from .email_test import send_email
-from .token_test import generate_confirmation_token, confirm_token
+
+try:
+    from .email_test import send_email
+except ImportError:
+    from email_test import send_email
+
+try:
+    from .token_test import generate_confirmation_token, confirm_token
+except ImportError:
+    from token_test import generate_confirmation_token, confirm_token
 
 auth = Blueprint('auth', __name__)
 confirmed = True
