@@ -1,7 +1,11 @@
 from pickle import FALSE
 from flask_login import UserMixin
 from sqlalchemy import LargeBinary
-from . import db
+
+try:
+    from . import db
+except ImportError:
+    import db
 
 # User model that stores information regarding the person logged in atm
 # TODO: Connect to database, Make fields actually what we need, will require
