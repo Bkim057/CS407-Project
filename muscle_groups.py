@@ -213,10 +213,12 @@ def view_workout(id):
     target_muscle = Muscle.query.filter_by(name=id).first()
     workout_objs = Workout.query.all()
     workout_objs.sort(key=myFunc)
+   
 
     workout_html = ""
     for workout in workout_objs:
-        print("Processing..." + workout.exercise_name)
+        workout_comments = ''
+        # print("Processing..." + workout.exercise_name)
         muscles_worked = [muscle_group.name for muscle_group in workout.muscle_groups]
         if (muscles_worked):
             muscles_worked.sort()
@@ -292,8 +294,8 @@ def view_workout(id):
                     <button class=\"button is-warning is-light is-outlined is-small\">Downvote</button>\
                         </form>"
             workout_html += "</p>"
-            vote_count = workout.upvotes - workout.downvotes;
-            workout_html += f"</div></div>\
+            vote_count = workout.upvotes - workout.downvotes
+            workout_html += f"</div>\
                 <div class=\"level-left\">\
               <p>\
                 Likes: " + str(workout.likes) + "</p>\
@@ -312,7 +314,11 @@ def view_workout(id):
             <br>"
             if current_user.id != -1:
                 workout_html += comment_bar
-        for comment in workout.comments:
+            workout_comments = Workout_Comment.query.filter_by(workout_id=workout.id).all()
+            # print(len(workout_comments))
+            # print(workout)
+        for comment in workout_comments:
+            # print(comment)
             comments = comment.contents
             if current_user.id == comment.author:
                 poster = current_user.name
@@ -326,10 +332,8 @@ def view_workout(id):
                 fourth_section = ''
             workout_html += third_section
             workout_html += fourth_section
+        workout_html += "</div></div></div>"
     
-    workout_html += "</div>"
-    workout_html += "</article>\
-        </div>"
     return render_template('view_exercise.html', workout_html=workout_html)
 
 @muscle_groups.route('/saved_workout_list/<id>')
