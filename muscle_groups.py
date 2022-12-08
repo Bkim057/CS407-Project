@@ -6,6 +6,7 @@ from numpy import delete
 from .models import User, Post, Workout, Muscle, Workout_Comment, saved_workout, workout_muscle_groups
 from . import db, share
 from werkzeug.security import generate_password_hash
+from collections import defaultdict
 
 muscle_groups = Blueprint('muscle_groups', __name__)
 
@@ -28,6 +29,51 @@ def lower_body_page():
 @muscle_groups.route('/muscle_page/workout_splits')
 def workout_splits():
     return render_template('workout_splits.html')
+
+@muscle_groups.route('/muscle_page/workout_splits/workout_planner')
+def workout_planner():
+    workout_list = Workout.query.all()
+    all_workouts = "<option value=\"none\" selected>none</option>"
+    for workout in workout_list:
+        all_workouts += f'<option value=\"{workout.exercise_name}\">{workout.exercise_name}</option>'
+
+
+    workout_html = ''
+    for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']:
+        workout_html += f'<h3 class=\"title\">{day}</h3>'
+        workout_html += f'<div class=\"box\"><table>'
+        for i in range(1,7):
+            workout_html += f'<tr><td class=\"col1\"><label for=\"exercise\">Exercise#{i}</label></td>\
+            <td><select name=\"{day+str(i)}\" class=\"form-control\" id=\"exercise\">{all_workouts}</select></td></tr>'
+        workout_html += f'</table></div>'
+
+    return render_template('workout_planner.html', workout_html=workout_html)
+
+@muscle_groups.route('/muscle_page/workout_splits/workout_planned', methods=['POST'])
+def workout_planned():
+    days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+    choices = request.form.items()
+    split_dic = defaultdict(list)
+
+    for choice in choices:
+        if choice[0][:-1] in days and choice[1] != 'none':
+            split_dic[choice[0][:-1]].append(choice[1])
+
+    workout_plan_html = ''
+    for day in days:
+        workout_plan_html += f'<div class=\"column is-1.5\"><div class=\"box\">\
+            <div class=\"content is-medium is-left has-text-left\"><h4>{day}</h4></div>\
+            <div class=\"container has-text-left\">'
+            
+        if day not in split_dic:
+            workout_plan_html += f'<p><strong>Rest</strong></p>'
+        else:
+            for exercise in split_dic[day]:
+                workout_plan_html += f'<p>- {exercise}</p>'
+        workout_plan_html += f'</div></div></div>'
+
+    return render_template('workout_planned.html', workout_plan_html=workout_plan_html)
 
 @muscle_groups.route('/like_workout/<id>')
 def like_workout(id):
