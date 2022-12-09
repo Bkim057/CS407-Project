@@ -169,7 +169,7 @@ def post_to_approve_to_html(post_id, post_num):
         </div>"
     
     call_to_action_string = ""
-    if (obj.call_to_action != None):
+    if (obj.call_to_action != None) and (obj.call_to_action != "") and ("https://" in obj.call_to_action):
         call_to_action_string += "<div class=\"Box-body\">\
               <a href=\"" + obj.call_to_action + "\"><button class=\"button is-link is-small is-outlined\">Highlighted Reference</button></a>\
           </div>"
@@ -283,7 +283,7 @@ def post_del_to_html(post_id):
         </div>"
 
     call_to_action_string = ""
-    if (obj.call_to_action != None):
+    if (obj.call_to_action != None) and (obj.call_to_action != "") and ("https://" in obj.call_to_action):
         call_to_action_string += "<div class=\"Box-body\">\
               <a href=\"" + obj.call_to_action + "\"><button class=\"button is-link is-small is-outlined\">Highlighted Reference</button></a>\
           </div>"
@@ -441,7 +441,7 @@ def post_to_html(post_id):
     
     call_to_action_string = ""
     try:
-      if (obj.call_to_action != None):
+      if (obj.call_to_action != None) and (obj.call_to_action != "") and ("https://" in obj.call_to_action):
         call_to_action_string += "<div class=\"Box-body\">\
               <a href=\"" + obj.call_to_action + "\"><button class=\"button is-link is-small is-outlined\">Highlighted Reference</button></a>\
           </div>"
