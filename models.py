@@ -2,10 +2,7 @@ from pickle import FALSE
 from flask_login import UserMixin
 from sqlalchemy import LargeBinary
 
-try:
-    from . import db
-except ImportError:
-    import db
+from . import db
 
 # User model that stores information regarding the person logged in atm
 # TODO: Connect to database, Make fields actually what we need, will require
@@ -320,6 +317,7 @@ class Post(UserMixin, db.Model):
     high_risk = db.Column(db.Boolean)
     precautions = db.Column(db.String(300))
     video_link = db.Column(db.String(2048))
+    call_to_action = db.Column(db.String(2048)) 
 
 class Topic(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

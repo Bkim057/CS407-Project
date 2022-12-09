@@ -41,7 +41,8 @@ def post_creation_handler():
         file = request.files['attachment']
         precautions = request.form.get('safety_precaution')
         video_link = request.form.get('video_link') # video_link data is validated before rendering as HTML
-        
+        call_to_action = request.form.get('call_to_action')
+
         isValidFile = False if not file else file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'))
         anonymous = True if request.form.get('anonymous') == 'on' else False 
 
@@ -52,13 +53,13 @@ def post_creation_handler():
           moderated_status = True
 
         if (anonymous):
-          new_post = Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk, precautions=precautions, video_link=video_link) \
+          new_post = Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk, precautions=precautions, video_link=video_link, call_to_action=call_to_action) \
             if not isValidFile else Post(user_id= -1, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), modertated=moderated_status, high_risk=high_risk,
-            precautions=precautions, video_link=video_link)
+            precautions=precautions, video_link=video_link, call_to_action=call_to_action)
         else:
-          new_post = Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk, precautions=precautions, video_link=video_link) \
+          new_post = Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, moderated=moderated_status, high_risk=high_risk, precautions=precautions, video_link=video_link, call_to_action=call_to_action) \
             if not isValidFile else Post(user_id=current_user.id, contents=contents, anonymous=anonymous, likes=0, filename=file.filename, data=file.read(), moderated=moderated_status, high_risk=high_risk,
-            precautions=precautions, video_link=video_link)
+            precautions=precautions, video_link=video_link, call_to_action=call_to_action)
         
         if (topic):
           topic_obj = Topic.query.filter_by(name=topic).first()
@@ -166,6 +167,12 @@ def post_to_approve_to_html(post_id, post_num):
             src=\"" + obj.video_link + "\">\
           </iframe>\
         </div>"
+    
+    call_to_action_string = ""
+    if (obj.call_to_action != None):
+        call_to_action_string += "<div class=\"Box-body\">\
+              <a href=\"" + obj.call_to_action + "\"><button class=\"button is-link is-small is-outlined\">Highlighted Reference</button></a>\
+          </div>"
 
     pfp_string = "https://bulma.io/images/placeholders/128x128.png"
     if (user_for_post.pfp):
@@ -193,6 +200,7 @@ def post_to_approve_to_html(post_id, post_num):
             </div>\
             " + image_string + "\
             " + video_string + "\
+            " + call_to_action_string + "\
             <nav class=\"level is-mobile\">\
               <div class=\"level-right\">\
                 <form method=\"POST\" action=\"/approve_post/"+str(post_id)+"/" + str(post_num) +"\">\
@@ -273,6 +281,12 @@ def post_del_to_html(post_id):
             src=\"" + obj.video_link + "\">\
           </iframe>\
         </div>"
+
+    call_to_action_string = ""
+    if (obj.call_to_action != None):
+        call_to_action_string += "<div class=\"Box-body\">\
+              <a href=\"" + obj.call_to_action + "\"><button class=\"button is-link is-small is-outlined\">Highlighted Reference</button></a>\
+          </div>"
     
     pfp_string = "https://bulma.io/images/placeholders/128x128.png"
     if (user_for_post.pfp):
@@ -299,6 +313,7 @@ def post_del_to_html(post_id):
             </div>\
             " + image_string + "\
             " + video_string + "\
+            " + call_to_action_string + "\
             <nav class=\"level is-mobile\">\
               <div class=\"level-right\">\
                 <form method=\"POST\" action=\"/delete_post/"+str(post_id)+"\">\
@@ -424,6 +439,16 @@ def post_to_html(post_id):
     except:
       print("could not render video")
     
+    call_to_action_string = ""
+    try:
+      if (obj.call_to_action != None):
+        call_to_action_string += "<div class=\"Box-body\">\
+              <a href=\"" + obj.call_to_action + "\"><button class=\"button is-link is-small is-outlined\">Highlighted Reference</button></a>\
+          </div>"
+    except:
+      print("could not render call to action")
+
+    
     pfp_string = "https://bulma.io/images/placeholders/128x128.png"
     if (user_for_post.pfp):
       img_src = Image.open(BytesIO(user_for_post.pfp))
@@ -458,6 +483,7 @@ def post_to_html(post_id):
             </div>\
             " + image_string + "\
             " + video_string + "\
+            " + call_to_action_string + "\
         </article>\
         </div>"
 
@@ -480,6 +506,7 @@ def post_to_html(post_id):
             </div>\
             " + image_string + "\
             " + video_string + "\
+            " + call_to_action_string + "\
             <nav class=\"level is-mobile\">"
 
     # Setup strings for post_html for guest users (no save button)
